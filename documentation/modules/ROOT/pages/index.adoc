@@ -1,20 +1,15 @@
-= Welcome to Template Tutorial
+= Welcome to Inner Loop Workshop
 :page-layout: home
 :!sectids:
 
 [.text-center.strong]
-== Publish Services to Kubernetes
+== Ready to become a Cloud Native Developer?
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on OpenShift using rich and advanced development services.
 
-[.tiles.browse]
-== Browse modules
+image::inner-loop.png[Developer Inner Loop, 400]
 
-[.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+The goal of this hands-workshop is to provide a Developer Experience through the Inner Loop using Cloud Native Technologies.
 
-[.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+To be a part of this journey, all you need is to come your modern web browser. 
+Everything else is running on the Cloud, on OpenShift
