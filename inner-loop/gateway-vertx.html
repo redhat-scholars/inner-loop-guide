@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create Gateway Service with Eclipse Vert.x :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/gateway-vertx.html">
+    <link rel="prev" href="catalog-spring-boot.html">
+    <link rel="next" href="webui-deployment.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_codeready_workspaces">What is CodeReady Workspaces?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#get_your_developer_workspace">Getting your Developer Workspace with a single click</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_openshift_connect">What is OpenShift Connect?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#connect_your_workspace">Connect Your Workspace to Your OpenShift User</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#login_to_openshift">Log in to the OpenShift Developer Console</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#what_is_quarkus">What is Quarkus?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#quarkus_maven_project">Quarkus Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#enable_development_mode">Enable the Development Mode</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_domain_model">Create a Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#what_is_spring_boot">What is Spring Boot?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#spring_boot_maven_project">Spring Boot Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_domain_model">Create the Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_data_repository">Create a Data Repository</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="gateway-vertx.html">5. Create Gateway Service with Eclipse Vert.x</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#what_is_vertx">What is Eclipse Vert.x?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#vertx_maven_project">Vert.x Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create_an_api_gateway">Create an API Gateway</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#what_is_nodejs">What is Node.js?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#update_annotations">Update Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_liveness">Understanding Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_liveness">Configuring Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#testing_liveness">Testing Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_readiness">Understanding Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_readiness">Configuring Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_startup">Understanding Startup Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_all_applications">Monitoring All Application Healths</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_application_metrics">Monitoring Applications Metrics</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#create_databases">Create Databases for Inventory and Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_quarkus_configuration">Externalize Quarkus (Inventory) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_spring_boot_configuration">Externalize Spring Boot (Catalog) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#explore_secrets">Explore Sensitive Configuration Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="gateway-vertx.html">5. Create Gateway Service with Eclipse Vert.x</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guides/edit/master/documentation/modules/ROOT/pages/gateway-vertx.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Create Gateway Service with Eclipse Vert.x</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>15 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about Eclipse Vert.x and how you can
+build microservices using reactive principles. During this lab you will
+create a scalable API Gateway that aggregates Catalog and Inventory APIs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch-gateway-vertx.png" alt="CoolStore Architecture" width="400">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_is_vertx"><a class="anchor" href="#what_is_vertx"></a>What is Eclipse Vert.x?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/vertx-logo.png" alt="Vertx" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="http://vertx.io/" target="_blank" rel="noopener">Eclipse Vert.x</a> is a toolkit for building reactive applications on the Java Virtual Machine (JVM). Vert.x does not
+impose a specific framework or packaging model and can be used within your existing applications and frameworks
+in order to add reactive functionality by just adding the Vert.x jar files to the application classpath.</p>
+</div>
+<div class="paragraph">
+<p><a href="http://vertx.io/" target="_blank" rel="noopener">Eclipse Vert.x</a> enables building reactive systems as defined by <a href="http://www.reactivemanifesto.org" target="_blank" rel="noopener">The Reactive Manifesto</a> and build
+services that are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Responsive</strong>: to handle requests in a reasonable time</p>
+</li>
+<li>
+<p><strong>Resilient</strong>: to stay responsive in the face of failures</p>
+</li>
+<li>
+<p><strong>Elastic</strong>: to stay responsive under various loads and be able to scale up and down</p>
+</li>
+<li>
+<p><strong>Message driven</strong>: components interact using asynchronous message-passing</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="http://vertx.io/" target="_blank" rel="noopener">Eclipse Vert.x</a> is designed to be event-driven and non-blocking. Events are delivered in an event loop that must never be blocked. Unlike traditional applications, Vert.x uses a very small number of threads responsible for dispatching the events to event handlers. If the event loop is blocked, the events won’t be delivered anymore and therefore the code needs to be mindful of this execution model.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="vertx_maven_project"><a class="anchor" href="#vertx_maven_project"></a>Vert.x Maven Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>gateway-vertx</strong> project has the following structure which shows the components of
+the Vert.x project laid out in different subdirectories according to Maven best practices:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vertx-gateway-project.png" alt="Gateway Project" width="340">
+</div>
+</div>
+<div class="paragraph">
+<p>This is a minimal Vert.x project with support for RESTful services. This project currently contains no code
+other than the main class, <strong><em>GatewayVerticle.java</em></strong> which is there to bootstrap the Vert.x application. Verticles
+are encapsulated parts of the application that can run completely independently and communicate with each other
+using HTTP. Verticles get deployed and run by Vert.x in an event loop and therefore it
+is important that the code in a Verticle does not block. This asynchronous architecture allows Vert.x applications
+to easily scale and handle large amounts of throughput with few threads.All API calls in Vert.x by default are non-blocking
+and support this concurrency model.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vertx-event-loop.png" alt="Vert.x Event Loop" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Although you can have multiple, there is currently only one Verticle created in the <strong><em>gateway-vertx</em></strong> project.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Examine 'GatewayVerticle' class</strong></code> in the <strong>com.redhat.cloudnative.gateway</strong> package in the <strong>/projects/workshop/labs/gateway-vertx/src</strong> directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.gateway;
+
+
+import io.vertx.core.Future;
+import io.vertx.reactivex.core.AbstractVerticle;
+import io.vertx.reactivex.ext.web.Router;
+import io.vertx.reactivex.ext.web.handler.StaticHandler;
+
+public class GatewayVerticle extends AbstractVerticle { <i class="conum" data-value="1"></i><b>(1)</b>
+    @Override
+    public void start(Future&lt;Void&gt; future) { <i class="conum" data-value="2"></i><b>(2)</b>
+        Router router = Router.router(vertx); <i class="conum" data-value="3"></i><b>(3)</b>
+
+        router.get("/*").handler(StaticHandler.create("assets")); <i class="conum" data-value="4"></i><b>(4)</b>
+
+        vertx.createHttpServer().requestHandler(router)
+            .listen(Integer.getInteger("http.port", 8080)); <i class="conum" data-value="5"></i><b>(5)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A Verticle is created by extending from <strong><em>AbstractVerticle</em></strong> class</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <strong><em>start()</em></strong> method creates an HTTP server</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong><em>Router</em></strong> is retrieved for mapping the REST endpoints</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>A REST endpoint is created for <strong>/</strong> to return a static HTML page <strong>assets/index.html</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>An HTTP Server is created which listens on port <strong>8080</strong></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can use Maven to make sure the skeleton project builds successfully. You should get a <strong>BUILD SUCCESS</strong> message
+in the build logs, otherwise the build has failed.</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Build'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-gateway-build.png" alt="Che - Catalog Build" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once successfully built, the resulting <strong>gateway-1.0-SNAPSHOT.jar</strong> is located in the <strong>/projects/workshop/labs/gateway-vertx/target/</strong> directory.
+This is an uber-jar with all the dependencies required packaged in the <strong>jar</strong> to enable running the application with <strong>java -jar</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_an_api_gateway"><a class="anchor" href="#create_an_api_gateway"></a>Create an API Gateway</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous labs, you have created two RESTful services: Catalog and Inventory. Instead of the
+web frontend contacting each of these backend services, you can create an API Gateway which is an entry
+point for the web frontend to access all backend services from a single place. This pattern is expectedly
+called <a href="http://microservices.io/patterns/apigateway.html" target="_blank" rel="noopener">API Gateway</a> and is a common practice in Microservices
+architecture.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch.png" alt="API Gateway Pattern" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Replace the content of '/projects/workshop/labs/gateway-vertx/src/main/java/com/redhat/cloudnative/gateway/GatewayVerticle.java'</strong></code> class with the following:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.gateway;
+
+import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.client.WebClientOptions;
+import io.vertx.reactivex.config.ConfigRetriever;
+import io.vertx.reactivex.core.AbstractVerticle;
+import io.vertx.reactivex.ext.web.Router;
+import io.vertx.reactivex.ext.web.RoutingContext;
+import io.vertx.reactivex.ext.web.client.WebClient;
+import io.vertx.reactivex.ext.web.client.predicate.ResponsePredicate;
+import io.vertx.reactivex.ext.web.codec.BodyCodec;
+import io.vertx.reactivex.ext.web.handler.CorsHandler;
+import io.vertx.reactivex.ext.web.handler.StaticHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GatewayVerticle extends AbstractVerticle {
+    private static final Logger LOG = LoggerFactory.getLogger(GatewayVerticle.class);
+
+    private WebClient catalog;
+    private WebClient inventory;
+
+    @Override
+    public void start() {
+        Router router = Router.router(vertx);
+        router.route().handler(CorsHandler.create("*").allowedMethod(HttpMethod.GET));
+        router.get("/*").handler(StaticHandler.create("assets"));
+        router.get("/health").handler(this::health); <i class="conum" data-value="1"></i><b>(1)</b>
+        router.get("/api/products").handler(this::products); <i class="conum" data-value="2"></i><b>(2)</b>
+
+        ConfigRetriever retriever = ConfigRetriever.create(vertx);
+        retriever.getConfig(ar -&gt; {
+            if (ar.failed()) {
+                // Failed to retrieve the configuration
+            } else {
+                JsonObject config = ar.result();
+
+                String catalogApiHost = config.getString("COMPONENT_CATALOG_HOST", "localhost"); <i class="conum" data-value="3"></i><b>(3)</b>
+                Integer catalogApiPort = config.getInteger("COMPONENT_CATALOG_PORT", 9001); <i class="conum" data-value="3"></i><b>(3)</b>
+
+                catalog = WebClient.create(vertx,
+                    new WebClientOptions()
+                        .setDefaultHost(catalogApiHost)
+                        .setDefaultPort(catalogApiPort));
+
+                LOG.info("Catalog Service Endpoint: " + catalogApiHost + ":" + catalogApiPort.toString());
+
+                String inventoryApiHost = config.getString("COMPONENT_INVENTORY_HOST", "localhost");
+                Integer inventoryApiPort = config.getInteger("COMPONENT_INVENTORY_PORT", 9001);
+
+                inventory = WebClient.create(vertx,
+                    new WebClientOptions()
+                        .setDefaultHost(inventoryApiHost)
+                        .setDefaultPort(inventoryApiPort));
+
+                LOG.info("Inventory Service Endpoint: " + inventoryApiHost + ":" + inventoryApiPort.toString());
+
+                vertx.createHttpServer()
+                    .requestHandler(router)
+                    .listen(Integer.getInteger("http.port", 8080));
+
+                LOG.info("Server is running on port " + Integer.getInteger("http.port", 8080));
+            }
+        });
+    }
+
+    private void products(RoutingContext rc) { <i class="conum" data-value="4"></i><b>(4)</b>
+        // Retrieve catalog
+        catalog
+            .get("/api/catalog")
+            .expect(ResponsePredicate.SC_OK)
+            .as(BodyCodec.jsonArray())
+            .rxSend()
+            .map(resp -&gt; {
+                // Map the response to a list of JSON object
+                List&lt;JsonObject&gt; listOfProducts = new ArrayList&lt;&gt;();
+                for (Object product : resp.body()) {
+                    listOfProducts.add((JsonObject)product);
+                }
+                return listOfProducts;
+            })
+            .flatMap(products -&gt; {
+                    // For each item from the catalog, invoke the inventory service
+                    // and create a JsonArray containing all the results
+                    return Observable.fromIterable(products)
+                        .flatMapSingle(this::getAvailabilityFromInventory)
+                        .collect(JsonArray::new, JsonArray::add);
+                }
+            )
+            .subscribe(
+                list -&gt; rc.response().end(list.encodePrettily()),
+                error -&gt; rc.response().setStatusCode(500).end(new JsonObject().put("error", error.getMessage()).toString())
+            );
+    }
+
+    private Single&lt;JsonObject&gt; getAvailabilityFromInventory(JsonObject product) { <i class="conum" data-value="5"></i><b>(5)</b>
+        // Retrieve the inventory for a given product
+        return inventory
+            .get("/api/inventory/" + product.getString("itemId"))
+            .as(BodyCodec.jsonObject())
+            .rxSend()
+            .map(resp -&gt; {
+                if (resp.statusCode() != 200) {
+                    LOG.warn("Inventory error for {}: status code {}",
+                        product.getString("itemId"), resp.statusCode());
+                    return product.copy();
+                }
+                return product.copy().put("availability",
+                    new JsonObject().put("quantity", resp.body().getInteger("quantity")));
+            });
+    }
+
+    private void health(RoutingContext rc) { <i class="conum" data-value="6"></i><b>(6)</b>
+        // Check Catalog and Inventory Service up and running
+        catalog.get("/").rxSend()
+            .subscribe(
+                catalogCallOk -&gt; {
+                    inventory.get("/").rxSend()
+                        .subscribe(
+                            inventoryCallOk -&gt; rc.response().setStatusCode(200).end(new JsonObject().put("status", "UP").toString()),
+                            error -&gt; rc.response().setStatusCode(503).end(new JsonObject().put("status", "DOWN").toString())
+                        );
+                },
+                error -&gt; rc.response().setStatusCode(503).end(new JsonObject().put("status", "DOWN").toString())
+            );
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A REST mapping to map <strong>/health</strong> to the <strong><em>health()</em></strong> method</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A REST mapping to map <strong>/api/products</strong> to the <strong><em>products()</em></strong> method</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>COMPONENT_%<em>HOST</strong> and <strong>COMPONENT</em>%_PORT</strong> environment variables used as endpoints for the Catalog
+and the Inventory Service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <strong><em>products()</em></strong> method invokes the Catalog REST endpoint and retrieves the products. It then
+iterates over the retrieved products and for each product invokes the
+Inventory REST endpoint to get the inventory status and enrich the product data with availability
+info using the <strong>getAvailabilityFromInventory()</strong> method. Note that instead of making blocking calls
+to the Catalog and Inventory REST APIs, all calls
+are non-blocking and handled using <a href="http://vertx.io/docs/vertx-rx/java" target="_blank" rel="noopener">RxJava</a>. Due to its non-blocking
+nature, the <strong><em>product()</em></strong> method can immediately return without waiting for the Catalog and Inventory
+REST invocations to complete and whenever the result of the REST calls is ready, the result
+will be acted upon and update the response which is then sent back to the client.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The <strong>getAvailabilityFromInventory()</strong> method is similar to the <strong>product()</strong> method, it invokes the
+Inventory REST endpoint and retrieves the inventory.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The <strong>health()</strong> method pings the Catalog and the Inventory Service to check if this dependent services
+are up and running. If so, it returns a <strong>Success</strong> HTTP code, else, it returns a <strong>Service Unavailable</strong> code</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Gateway - Build'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-gateway-build.png" alt="Che - Catalog Build" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It’s time to build and deploy your service on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>As you did previously, <code><strong>create a new Component, a New URL then Push it in to the OpenShift cluster</strong></code>
+by using the following inputs:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. OpenShift New Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which Application you want to create a Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select source type for Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary File</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select context folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$(plus) Add new context folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/projects/workshop/labs/gateway-vertx</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select binary file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$(file-zip) target/gateway-1.0-SNAPSHOT.jar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide Component name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component type version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You need to push your component first in order to create a Route for it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. OpenShift New URL</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide URL name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select port to expose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080/tcp</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do you want to secure new URL?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Gateway Component needs to be connected to the Inventory and Catalog components in order to interact.
+OpenShift Container Platform provides linking mechanisms to publish communication bindings from a program to its clients,
+especially by injecting the variables <strong>'COMPONENT_*<em>HOST'</strong> and <strong>'COMPONENT</em>*_PORT'</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], from <strong>'OpenShift' View</strong>,
+<code><strong>right-click on the 'Gateway component' &#8594; 'Link Component'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-openshift-link-component.png" alt="Che - OpenShift Link Component" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, <code><strong>link the 2 following components</strong></code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. OpenShift Link Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080/tcp</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080/tcp</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The configuration information of the Inventory and Catalog component is added to the Gateway component
+and the Gateway component restarts.</p>
+</div>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running. OpenShift runs the different components of
+the application in one or more pods which are the unit of runtime deployment and consists of the running
+containers for the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Gateway Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-gateway-topology.png" alt="OpenShift - Gateway Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect on <strong>your Gateway Service running on OpenShift</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gateway-service.png" alt="Gateway Service" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[ {
+  "itemId" : "329299",
+  "name" : "Red Fedora",
+  "desc" : "Official Red Hat Fedora",
+  "price" : 34.99,
+  "availability" : {
+    "quantity" : 35
+  }
+},
+...
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="catalog-spring-boot.html" class="query-params-link">4. Create Catalog Service with Spring Boot</a></span>
+  <span class="next"><a href="webui-deployment.html" class="query-params-link">6. Deploy Web UI with with Node.js and AngularJS</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

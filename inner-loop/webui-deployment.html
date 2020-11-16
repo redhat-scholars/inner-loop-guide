@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deploy Web UI with with Node.js and AngularJS :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/webui-deployment.html">
+    <link rel="prev" href="gateway-vertx.html">
+    <link rel="next" href="app-health.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_codeready_workspaces">What is CodeReady Workspaces?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#get_your_developer_workspace">Getting your Developer Workspace with a single click</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_openshift_connect">What is OpenShift Connect?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#connect_your_workspace">Connect Your Workspace to Your OpenShift User</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#login_to_openshift">Log in to the OpenShift Developer Console</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#what_is_quarkus">What is Quarkus?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#quarkus_maven_project">Quarkus Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#enable_development_mode">Enable the Development Mode</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_domain_model">Create a Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#what_is_spring_boot">What is Spring Boot?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#spring_boot_maven_project">Spring Boot Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_domain_model">Create the Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_data_repository">Create a Data Repository</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog-spring-boot.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="gateway-vertx.html">5. Create Gateway Service with Eclipse Vert.x</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#what_is_vertx">What is Eclipse Vert.x?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#vertx_maven_project">Vert.x Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#create_an_api_gateway">Create an API Gateway</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#what_is_nodejs">What is Node.js?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#update_annotations">Update Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_liveness">Understanding Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_liveness">Configuring Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#testing_liveness">Testing Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_readiness">Understanding Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_readiness">Configuring Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_startup">Understanding Startup Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_all_applications">Monitoring All Application Healths</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_application_metrics">Monitoring Applications Metrics</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#create_databases">Create Databases for Inventory and Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_quarkus_configuration">Externalize Quarkus (Inventory) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_spring_boot_configuration">Externalize Spring Boot (Catalog) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#explore_secrets">Explore Sensitive Configuration Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guides/edit/master/documentation/modules/ROOT/pages/webui-deployment.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Deploy Web UI with with Node.js and AngularJS</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>10 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about Node.js and will deploy the Node.js and Angular-based
+web frontend for the CoolStore online shop which uses the API Gateway services you deployed
+in previous labs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch-webui-nodejs.png" alt="API Gateway Pattern" width="400">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_is_nodejs"><a class="anchor" href="#what_is_nodejs"></a>What is Node.js?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/nodejs-logo.png" alt="Node.js" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> is an open source, cross-platform runtime environment for developing server-side
+applications using JavaScript. <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> has an event-driven architecture capable of
+non-blocking I/O. These design choices aim to optimize throughput and scalability in
+Web applications with many input/output operations, as well as for real-time web applications.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> non-blocking architecture allows applications to process large number of
+requests (tens of thousands) using a single thread which makes it desirable choice for building
+scalable web applications.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Web UI is built using Node.js for server-side JavaScript and AngularJS for client-side
+JavaScript. Let&#8217;s deploy it on OpenShift using the certified Node.js container image available
+in OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>In the previous labs, you only used the S2I builder image for
+injecting developer source code inside a running container.
+In this lab, you will fully use OpenShift <a href="https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds">Source-to-Image (S2I)</a>.
+OpenShift will obtain the application code directly from the source repository then build and deploy a
+container image of it.</p>
+</div>
+<div class="paragraph">
+<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<code><strong>click on '+ Add' and select 'From Git'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-add-from-git.png" alt="OpenShift - Add from Git" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, enter the following information:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Web UI Project</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git Repo URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%WORKSHOP_GIT_REPO%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git Reference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%WORKSHOP_GIT_REF%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context Dir</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/labs/web-nodejs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builder Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builder Image Version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">web-coolstore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resources</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deployment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a route to the application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Checked</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Labels</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">app=coolstore app.kubernetes.io/instance=web app.kubernetes.io/part-of=coolstore</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code><strong>Click on 'Create' button</strong></code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="update_annotations"><a class="anchor" href="#update_annotations"></a>Update Annotations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For the integration with the <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector" target="_blank" rel="noopener">OpenShift Connector</a> plugin,
+you need to add a specific annotation when deploying a component without use it.</p>
+</div>
+<div class="paragraph">
+<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<code><strong>click on 'DC web-coolstore' &#8594; 'Actions' &#8594; 'Edit Annotations'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-web-annotate.png" alt="OpenShift - Web Annotate" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Add the new annotation</strong></code> in order to be compatible with odo usage.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Web Annotations</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">app.kubernetes.io/component-source-type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Web Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-web-topology.png" alt="OpenShift - Web Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect on <strong>your Web Service running on OpenShift</strong>.
+You should be able to see the CoolStore application with all products and their inventory status.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-web.png" alt="CoolStore Shop" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="gateway-vertx.html" class="query-params-link">5. Create Gateway Service with Eclipse Vert.x</a></span>
+  <span class="next"><a href="app-health.html" class="query-params-link">7. Monitor Application Health</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

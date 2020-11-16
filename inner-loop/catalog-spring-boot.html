@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create Catalog Service with Spring Boot :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/catalog-spring-boot.html">
+    <link rel="prev" href="inventory-quarkus.html">
+    <link rel="next" href="gateway-vertx.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_codeready_workspaces">What is CodeReady Workspaces?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#get_your_developer_workspace">Getting your Developer Workspace with a single click</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#what_is_openshift_connect">What is OpenShift Connect?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#connect_your_workspace">Connect Your Workspace to Your OpenShift User</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="developer-workspace.html#login_to_openshift">Log in to the OpenShift Developer Console</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#what_is_quarkus">What is Quarkus?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#quarkus_maven_project">Quarkus Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#enable_development_mode">Enable the Development Mode</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_domain_model">Create a Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inventory-quarkus.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#what_is_spring_boot">What is Spring Boot?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#spring_boot_maven_project">Spring Boot Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create_domain_model">Create the Domain Model</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create_data_repository">Create a Data Repository</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create_restful_service">Create a RESTful Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="gateway-vertx.html">5. Create Gateway Service with Eclipse Vert.x</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#what_is_vertx">What is Eclipse Vert.x?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#vertx_maven_project">Vert.x Maven Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#create_an_api_gateway">Create an API Gateway</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="gateway-vertx.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#what_is_nodejs">What is Node.js?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#deploy_on_openshift">Deploy on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#update_annotations">Update Annotations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="webui-deployment.html#test_your_service">Test your Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_liveness">Understanding Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_liveness">Configuring Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#testing_liveness">Testing Liveness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_readiness">Understanding Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#configuring_readiness">Configuring Readiness Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#understanding_startup">Understanding Startup Probes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_all_applications">Monitoring All Application Healths</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-health.html#monitoring_application_metrics">Monitoring Applications Metrics</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#create_databases">Create Databases for Inventory and Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_quarkus_configuration">Externalize Quarkus (Inventory) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#externalize_spring_boot_configuration">Externalize Spring Boot (Catalog) Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-config.html#explore_secrets">Explore Sensitive Configuration Data</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guides/edit/master/documentation/modules/ROOT/pages/catalog-spring-boot.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Create Catalog Service with Spring Boot</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>35 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about Spring Boot and how you can build microservices
+using Spring Boot and JBoss technologies. During this lab, you will create a REST API for
+the Catalog service in order to provide a list of products for the CoolStore online shop.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch-catalog-spring-boot.png" alt="CoolStore Architecture" width="400">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_is_spring_boot"><a class="anchor" href="#what_is_spring_boot"></a>What is Spring Boot?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/spring-boot-logo.png" alt="Spring Boot" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Spring Boot is an opinionated framework that makes it easy to create stand-alone Spring based
+applications with embedded web containers such as Tomcat (or JBoss Web Server), Jetty and Undertow
+that you can run directly on the JVM using <strong>java -jar</strong>. Spring Boot also allows producing a war
+file that can be deployed on stand-alone web containers.</p>
+</div>
+<div class="paragraph">
+<p>The opinionated approach means many choices about Spring platform and third-party libraries
+are already made by Spring Boot so that you can get started with minimum effort and configuration.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="spring_boot_maven_project"><a class="anchor" href="#spring_boot_maven_project"></a>Spring Boot Maven Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>catalog-spring-boot</strong> project has the following structure which shows the components of
+the Spring Boot project laid out in different subdirectories according to Maven best practices:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/springboot-catalog-project.png" alt="Catalog Project" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>This is a minimal Spring Boot project with support for RESTful services and Spring Data with JPA for connecting
+to a database. This project currently contains no code other than the main class, <strong><strong>CatalogApplication</strong></strong>
+which is there to bootstrap the Spring Boot application.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class</strong></code> in the <strong>/projects/workshop/labs/catalog-spring-boot/src/main</strong> directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.catalog;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CatalogApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CatalogApplication.class, args);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The database is configured using the Spring application configuration file which is located at
+<strong>/projects/workshop/labs/catalog-spring-boot/src/main/resources/application.properties</strong>. Examine this file to see the database connection details
+and note that an in-memory H2 database is used in this lab for local development and will be replaced
+with a PostgreSQL database in the following labs. Be patient! More on that later.</p>
+</div>
+<div class="paragraph">
+<p>You can use Maven to make sure the skeleton project builds successfully. You should get a <strong>BUILD SUCCESS</strong> message
+in the build logs, otherwise the build has failed.</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Build'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-build.png" alt="Che - Catalog Build" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once successfully built, the resulting <strong>catalog-1.0-SNAPSHOT.jar</strong> is located in the <strong>/projects/workshop/labs/catalog-spring-boot/target/</strong> directory.
+This is an uber-jar with all the dependencies required packaged in the <strong>jar</strong> to enable running the application with <strong>java -jar</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Now that the project is ready, let&#8217;s get coding and create a domain model, data repository, and a
+RESTful endpoint to create the Catalog service:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/springboot-catalog-arch.png" alt="Catalog RESTful Service" width="640">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_domain_model"><a class="anchor" href="#create_domain_model"></a>Create the Domain Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], <code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/Product.java' file</code></strong></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.catalog;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity <i class="conum" data-value="1"></i><b>(1)</b>
+@Table(name = "PRODUCT") <i class="conum" data-value="2"></i><b>(2)</b>
+public class Product implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
+  @Id <i class="conum" data-value="3"></i><b>(3)</b>
+  private String itemId;
+
+  private String name;
+
+  private String description;
+
+  private double price;
+
+  public Product() {
+  }
+
+  public String getItemId() {
+    return itemId;
+  }
+
+  public void setItemId(String itemId) {
+    this.itemId = itemId;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  @Override
+  public String toString() {
+    return "Product [itemId=" + itemId + ", name=" + name + ", price=" + price + "]";
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>@Entity</strong> marks the class as a JPA entity</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>@Table</strong> customizes the table creation process by defining a table name and database constraint</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>@Id</strong> marks the primary key for the table</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_data_repository"><a class="anchor" href="#create_data_repository"></a>Create a Data Repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Data repository abstraction simplifies dealing with data models in Spring applications by
+reducing the amount of boilerplate code required to implement data access layers for various
+persistence stores. <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.core-concepts" target="_blank" rel="noopener">Repository and its sub-interfaces</a>
+are the central concept in Spring Data which is a marker interface to provide
+data manipulation functionality for the entity class that is being managed. When the application starts,
+Spring finds all interfaces marked as repositories and for each interface found, the infrastructure
+configures the required persistent technologies and provides an implementation for the repository interface.</p>
+</div>
+<div class="paragraph">
+<p>Create a new Java interface named <strong>ProductRepository</strong> in <strong>com.redhat.cloudnative.catalog</strong> package
+and extend <a href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html" target="_blank" rel="noopener">CrudRepository</a> interface in order to indicate to Spring that you want to expose a complete set of methods to manipulate the entity.</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^],
+<code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file</code></strong>.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.catalog;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProductRepository extends CrudRepository&lt;Product, String&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html" target="_blank" rel="noopener">CrudRepository</a> interface
+in order to indicate to Spring that you want to expose a complete set of methods to manipulate the entity</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>That&#8217;s it! Now that you have a domain model and a repository to retrieve the domain model,
+let&#8217;s create a RESTful service that returns the list of products.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_restful_service"><a class="anchor" href="#create_restful_service"></a>Create a RESTful Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Boot uses Spring Web MVC as the default RESTful stack in Spring applications. Create
+a new Java class named <strong>CatalogController</strong> in <strong>com.redhat.cloudnative.catalog</strong> package.</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^],
+<code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file</code></strong>.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative.catalog;
+
+import java.util.List;
+import java.util.Spliterator;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/api/catalog") <i class="conum" data-value="1"></i><b>(1)</b>
+public class CatalogController {
+
+    @Autowired <i class="conum" data-value="2"></i><b>(2)</b>
+    private ProductRepository repository; <i class="conum" data-value="3"></i><b>(3)</b>
+
+    @ResponseBody
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List&lt;Product&gt; getAll() {
+        Spliterator&lt;Product&gt; products = repository.findAll().spliterator();
+        return StreamSupport.stream(products, false).collect(Collectors.toList());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>@RequestMapping</strong> indicates the above REST service defines an endpoint that is accessible via <strong>HTTP GET</strong> at <strong>/api/catalog</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Spring Boot automatically provides an implementation for <strong>ProductRepository</strong> at runtime and injects it into the
+controller using the
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-spring-beans-and-dependency-injection.html" target="_blank" rel="noopener"><strong>@Autowire</strong></a> annotation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the <strong>repository</strong> attribute on the controller class is used to retrieve the list of products from the databases.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s build and package the <strong>Catalog Service</strong> using Maven.
+<code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Build'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-build.png" alt="Che - Catalog Build" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Once done, you can conviently run your service using <strong>Spring Boot maven plugin</strong> and test the endpoint.
+<code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Run'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-run.png" alt="Che - Catalog Run" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>When pop-ups appear, <code><strong>confirm you want to expose the 9000 port</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-expose-9000-port.png" alt="Che - Expose Port" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>And finally <code><strong>click on 'Open Link'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-open-9000-link.png" alt="Che - Open Link" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect on <strong>your Catalog Service running inside your Workspace</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/catalog-service.png" alt="Catalog Service" width="500">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you have the following result on the 'Preview' window, please <code><strong>click on the refresh icon of this same window</code></strong>,</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-preview-na.png" alt="Che - Preview Not Available" width="500">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[{"itemId":"329299","name":"Red Fedora","desc":"Official Red Hat Fedora","price":34.99},...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The REST API returned a JSON object representing the product list. Congratulations!</p>
+</div>
+<div class="paragraph">
+<p>In your %CHE_URL%[Workspace^], stop the service by <code><strong>hitting Ctrl+c in the '&gt;_ Catalog - Run' Terminal</strong></code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It’s time to build and deploy your service on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>As you did previously, <code><strong>create a new Component, a New URL then Push it in to the OpenShift cluster</strong></code>
+by using the following inputs:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. OpenShift New Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which Application you want to create a Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select source type for Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary File</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select context folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$(plus) Add new context folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/projects/workshop/labs/catalog-spring-boot</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select binary file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$(file-zip) target/catalog-1.0-SNAPSHOT.jar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide Component name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component type version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You need to push your component first in order to create a Route for it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. OpenShift New URL</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide URL name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select port to expose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080/tcp</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do you want to secure new URL?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running. OpenShift runs the different components of
+the application in one or more pods which are the unit of runtime deployment and consists of the running
+containers for the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the %OPENSHIFT_CONSOLE_URL%/topology/ns/my-project%USER_ID%/graph[OpenShift Web Console^], from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Catalog Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-catalog-topology.png" alt="OpenShift - Catalog Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect on <strong>your Catalog Service running on OpenShift</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/catalog-service.png" alt="Catalog Service" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[{"itemId":"329299","name":"Red Fedora","desc":"Official Red Hat Fedora","price":34.99},...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="inventory-quarkus.html" class="query-params-link">3. Create Inventory Service with Quarkus</a></span>
+  <span class="next"><a href="gateway-vertx.html" class="query-params-link">5. Create Gateway Service with Eclipse Vert.x</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
