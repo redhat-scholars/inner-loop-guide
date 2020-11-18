@@ -64,7 +64,7 @@ making it simple to re-create complex deployments by just deploying a single tem
 be parameterized to get input for fields like service names and generate values for fields like passwords.
 ====
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], `*click on '+ Add' and select 'Database'*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '+ Add' and select 'Database'*`
 
 image::openshift-add-database.png[OpenShift - Add database, 700]
 
@@ -166,7 +166,7 @@ In Quarkus, Driver is a build time property and cannot be overridden. So as you 
 technology, you need to change the 'quarkus.datasource.driver' parameter 
 in **/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties** and rebuild the application.
 
-In your {CHE_URL}[Workspace^], `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
+In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
 'JDBC Driver - MariaDB' dependency*`
 
 [source,xml,subs="{markup-in-source}",role=copypaste]
@@ -192,7 +192,7 @@ Leave the **'quarkus.datasource.url'**, **'quarkus.datasource.username'** and **
 parameters unchanged. They will be overridden later.
 ====
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
@@ -204,7 +204,7 @@ image::che-openshift-push-again-inventory.png[Che - OpenShift Push Inventory, 40
 
 Now, let's create the Quarkus configuration content using the database credentials.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -232,7 +232,7 @@ data:
 
 Now, let’s mount this Config Map as a volume inside the Inventory Service Pod.
 
-In your {CHE_URL}[Workspace^], open a new Terminal by `*clicking 
+In your {CHE_URL}[Workspace^, role='params-link'], open a new Terminal by `*clicking 
 on the 'My Workspace' white box in the right menu, then 'Plugins' -> 'workshop-tools' -> '>_ New terminal'*`:
 
 image::che-open-workshop-terminal.png[Che - Open OpenShift Terminal, 700]
@@ -330,7 +330,7 @@ configuration using an alternative **application.properties** backed by a config
 
 Let's create the Spring Boot configuration content using the database credentials and create the Config Map.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -499,7 +499,7 @@ This secret has three encrypted properties defined as **database-name**, **datab
 the PostgreSQL database name, username and password values. These values are injected in the PostgreSQL container as 
 environment variables and used to initialize the database.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on 'DC catalog-postgresql' -> 'DC catalog-postgresql' -> 'Environment'*`. Notice the values 
 from the secret are defined as env vars on the deployment:
 

@@ -69,7 +69,7 @@ with a PostgreSQL database in the following labs. Be patient! More on that later
 You can use Maven to make sure the skeleton project builds successfully. You should get a **BUILD SUCCESS** message 
 in the build logs, otherwise the build has failed.
 
-In your {CHE_URL}[Workspace^], `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 
@@ -86,7 +86,7 @@ image::springboot-catalog-arch.png[Catalog RESTful Service,640]
 [#create_domain_model]
 == Create the Domain Model
 
-In your {CHE_URL}[Workspace^], `*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
+In your {CHE_URL}[Workspace^, role='params-link'], `*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
 
 [source,java,role=copypaste]
 ----
@@ -172,7 +172,7 @@ configures the required persistent technologies and provides an implementation f
 Create a new Java interface named **ProductRepository** in **com.redhat.cloudnative.catalog** package 
 and extend https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html[CrudRepository^] interface in order to indicate to Spring that you want to expose a complete set of methods to manipulate the entity.
 
-In your {CHE_URL}[Workspace^], 
+In your {CHE_URL}[Workspace^, role='params-link'], 
 `*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file`*.
 
 [source,java,role=copypaste]
@@ -196,7 +196,7 @@ let's create a RESTful service that returns the list of products.
 Spring Boot uses Spring Web MVC as the default RESTful stack in Spring applications. Create 
 a new Java class named **CatalogController** in **com.redhat.cloudnative.catalog** package.
 
-In your {CHE_URL}[Workspace^], 
+In your {CHE_URL}[Workspace^, role='params-link'], 
 `*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file`*.
 
 [source,java,role=copypaste]
@@ -278,7 +278,7 @@ Then `*click on 'Test it'*`. You should have the following output:
 
 The REST API returned a JSON object representing the product list. Congratulations!
 
-In your {CHE_URL}[Workspace^], stop the service by `*hitting Ctrl+c in the '>_ Catalog - Run' Terminal*`
+In your {CHE_URL}[Workspace^, role='params-link'], stop the service by `*hitting Ctrl+c in the '>_ Catalog - Run' Terminal*`
 
 [#deploy_on_openshift]
 == Deploy on OpenShift
@@ -349,7 +349,7 @@ containers for the project.
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on the 'Open URL' icon of the Catalog Service*`
 
 image::openshift-catalog-topology.png[OpenShift - Catalog Topology, 700]

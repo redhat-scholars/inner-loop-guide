@@ -62,6 +62,7 @@ to this file.
 
 [link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-cloud-native]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
 
 Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let's the magic happens...
@@ -117,7 +118,7 @@ the running OpenShift cluster.
 [#connect_your_workspace]
 == Connect Your Workspace to Your OpenShift User
 
-First, in your {CHE_URL}[Workspace^], 
+First, in your {CHE_URL}[Workspace^, role='params-link'], 
 `*click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
 
 image::che-runtask.png[Che - RunTask, 500]
@@ -144,7 +145,7 @@ image::che-openshift-view.png[Che - OpenShift View, 300]
 
 So, as you can see, you are missing the **Development Environment**. Let's create it!
 
-In your {CHE_URL}[Workspace^], from **'OpenShift' View**, 
+In your {CHE_URL}[Workspace^, role='params-link'], from **'OpenShift' View**, 
 `*right-click on the cluster URL and select 'New Project'*`
 
 image::che-openshift-new-project.png[Che - OpenShift New Project, 500]
@@ -172,6 +173,7 @@ perform various tasks via a browser.
 
 [link={OPENSHIFT_CONSOLE_URL}]
 [window=_blank, align="center"]
+[role='params-link']
 image::developer-console-button.png[Developer Workspace - Button, 300]
 
 `*Enter your username and password (user{USER_ID}/{OPENSHIFT_PASSWORD})*` and 
