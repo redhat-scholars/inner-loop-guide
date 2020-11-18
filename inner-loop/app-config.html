@@ -356,7 +356,7 @@ be parameterized to get input for fields like service names and generate values 
 </table>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on '+ Add' and select 'Database'</strong></code></p>
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on '+ Add' and select 'Database'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -510,7 +510,7 @@ technology, you need to change the 'quarkus.datasource.driver' parameter
 in <strong>/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties</strong> and rebuild the application.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
 'JDBC Driver - MariaDB' dependency</strong></code></p>
 </div>
 <div class="listingblock copypaste">
@@ -554,7 +554,7 @@ parameters unchanged. They will be overridden later.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Build'</strong></code></p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Build'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -578,7 +578,7 @@ parameters unchanged. They will be overridden later.</p>
 <p>Now, let&#8217;s create the Quarkus configuration content using the database credentials.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -613,7 +613,7 @@ data:
 <p>Now, let’s mount this Config Map as a volume inside the Inventory Service Pod.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, open a new Terminal by <code><strong>clicking
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, open a new Terminal by <code><strong>clicking
 on the 'My Workspace' white box in the right menu, then 'Plugins' &#8594; 'workshop-tools' &#8594; '&gt;_ New terminal'</strong></code>:</p>
 </div>
 <div class="imageblock">
@@ -753,7 +753,7 @@ configuration using an alternative <strong>application.properties</strong> backe
 <p>Let&#8217;s create the Spring Boot configuration content using the database credentials and create the Config Map.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -954,7 +954,7 @@ the PostgreSQL database name, username and password values. These values are inj
 environment variables and used to initialize the database.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'DC catalog-postgresql' &#8594; 'DC catalog-postgresql' &#8594; 'Environment'</strong></code>. Notice the values
 from the secret are defined as env vars on the deployment:</p>
 </div>

@@ -361,7 +361,7 @@ start listening until initialization is complete.</p>
 where it cannot perform as it should. Let&#8217;s access inside the container and simulate this state.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Resources' &#8594; 'P inventory-coolstore-x-xxxxx'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -386,7 +386,7 @@ where it cannot perform as it should. Let&#8217;s access inside the container an
 <p>So we just suspend the <em>Inventory Service</em> java process to simulate a stuck situation.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, <code>*click on the 'Events' and 'Logs' tabs *</code> and notice that
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code>*click on the 'Events' and 'Logs' tabs *</code> and notice that
 everything seems to be ok.</p>
 </div>
 <div class="imageblock">
@@ -400,14 +400,14 @@ everything seems to be ok.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
+<p>Now, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
 You don&#8217;t have any response anymore (as the process has been stopped previously).</p>
 </div>
 <div class="paragraph">
 <p>Often, applications need a restart to work correctly again.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on 'Actions' &#8594; 'Delete Pod' &#8594; 'Delete'</strong></code></p>
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on 'Actions' &#8594; 'Delete Pod' &#8594; 'Delete'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -415,7 +415,7 @@ You don&#8217;t have any response anymore (as the process has been stopped previ
 </div>
 </div>
 <div class="paragraph">
-<p>A new instance (pod) will be redeployed. Once done, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Inventory Service</a></strong></code>.</p>
+<p>A new instance (pod) will be redeployed. Once done, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>Now the <em>Inventory Service</em> is working again.</p>
@@ -437,7 +437,7 @@ in cloud environments where automated processes must be able to determine whethe
 </div>
 <div class="paragraph">
 <p>Let&#8217;s add the needed dependencies to <strong>/projects/workshop/labs/inventory-quarkus/pom.xml</strong>.
-In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file</strong></code>:</p>
+In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file</strong></code>:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -472,7 +472,7 @@ In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_bl
 <p>Once completed, verify that the health endpoint works for the <strong>Inventory Service</strong> using <code><strong>curl</strong></code></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, open a new Terminal by <code><strong>clicking
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, open a new Terminal by <code><strong>clicking
 on the 'My Workspace' white box in the right menu, then 'Plugins' &#8594; 'workshop-tools' &#8594; '&gt;_ New terminal'</strong></code>:</p>
 </div>
 <div class="imageblock">
@@ -505,7 +505,7 @@ on the 'My Workspace' white box in the right menu, then 'Plugins' &#8594; 'works
 </div>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -591,11 +591,11 @@ Therefore, as soon as you define the probe, OpenShift automatically redeploys th
 <h2 id="testing_liveness"><a class="anchor" href="#testing_liveness"></a>Testing Liveness Probes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As you did previously, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>As you did previously, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>access into the container and suspend the <em>Inventory Service</em> java process</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>Then, still in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on the 'Events' tab</strong></code>.</p>
+<p>Then, still in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on the 'Events' tab</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>After 3 failed checks, OpenShift automatically restarts the container.</p>
@@ -606,7 +606,7 @@ Therefore, as soon as you define the probe, OpenShift automatically redeploys th
 </div>
 </div>
 <div class="paragraph">
-<p>Now, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
+<p>Now, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
 The service is up and running again.</p>
 </div>
 </div>
@@ -621,7 +621,7 @@ The service is up and running again.</p>
 <p>Let&#8217;s imagine you have traffic to the <em>Catalog Service</em></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Generate Traffic'</strong></code></p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Generate Traffic'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -645,7 +645,7 @@ The service is up and running again.</p>
 <p>Now let&#8217;s scale out your <em>Catalog Service</em> to 2 instances.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the up arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
@@ -656,7 +656,7 @@ on the right side of the pod blue circle</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>You should see the 2 instances (pods) running.
-Now, <code><strong>switch back to your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a> and check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+Now, <code><strong>switch back to your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a> and check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -678,7 +678,7 @@ A readiness probe can be used to signal to the endpoints controller that even th
 <h2 id="configuring_readiness"><a class="anchor" href="#configuring_readiness"></a>Configuring Readiness Probes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First, scale down your <em>Catalog Service</em> to 1 instance. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>First, scale down your <em>Catalog Service</em> to 1 instance. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the down arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
@@ -692,7 +692,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 <p>Verify that the health endpoint works for the <strong>Catalog Service</strong> using <code><strong>curl</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, in the window called <strong>'&gt;_ workshop-tools terminal'</strong>,
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, in the window called <strong>'&gt;_ workshop-tools terminal'</strong>,
 <code><strong>execute the following commands</strong></code>:</p>
 </div>
 <div class="listingblock copypaste">
@@ -709,7 +709,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -788,13 +788,13 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 Now let&#8217;s test it as you did previously.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>run the 'Catalog - Generate Traffic' task</strong></code>.</p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>run the 'Catalog - Generate Traffic' task</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>scale out the Catalog Service to 2 instances (pods)</strong></code></p>
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>scale out the Catalog Service to 2 instances (pods)</strong></code></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>You should not see any error means that you can now <strong>scale out your <em>Catalog Service</em> with no downtime.</strong></p>
@@ -966,7 +966,7 @@ the fast response to stuck states.</p>
 </table>
 <div class="paragraph">
 <p>Finally, let&#8217;s configure probes for Gateway and Web Service.
-In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Probes - Configure Gateway &amp; Web'</strong></code></p>
+In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Probes - Configure Gateway &amp; Web'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -992,7 +992,7 @@ gain visibility into how the application behaves and particularly in identifying
 each container has been consuming over time.</p>
 </div>
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on 'Monitoring' then select your 'my-project%USER_ID%' project</strong></code>.</p>
 </div>
 <div class="paragraph">
