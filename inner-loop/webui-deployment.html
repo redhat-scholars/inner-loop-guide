@@ -328,7 +328,7 @@ in OpenShift.</p>
 <div class="paragraph">
 <p>In the previous labs, you only used the S2I builder image for
 injecting developer source code inside a running container.
-In this lab, you will fully use OpenShift <a href="https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds">Source-to-Image (S2I)</a>.
+In this lab, you will fully use OpenShift <a href="https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds" target="_blank" rel="noopener">Source-to-Image (S2I)</a>.
 OpenShift will obtain the application code directly from the source repository then build and deploy a
 container image of it.</p>
 </div>
@@ -375,7 +375,7 @@ container image of it.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Builder Image Version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12-ubi7</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Application Name</p></td>
@@ -395,7 +395,9 @@ container image of it.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Labels</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">app=coolstore app.kubernetes.io/instance=web app.kubernetes.io/part-of=coolstore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">app=coolstore
+app.kubernetes.io/instance=web
+app.kubernetes.io/part-of=coolstore</p></td>
 </tr>
 </tbody>
 </table>

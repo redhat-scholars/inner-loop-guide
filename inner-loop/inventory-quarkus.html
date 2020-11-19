@@ -307,7 +307,7 @@ crafted from the best of breed Java libraries and standards.</p>
 <div class="paragraph">
 <p><strong>Container First</strong>: <a href="https://quarkus.io/" target="_blank" rel="noopener">Quarkus</a> tailors your application for GraalVM and HotSpot. Amazingly fast boot time, incredibly low RSS memory
 (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms
-like Kubernetes. We use a technique we call <a href="https://quarkus.io/vision/container-first/" target="_blank" rel="noopener">compile time boot</a>.</p>
+like Kubernetes. We use a technique we call <a href="https://quarkus.io/vision/container-first" target="_blank" rel="noopener">compile time boot</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Unifies Imperative and Reactive</strong>: Combine both the familiar <a href="https://quarkus.io/vision/continuum" target="_blank" rel="noopener">imperative code and
@@ -812,13 +812,8 @@ the last path param being the product id which we want to check its inventory st
 <p>It’s time to deploy your service on OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>OpenShift <a href="https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds">Source-to-Image (S2I)</a> is an open-source project
-which helps in building artifacts from source code and injecting these into container images.
-S2I produces ready-to-run images by building source code without the need of a Dockerfile.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://docs.openshift.com/container-platform/4.4/cli_reference/developer_cli_odo/understanding-odo.html">odo</a> (OpenShift Connector Plugin) uses S2I builder image for
-executing developer source code inside a container.</p>
+<p><a href="https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a> (OpenShift Connector Plugin) is a
+fast, iterative, and straightforward CLI tool for developers who write, build, and deploy applications on Kubernetes and OpenShift.</p>
 </div>
 <div class="paragraph">
 <p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Build'</strong></code></p>
@@ -891,7 +886,7 @@ executing developer source code inside a container.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java (s2i)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Component type version</p></td>
