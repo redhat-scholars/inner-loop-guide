@@ -286,7 +286,7 @@ mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$HOSTNAME --execute="
 
 You should have the following output:
 
-[source,json,subs="{markup-in-source}"]
+[source,sql,subs="{markup-in-source}"]
 ----
 +--------+----------+
 | itemId | quantity |
@@ -394,7 +394,7 @@ oc logs -c catalog-coolstore dc/catalog-coolstore -n my-project{USER_ID} | grep 
 
 You should have the following output:
 
-[source,logs,subs="{markup-in-source}"]
+[source,shell,subs="{markup-in-source}"]
 ----
 2017-08-10 21:07:51.670  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
 ----
@@ -420,7 +420,7 @@ psql catalogdb -U catalog -c "select item_id, name, price from product"
 
 You should have the following output:
 
-[source,logs,subs="{markup-in-source}"]
+[source,sql,subs="{markup-in-source}"]
 ----
   item_id |              name               | price 
   ---------+---------------------------------+-------
@@ -475,7 +475,7 @@ oc describe secret catalog-postgresql
 
 You should have the following output:
 
-[source,logs,subs="{markup-in-source}"]
+[source,shell,subs="{markup-in-source}"]
 ----
 Name:            catalog-postgresql
 Namespace:       coolstore
