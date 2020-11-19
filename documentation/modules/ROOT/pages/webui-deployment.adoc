@@ -42,7 +42,7 @@ in OpenShift.
 
 In the previous labs, you only used the S2I builder image for 
 injecting developer source code inside a running container.
-In this lab, you will fully use OpenShift https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds[Source-to-Image (S2I)].
+In this lab, you will fully use OpenShift https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds[Source-to-Image (S2I)^].
 OpenShift will obtain the application code directly from the source repository then build and deploy a 
 container image of it.
 
@@ -72,7 +72,7 @@ Then, enter the following information:
 |Node.js
 
 |Builder Image Version
-|12
+|12-ubi7
 
 |Application Name
 |coolstore
@@ -87,7 +87,9 @@ Then, enter the following information:
 |_Checked_
 
 |Labels
-|app=coolstore app.kubernetes.io/instance=web app.kubernetes.io/part-of=coolstore
+|app=coolstore
+app.kubernetes.io/instance=web
+app.kubernetes.io/part-of=coolstore
 
 
 |===

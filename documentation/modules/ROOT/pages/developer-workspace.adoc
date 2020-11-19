@@ -45,8 +45,7 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 [NOTE]
 .Devfile
 ====
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] uses https://access.redhat.com/documentation/en-us/red_hat_codeready_workspaces/2.2/html/end-user_guide/workspaces-overview_crw#configuring-a-workspace-using-a-devfile_crw[Devfiles^] to automate the provisioning 
-of a specific workspace by defining:
+https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning of a specific workspace by defining:
 
 * projects to clone
 * browser IDE to use
@@ -54,7 +53,7 @@ of a specific workspace by defining:
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.5/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
+Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.6/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
 to this file.
 ====
 
@@ -103,9 +102,9 @@ The new OpenShift Connector 0.1.1 features offer three major benefits:
 * Speeds up OpenShift development by supporting fully integrated OpenShift development and deployment within CodeReady Workspaces, 
 which lets you connect to any OpenShift cluster and create, debug, and deploy from the IDE itself.
 * Simplifies inner-loop development for cloud infrastructure, since under the hood this extension uses tools like 
-https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_developer_cli/understanding-odo.html[OpenShift Do (odo)^],
+https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^],
 a fast and simple CLI tool for creating applications on Red Hat OpenShift Container Platform and 
-https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] 
+https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] 
 to help you interact with the local or production OpenShift instance and complete the inner-loop experience.
 * Enhances developer workflow by providing a streamlined developer experience for working with OpenShift instances (3.x or 4.x) 
 and supporting public cloud instances such as Red Hat OpenShift on Azure and AWS.

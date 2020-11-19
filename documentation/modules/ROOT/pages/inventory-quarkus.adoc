@@ -25,7 +25,7 @@ crafted from the best of breed Java libraries and standards.
 
 **Container First**: https://quarkus.io/[Quarkus^] tailors your application for GraalVM and HotSpot. Amazingly fast boot time, incredibly low RSS memory 
 (not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms 
-like Kubernetes. We use a technique we call https://quarkus.io/vision/container-first/[compile time boot^].
+like Kubernetes. We use a technique we call https://quarkus.io/vision/container-first[compile time boot^].
 
 **Unifies Imperative and Reactive**: Combine both the familiar https://quarkus.io/vision/continuum[imperative code and 
 the non-blocking reactive style^] when developing applications
@@ -383,12 +383,9 @@ In your {CHE_URL}[Workspace^, role='params-link'], stop the service by `*hitting
 
 It’s time to deploy your service on OpenShift. 
 
-OpenShift https://docs.openshift.com/container-platform/4.4/builds/understanding-image-builds.html#build-strategy-s2i_understanding-image-builds[Source-to-Image (S2I)] is an open-source project 
-which helps in building artifacts from source code and injecting these into container images. 
-S2I produces ready-to-run images by building source code without the need of a Dockerfile.
 
-https://docs.openshift.com/container-platform/4.4/cli_reference/developer_cli_odo/understanding-odo.html[odo] (OpenShift Connector Plugin) uses S2I builder image for 
-executing developer source code inside a container.
+https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^] (OpenShift Connector Plugin) is a 
+fast, iterative, and straightforward CLI tool for developers who write, build, and deploy applications on Kubernetes and OpenShift.
 
 In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
 
@@ -433,7 +430,7 @@ Then, `*enter the following information*`:
 |inventory
 
 |Component type
-|java
+|java (s2i)
 
 |Component type version
 |11
