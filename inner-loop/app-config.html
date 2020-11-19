@@ -694,7 +694,7 @@ loaded into the database.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">+--------+----------+
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">+--------+----------+
 | itemId | quantity |
 +--------+----------+
 | 100000 |        0 |
@@ -829,7 +829,7 @@ used. Check the Catalog pod logs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-logs hljs" data-lang="logs">2017-08-10 21:07:51.670  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">2017-08-10 21:07:51.670  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -867,7 +867,7 @@ used. Check the Catalog pod logs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-logs hljs" data-lang="logs">  item_id |              name               | price
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">  item_id |              name               | price
   ---------+---------------------------------+-------
   100000  | Red Fedora                      | 34.99
   329299  | Quarkus T-shirt                 |    10
@@ -930,7 +930,7 @@ the database credentials in a secret in the project in which it&#8217;s being cr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-logs hljs" data-lang="logs">Name:            catalog-postgresql
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Name:            catalog-postgresql
 Namespace:       coolstore
 Labels:          app=catalog
                  template=postgresql-persistent-template
