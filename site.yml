@@ -8,7 +8,7 @@ site:
 
 content:
   sources:
-    - url: git@github.com:redhat-scholars/inner-loop-guides.git
+    - url: git@github.com:redhat-scholars/inner-loop-guide.git
       tags: []
       branches: master
       start_path: documentation

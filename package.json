@@ -1,11 +1,11 @@
 {
-  "name": "rhs-openshift-admins-devops",
-  "description": "OpenShift Admins Devops Course Documentation Site",
-  "homepage": "https://redhat-scholars.github.io/openshift-admins-devops",
+  "name": "rhs-openshift-inner-loop-workshop",
+  "description": "OpenShift Outer Loop Workshop ",
+  "homepage": "https://redhat-scholars.github.io/inner-loop-guide",
   "author": {
-    "email": "kamesh.sampath@hotmail.com",
-    "name": "Kamesh Sampath",
-    "url": "https://twitter.com/@kamesh_sampath"
+    "email": "madou@redhat.com",
+    "name": "Madou Coulibaly",
+    "url": "https://twitter.com/@madou_coulibaly"
   },
   "dependencies": {
     "@antora/cli": "^2.3.1",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redhat-scholars/openshift-admins-devops.git"
+    "url": "git+https://github.com/redhat-scholars/inner-loop-guide.git"
   },
   "license": "Apache-2.0",
   "babel": {
