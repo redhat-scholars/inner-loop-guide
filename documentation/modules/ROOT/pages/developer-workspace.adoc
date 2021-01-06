@@ -64,7 +64,7 @@ to this file.
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
 
-Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let's the magic happens...
+Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let the magic happens...
 
 image::che-login.png[Che - Login, 500]
 
