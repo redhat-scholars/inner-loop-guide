@@ -117,7 +117,7 @@ CLI::
 --
 NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 
-`*Execute the following commands in a terminal*`
+`*Execute the following commands*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -126,7 +126,7 @@ odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSH
 --
 ====
 
-The terminal should be displayed the following output:
+The result should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
@@ -141,7 +141,7 @@ Using project "cn-project{USER_ID}".
 Welcome! See 'odo help' to get started.
 ----
 
-Then, create your **Development Environment** as following:
+Then, create your **Development Environment**:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -159,7 +159,7 @@ CLI::
 --
 NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 
-`*Execute the following commands in a terminal*`
+`*Execute the following commands*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -168,7 +168,7 @@ odo project create my-project{USER_ID}
 --
 ====
 
-The terminal should be displayed the following output:
+The result should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
