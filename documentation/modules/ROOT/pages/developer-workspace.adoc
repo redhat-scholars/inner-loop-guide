@@ -104,7 +104,7 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 [tabs, subs="attributes+,+macros"]
 ====
 
-CRW Task::
+IDE Task::
 +
 -- 
 `*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
@@ -115,18 +115,19 @@ image::che-runtask.png[Che - RunTask, 500]
 CLI::
 +
 --
-NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
-
-`*Execute the following commands*`
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
 ----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+
 --
 ====
 
-The result should be as follows:
+The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
@@ -146,7 +147,7 @@ Then, create your **Development Environment**:
 [tabs, subs="attributes+,+macros"]
 ====
 
-CRW Task::
+IDE Task::
 +
 -- 
 `*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Create Development Project'*`
@@ -157,18 +158,18 @@ image::che-runtask.png[Che - RunTask, 500]
 CLI::
 +
 --
-NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
-
-`*Execute the following commands*`
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 odo project create my-project{USER_ID}
 ----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
 ====
 
-The result should be as follows:
+The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
@@ -182,7 +183,7 @@ The result should be as follows:
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.
 
-`*Click on the below button called 'Developer Console'*`
+`*Click on the 'Developer Console' button below*`
 
 [link={OPENSHIFT_CONSOLE_URL}]
 [window=_blank, align="center"]
