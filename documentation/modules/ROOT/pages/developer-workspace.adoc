@@ -80,38 +80,20 @@ Once completed, you will have a fully functional Browser-based IDE within the so
 
 image::che-workspace.png[Che - Workspace, 800]
 
-[#what_is_openshift_connect]
-== What is OpenShift Connect?
+[#what_is_odo]
+== What is OpenShift Do (odo)?
 
 [sidebar]
-.OpenShift Connector
+.OpenShift Do (odo)
 --
-[window=_blank, align="center"]
-image::openshiftconnect-logo.png[OpenShift Connector logo, 150]
 
-https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector[OpenShift Connector^]
-is a Visual Studio (VS) Code extension for interacting with Red Hat OpenShift cluster with more improved features for a seamless developer experience.
+https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift Container Platform and Kubernetes. 
+With https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, and debug applications on a cluster without the need to administer the cluster itself. 
+Creating deployment configurations, build configurations, service routes and other OpenShift Container Platform or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
 
-Developers can now focus on higher-level abstractions like their application and components and can drill down deeper to get to the OpenShift and 
-Kubernetes resources that make up their application directly from CodeReady Workspaces.
+Existing tools such as https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift Container Platform concepts. 
+https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift Container Platform concepts allowing developers to focus on what is most important to them: **code**.
 
-Three major benefits:
-
-The new OpenShift Connector 0.1.1 features offer three major benefits:
-
-* Speeds up OpenShift development by supporting fully integrated OpenShift development and deployment within CodeReady Workspaces, 
-which lets you connect to any OpenShift cluster and create, debug, and deploy from the IDE itself.
-* Simplifies inner-loop development for cloud infrastructure, since under the hood this extension uses tools like 
-https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^],
-a fast and simple CLI tool for creating applications on Red Hat OpenShift Container Platform and 
-https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] 
-to help you interact with the local or production OpenShift instance and complete the inner-loop experience.
-* Enhances developer workflow by providing a streamlined developer experience for working with OpenShift instances (3.x or 4.x) 
-and supporting public cloud instances such as Red Hat OpenShift on Azure and AWS.
-
-https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector[OpenShift Connector^] on CodeReady Workspaces provides an end-to-end developer experience for interacting with a Red Hat OpenShift cluster. 
-By leveraging the IDE features, developers can create, deploy, and debug applications and then deploy directly to 
-the running OpenShift cluster.
 --
 
 [#connect_your_workspace]
