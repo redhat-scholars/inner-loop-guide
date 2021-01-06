@@ -117,50 +117,82 @@ the running OpenShift cluster.
 [#connect_your_workspace]
 == Connect Your Workspace to Your OpenShift User
 
-First, in your {CHE_URL}[Workspace^, role='params-link'], 
-`*click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
+First, in your {CHE_URL}[Workspace^, role='params-link'],
+
+[tabs, subs="attributes+,+macros"]
+====
+
+CRW Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
 
 image::che-runtask.png[Che - RunTask, 500]
+--
 
-image::che-openshift-login.png[Che - OpenShift Login, 500]
+CLI::
++
+--
+NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 
-A terminal should be opened with the following output:
+`*Execute the following commands in a terminal*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
+----
+--
+====
+
+The terminal should be displayed the following output:
 
 [source,shell,subs="{markup-in-source}"]
 ----
+Connecting to the OpenShift cluster
+
 Login successful.
 
 You have one project on this server: "cn-project{USER_ID}"
 
 Using project "cn-project{USER_ID}".
-Welcome! See 'oc help' to get started.
+
+Welcome! See 'odo help' to get started.
 ----
 
-Then, `*open the 'OpenShift' View*`, you should see at least 1 project as following:
+Then, create your **Development Environment** as following:
 
-image::che-openshift-view.png[Che - OpenShift View, 300]
+[tabs, subs="attributes+,+macros"]
+====
 
-* The **'cn-project{USER_ID}' project** will be used as a **Staging Environment**.
+CRW Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Create Development Project'*`
 
-So, as you can see, you are missing the **Development Environment**. Let's create it!
+image::che-runtask.png[Che - RunTask, 500]
+--
 
-In your {CHE_URL}[Workspace^, role='params-link'], from **'OpenShift' View**, 
-`*right-click on the cluster URL and select 'New Project'*`
+CLI::
++
+--
+NOTE: To open a terminal, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 
-image::che-openshift-new-project.png[Che - OpenShift New Project, 500]
+`*Execute the following commands in a terminal*`
 
-Finally, `*enter the following information*`:
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+odo project create my-project{USER_ID}
+----
+--
+====
 
-.OpenShift New Project
-[%header,cols=2*]
-|===
-|Parameter 
-|Value
+The terminal should be displayed the following output:
 
-|Provide Project name.
-|my-project{USER_ID}
-
-|===
+[source,shell,subs="{markup-in-source}"]
+----
+ ✓  Project 'my-project{USER_ID}' is ready for use
+ ✓  New project created and now using project: my-project{USER_ID}
+----
 
 [#login_to_openshift]
 == Log in to the OpenShift Developer Console
