@@ -375,16 +375,53 @@ your request is then serviced by the redeployed application. If there are any is
 will let you know.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Compile (Dev Mode)'</strong></code></p>
+<p>First, in your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Compile (Dev Mode)'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
 </div>
 </div>
-<div class="imageblock">
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
 <div class="content">
-<img src="_images/che-inventory-compile.png" alt="Che - Inventory Development Mode" width="500">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+mvn compile quarkus:dev -Ddebug=false</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -659,8 +696,37 @@ the last path param being the product id which we want to check its inventory st
 <div class="paragraph">
 <p>The REST API returned a JSON object representing the inventory count for this product. Congratulations!</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stop_development_mode"><a class="anchor" href="#stop_development_mode"></a>Stop the Development Mode</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, stop the service by <code><strong>hitting Ctrl+c in the '&gt;_ Inventory Compile (Dev Mode)' Terminal</strong></code></p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, stop the service as follows:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset2_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_ide-task">
+<div class="paragraph">
+<p><code><strong>Enter Ctrl+c in the existing '&gt;_ Inventory Compile (Dev Mode)' terminal window</strong></code></p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_cli">
+<div class="paragraph">
+<p><code><strong>Enter Ctrl+c in the existing '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -668,91 +734,125 @@ the last path param being the product id which we want to check its inventory st
 <h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It’s time to deploy your service on OpenShift.</p>
+<p>It’s time to deploy your service on OpenShift using <a href="https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a>.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a> (OpenShift Connector Plugin) is a
-fast, iterative, and straightforward CLI tool for developers who write, build, and deploy applications on Kubernetes and OpenShift.</p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
 </div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset3_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_ide-task">
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Build'</strong></code></p>
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Build'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
 </div>
 </div>
-<div class="imageblock">
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
 <div class="content">
-<img src="_images/che-inventory-build.png" alt="Che - Build Inventory" width="500">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+mvn clean package -DskipTests</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Once this completes, let&#8217;s <strong>push</strong> your application into OpenShift.</p>
-</div>
-<div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, from <strong>'OpenShift' View</strong>,
-<code><strong>right-click on your 'my-project%USER_ID%' project and select 'New Component'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-openshift-new-component.png" alt="Che - OpenShift New Component" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>Then, <code><strong>enter the following information</strong></code>:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. OpenShift New Component</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Value</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">In which Application you want to create a Component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$(plus) Create new Application&#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provide Application name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select source type for Component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Binary File</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select context folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$(plus) Add new context folder.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Open</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/projects/workshop/labs/inventory-quarkus</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select binary file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">$(file-zip) target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provide Component name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java (s2i)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component type version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
-</tr>
-</tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once this completes, <strong>prepare</strong> your application code/binary for OpenShift.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset4_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Create Component'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+odo component create \
+    java:11 \
+    inventory \
+    --app coolstore \
+    --binary target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar \
+    --s2i \
+    --project my-project%USER_ID%</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Validation
+ ✓  Validating component [21ms]
+
+Please use `odo push` command to create the component with source deployed</code></pre>
+</div>
+</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -762,40 +862,95 @@ fast, iterative, and straightforward CLI tool for developers who write, build, a
 <td class="content">
 <div class="paragraph">
 <p>Now the configuration file <strong>'config.yaml'</strong> is in the local directory of the inventory component
-(<strong>'/projects/workshop/.odo'</strong>) that contains information about the component for deployment.</p>
+(<strong>'/projects/workshop/labs/inventory-quarkus.odo'</strong>) that contains information about the component for deployment.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Then, <code><strong>push the component to the OpenShift cluster</strong></code> by right-clicking on the <strong>inventory component</strong>,
-from <strong>'OpenShift' View</strong>, then select <strong>'Push'</strong>.</p>
+<p>Then, <strong>push</strong> the component to the OpenShift cluster:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset5_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset5_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset5_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Push'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/che-openshift-push-inventory.png" alt="Che - OpenShift Push Inventory" width="400">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset5_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+odo push</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
-<p>You should get an output in a <strong>'&gt;_ OpenShift' Terminal Window</strong> as following:</p>
+<p>You should get as output:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash-5.0$ odo push
-Validation
- ✓  Checking component [23ms]
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Validation
+ ✓  Checking component [21ms]
 
 Configuration changes
  ✓  Initializing component
- ✓  Creating component [149ms]
+ ✓  Creating component [395ms]
+
+Applying URL changes
+ ✓  URLs are synced with the cluster, no changes are required.
 
 Pushing to component inventory of type binary
- ✓  Checking files for pushing [4ms]
- ✓  Waiting for component to start [42s]
- ✓  Syncing files to the component [27s]
- ✓  Building component [2s]</code></pre>
+ ✓  Checking files for pushing [1ms]
+ ✓  Waiting for component to start [51s]
+ ✓  Syncing files to the component [207ms]
+ ✓  Building component [2s]]</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running. OpenShift runs the different components of the application
+in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="expose_service"><a class="anchor" href="#expose_service"></a>Expose the Inventory Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, you need to create an OpenShift Route for the component to access to your service from Internet.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -811,79 +966,136 @@ Pushing to component inventory of type binary
 </tr>
 </table>
 </div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset6_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset6_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset6_ide-task">
 <div class="paragraph">
-<p>Now, <code><strong>let’s create a Route for the component to access to your service from Internet</strong></code> by right-clicking on the <strong>inventory component</strong>,
-from <strong>'OpenShift' View</strong>, then select <strong>'New URL'</strong></p>
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Expose'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/che-openshift-url-inventory.png" alt="Che - OpenShift URL Inventory" width="400">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
 </div>
 </div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset6_cli">
 <div class="paragraph">
-<p><code><strong>Enter the following inputs</strong></code>:</p>
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. OpenShift New URL</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+odo url create \
+    inventory \
+    --port 8080</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Value</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provide URL name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select port to expose</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8080/tcp</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Do you want to secure new URL?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-</tr>
-</tbody>
 </table>
-<div class="paragraph">
-<p>Finally, <code><strong>push again the component to the OpenShift cluster</strong></code> to create the Route on OpenShift Cluster.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-openshift-push-again-inventory.png" alt="Che - OpenShift Push Inventory" width="400">
+</div>
 </div>
 </div>
 <div class="paragraph">
-<p>You should get an output in a <strong>'&gt;_ OpenShift' Terminal Window</strong> as following:</p>
+<p>The output should be as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash-5.0$ odo push
-Validation
- ✓  Checking component [140ms]
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"> ✓  URL inventory created for component: inventory
 
-Configuration changes
- ✓  Retrieving component data [107ms]
- ✓  Applying configuration [43ms]
-
-Applying URL changes
- ✓  URL inventory: http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX% created
-
-Pushing to component inventory of type binary
- ✓  Checking file changes for pushing [5ms]
- ✓  Waiting for component to start [7ms]
- ✓  Syncing files to the component [6s]
- ✓  Building component [2s]</code></pre>
+To apply the URL configuration changes, please use `odo push`</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Once this completes, your application should be up and running. OpenShift runs the different components of the application
-in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.</p>
+<p>Then, <strong>push</strong> again the component to the OpenShift cluster to apply the configuration change:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset7_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset7_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset7_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Push'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset7_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+odo push</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get as output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Validation
+ ✓  Checking component [72ms]
+
+Configuration changes
+ ✓  Retrieving component data [36ms]
+ ✓  Applying configuration [95ms]
+
+Applying URL changes
+<strong> ✓  URL inventory: http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/ created</strong>
+
+Pushing to component inventory of type binary
+ ✓  Checking file changes for pushing [1ms]
+ ✓  Waiting for component to start [6ms]
+ ✓  Syncing files to the component [248ms]
+ ✓  Building component [3s]</code></pre>
+</div>
 </div>
 </div>
 </div>
