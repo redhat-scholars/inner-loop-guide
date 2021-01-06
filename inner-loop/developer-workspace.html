@@ -316,7 +316,7 @@ Creating deployment configurations, build configurations, service routes and oth
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset1_crw-task"></a>CRW Task</p>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
 </li>
 <li>
 <p><a id="tabset1_cli"></a>CLI</p>
@@ -324,7 +324,7 @@ Creating deployment configurations, build configurations, service routes and oth
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_crw-task">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
 <div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'OpenShift - Login'</strong></code></p>
 </div>
@@ -335,6 +335,14 @@ Creating deployment configurations, build configurations, service routes and oth
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo login $(oc whoami --show-server) --username=user%USER_ID% --password=%OPENSHIFT_PASSWORD% --insecure-skip-tls-verify</code></pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -342,24 +350,16 @@ Creating deployment configurations, build configurations, service routes and oth
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To open a terminal, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><code><strong>Execute the following commands</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo login $(oc whoami --show-server) --username=user%USER_ID% --password=%OPENSHIFT_PASSWORD% --insecure-skip-tls-verify</code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The result should be as follows:</p>
+<p>The output should be as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -381,7 +381,7 @@ Welcome! See 'odo help' to get started.</code></pre>
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset2_crw-task"></a>CRW Task</p>
+<p><a id="tabset2_ide-task"></a>IDE Task</p>
 </li>
 <li>
 <p><a id="tabset2_cli"></a>CLI</p>
@@ -389,7 +389,7 @@ Welcome! See 'odo help' to get started.</code></pre>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset2_crw-task">
+<div class="tab-pane" aria-labelledby="tabset2_ide-task">
 <div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'OpenShift - Create Development Project'</strong></code></p>
 </div>
@@ -400,6 +400,14 @@ Welcome! See 'odo help' to get started.</code></pre>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset2_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo project create my-project%USER_ID%</code></pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -407,24 +415,16 @@ Welcome! See 'odo help' to get started.</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To open a terminal, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><code><strong>Execute the following commands</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo project create my-project%USER_ID%</code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The result should be as follows:</p>
+<p>The output should be as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -442,7 +442,7 @@ To open a terminal, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in 
 perform various tasks via a browser.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Click on the below button called 'Developer Console'</strong></code></p>
+<p><code><strong>Click on the 'Developer Console' button below</strong></code></p>
 </div>
 <div class="imageblock text-center params-link">
 <div class="content">
