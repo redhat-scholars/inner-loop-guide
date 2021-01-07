@@ -57,7 +57,7 @@ Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.6/devfil
 to this file.
 ====
 
-`*Click on the below button called 'Developer Workspace'*`
+`*Click on the 'Developer Workspace' button below*`
 
 [link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-cloud-native]
 [window=_blank, align="center"]

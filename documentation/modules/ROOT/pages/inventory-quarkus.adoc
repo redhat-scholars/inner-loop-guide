@@ -503,68 +503,7 @@ Now the configuration file **'config.yaml'** is in the local directory of the in
 (**'/projects/workshop/labs/inventory-quarkus.odo'**) that contains information about the component for deployment.
 ====
 
-
-Then, **push** the component to the OpenShift cluster:
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Push'*`
-
-image::che-runtask.png[Che - RunTask, 500]
---
-
-CLI::
-+
---
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-cd /projects/workshop/labs/inventory-quarkus
-odo push
-----
-
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
---
-====
-
-You should get as output:
-
-[source,shell,subs="{markup-in-source}"]
-----
-Validation
- ✓  Checking component [21ms]
-
-Configuration changes
- ✓  Initializing component
- ✓  Creating component [395ms]
-
-Applying URL changes
- ✓  URLs are synced with the cluster, no changes are required.
-
-Pushing to component inventory of type binary
- ✓  Checking files for pushing [1ms]
- ✓  Waiting for component to start [51s]
- ✓  Syncing files to the component [207ms]
- ✓  Building component [2s]]
-----
-
-Once this completes, your application should be up and running. OpenShift runs the different components of the application 
-in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.
-
-[#expose_service]
-== Expose the Inventory Service
-
-Now, you need to create an OpenShift Route for the component to access to your service from Internet.
-
-[IMPORTANT]
-====
-You need to push your component first in order to create a Route for it.
-====
+Then, **expose the service** to Internet by creating an OpenShift Route for the component.
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -594,16 +533,7 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 --
 ====
 
-The output should be as follows:
-
-[source,shell,subs="{markup-in-source}"]
-----
- ✓  URL inventory created for component: inventory
-
-To apply the URL configuration changes, please use \`odo push`
-----
-
-Then, **push** again the component to the OpenShift cluster to apply the configuration change:
+Finally, **push** the component to the OpenShift cluster:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -651,6 +581,9 @@ Pushing to component inventory of type binary
  ✓  Syncing files to the component [248ms]
  ✓  Building component [3s]
 ----
+
+Once this completes, your application should be up and running. OpenShift runs the different components of the application 
+in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.
 
 [#test_your_service]
 == Test your Service
