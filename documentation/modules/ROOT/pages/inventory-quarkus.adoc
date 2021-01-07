@@ -218,7 +218,7 @@ If you have the following result on the 'Preview' window, please `*click on the 
 image::che-preview-na.png[Che - Preview Not Available, 500]
 ====
 
-`*Modify the 'src/main/resources/META-INF/resources/index.html' file*` as following
+`*Modify the 'src/main/resources/META-INF/resources/index.html' file*` as follows
 
 [source,html,role=copypaste]
 ----
@@ -260,7 +260,7 @@ Now let's write some code and create a domain model and a RESTful endpoint to cr
 [#create_domain_model]
 == Create a Domain Model
 
-`*Create the 'src/main/java/com/redhat/cloudnative/Inventory.java' file`* as following:
+`*Create the 'src/main/java/com/redhat/cloudnative/Inventory.java' file`* as follows:
 
 [source,java,role=copypaste]
 ----
@@ -336,7 +336,7 @@ quarkus.hibernate-orm.sql-load-script=import.sql
 application with **java -jar**. By default, in Quarkus, the generation of the uber-jar is disabled. With the
 **%prod** prefix, this option is only activated when building the jar intended for deployments.
 
-`*Update the 'src/main/resources/import.sql' file`* as following:
+`*Update the 'src/main/resources/import.sql' file`* as follows:
 [source,sql,role=copypaste]
 ----
 INSERT INTO INVENTORY(itemId, quantity) VALUES (100000, 0);

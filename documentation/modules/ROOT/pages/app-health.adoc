@@ -138,7 +138,7 @@ on the 'My Workspace' white box in the right menu, then 'Plugins' -> 'workshop-t
 
 image::che-open-workshop-terminal.png[Che - Open OpenShift Terminal, 700]
 
-In the window called **'>_ workshop-tools terminal'**, `*execute the following commands*`:
+In the **'>_ workshop-tools'** terminal window, `*execute the following commands*`:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----

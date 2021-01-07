@@ -112,7 +112,7 @@ Then, enter the following information:
 image::openshift-inventory-mariadb-topology.png[OpenShift - Inventory MariaDB, 700]
 
 `*Click again on '+ Add' and select 'Database', delect 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
-to create the Catalog Database as following:
+to create the Catalog Database as follows:
 
 Then, enter the following information:
 
@@ -178,7 +178,7 @@ In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/worksho
 ----
 
 Then `*add the '%prod.quarkus.datasource.driver' parameter in 
- the '/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties' file*` as following
+ the '/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties' file*` as follows
 
 [source,properties,subs="{markup-in-source}",role=copypaste]
 ----
@@ -237,7 +237,7 @@ on the 'My Workspace' white box in the right menu, then 'Plugins' -> 'workshop-t
 
 image::che-open-workshop-terminal.png[Che - Open OpenShift Terminal, 700]
 
-In the window called **'>_ workshop-tools terminal'**, `*execute the following commands*`:
+In the **'>_ workshop-tools' terminal window, `*execute the following commands*`:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
