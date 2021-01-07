@@ -869,7 +869,7 @@ Please use `odo push` command to create the component with source deployed</code
 </table>
 </div>
 <div class="paragraph">
-<p>Then, <strong>push</strong> the component to the OpenShift cluster:</p>
+<p>Then, <strong>expose the service</strong> to Internet by creating an OpenShift Route for the component.</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -885,101 +885,6 @@ Please use `odo push` command to create the component with source deployed</code
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset5_ide-task">
 <div class="paragraph">
-<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Push'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset5_cli">
-<div class="paragraph">
-<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
-odo push</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get as output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Validation
- ✓  Checking component [21ms]
-
-Configuration changes
- ✓  Initializing component
- ✓  Creating component [395ms]
-
-Applying URL changes
- ✓  URLs are synced with the cluster, no changes are required.
-
-Pushing to component inventory of type binary
- ✓  Checking files for pushing [1ms]
- ✓  Waiting for component to start [51s]
- ✓  Syncing files to the component [207ms]
- ✓  Building component [2s]]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once this completes, your application should be up and running. OpenShift runs the different components of the application
-in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="expose_service"><a class="anchor" href="#expose_service"></a>Expose the Inventory Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now, you need to create an OpenShift Route for the component to access to your service from Internet.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>You need to push your component first in order to create a Route for it.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset6_ide-task"></a>IDE Task</p>
-</li>
-<li>
-<p><a id="tabset6_cli"></a>CLI</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset6_ide-task">
-<div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Expose'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -988,7 +893,7 @@ in one or more pods which are the unit of runtime deployment and consists of the
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset6_cli">
+<div class="tab-pane" aria-labelledby="tabset5_cli">
 <div class="paragraph">
 <p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>
@@ -1016,31 +921,21 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 </div>
 <div class="paragraph">
-<p>The output should be as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"> ✓  URL inventory created for component: inventory
-
-To apply the URL configuration changes, please use `odo push`</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then, <strong>push</strong> again the component to the OpenShift cluster to apply the configuration change:</p>
+<p>Finally, <strong>push</strong> the component to the OpenShift cluster:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset7_ide-task"></a>IDE Task</p>
+<p><a id="tabset6_ide-task"></a>IDE Task</p>
 </li>
 <li>
-<p><a id="tabset7_cli"></a>CLI</p>
+<p><a id="tabset6_cli"></a>CLI</p>
 </li>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset7_ide-task">
+<div class="tab-pane" aria-labelledby="tabset6_ide-task">
 <div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Push'</strong></code></p>
 </div>
@@ -1050,7 +945,7 @@ To apply the URL configuration changes, please use `odo push`</code></pre>
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset7_cli">
+<div class="tab-pane" aria-labelledby="tabset6_cli">
 <div class="paragraph">
 <p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>
@@ -1096,6 +991,10 @@ Pushing to component inventory of type binary
  ✓  Syncing files to the component [248ms]
  ✓  Building component [3s]</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running. OpenShift runs the different components of the application
+in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.</p>
 </div>
 </div>
 </div>
