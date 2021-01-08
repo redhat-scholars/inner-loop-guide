@@ -146,7 +146,7 @@ create a scalable API Gateway that aggregates Catalog and Inventory APIs.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/images/coolstore-arch-gateway-dotnet.png" alt="FIXME CoolStore Architecture" width="400">
+<img src="_images/coolstore-arch-gateway-dotnet.png" alt="CoolStore Architecture" width="400">
 </div>
 </div>
 </div>
@@ -189,7 +189,7 @@ the project laid out in different subdirectories according to ASP .NET best prac
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/images/dotnet-gateway-project.png" alt="FIXME Gateway Project" width="340">
+<img src="_images/dotnet-gateway-project.png" alt="Gateway Project" width="340">
 </div>
 </div>
 <div class="paragraph">
@@ -326,6 +326,19 @@ public class ProductsController : ControllerBase
 <p>As you did previously, <code><strong>create a new Component, a New URL then Push it in to the OpenShift cluster</strong></code>
 by using the following inputs:</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Unlike Catalog and Inventory service, you are going to push the <strong>'gateway-dotnet/'</strong> folder as a source to OpenShift.
+OpenShift will generate the dll file for you.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. OpenShift New Component</caption>
 <colgroup>
@@ -352,7 +365,11 @@ by using the following inputs:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enforce s2i builder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary as a source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enforce S2I type components</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
@@ -463,7 +480,7 @@ containers for the project.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/images/xxxxopenshift-gateway-topology.png" alt="FIXME OpenShift - Gateway Topology" width="700">
+<img src="_images/openshift-gateway-topology.png" alt="OpenShift - Gateway Topology" width="700">
 </div>
 </div>
 <div class="paragraph">
@@ -471,7 +488,7 @@ containers for the project.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/images/xxxgateway-service.png" alt="FIXME Gateway Service" width="500">
+<img src="_images/gateway-service.png" alt="Gateway Service" width="500">
 </div>
 </div>
 <div class="paragraph">
