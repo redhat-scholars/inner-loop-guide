@@ -12,7 +12,7 @@ In this lab you will learn about .NET and how you can
 build microservices using ASP.NET principles. During this lab you will 
 create a scalable API Gateway that aggregates Catalog and Inventory APIs.
 
-image::images/coolstore-arch-gateway-dotnet.png[FIXME CoolStore Architecture,400]
+image::coolstore-arch-gateway-dotnet.png[CoolStore Architecture,400]
 
 
 == What is .NET (previously .NET Core)?
@@ -40,7 +40,7 @@ We will also be using the standard web server pattern provided by ASP .NET libra
 The **gateway-dotnet** project has the following structure which shows the components of 
 the project laid out in different subdirectories according to ASP .NET best practices:
 
-image::images/dotnet-gateway-project.png[FIXME Gateway Project,340]
+image::dotnet-gateway-project.png[Gateway Project,340]
 
 This is a minimal ASP .NET project with support for asynchronous REST services. 
 
@@ -165,6 +165,9 @@ It’s time to build and deploy your service on OpenShift.
 As you did previously, `*create a new Component, a New URL then Push it in to the OpenShift cluster*`
 by using the following inputs:
 
+IMPORTANT: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as a source to OpenShift. 
+OpenShift will generate the dll file for you.
+
 .OpenShift New Component
 [%header,cols=2*]
 |===
@@ -180,7 +183,10 @@ by using the following inputs:
 |In which Application you want to create a Component
 |coolstore
 
-|Enforce s2i builder
+|Binary as a source
+|false
+
+|Enforce S2I type components
 |true
 
 |In which Project/Namespace you want to create a Component
@@ -251,11 +257,11 @@ containers for the project.
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^], from the **Developer view**,
 `*click on the 'Open URL' icon of the Gateway Service*`
 
-image::images/xxxxopenshift-gateway-topology.png[FIXME OpenShift - Gateway Topology, 700]
+image::openshift-gateway-topology.png[OpenShift - Gateway Topology, 700]
 
 Your browser will be redirect on **your Gateway Service running on OpenShift**.
 
-image::images/xxxgateway-service.png[FIXME Gateway Service,500]
+image::gateway-service.png[Gateway Service,500]
 
 Then `*click on 'Test it'*`. You should have the following output:
 
