@@ -77,17 +77,17 @@ image::openshift-inventory-pkill.png[OpenShift Inventory pkill, 700]
 pkill -STOP java
 ----
 
-So we just suspend the _Inventory Service_ java process to simulate a stuck situation.
+So **you just suspend the _Inventory Service_ java process** to simulate a stuck situation.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Events' and 'Logs' tabs *` and notice that 
-everything seems to be ok.
+**everything seems to be ok**.
 
 image::openshift-inventory-events.png[OpenShift Inventory Events, 500]
 
 image::openshift-inventory-logs.png[OpenShift Inventory Logs, 500]
 
 Now, `*access to your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
-You don't have any response anymore (as the process has been stopped previously).
+**You don't have any response anymore** (as the process has been stopped previously).
 
 Often, applications need a restart to work correctly again.
 
@@ -97,7 +97,7 @@ image::openshift-inventory-delete-pod.png[OpenShift Inventory Delete Pod, 700]
 
 A new instance (pod) will be redeployed. Once done, `*access to your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
 
-Now the _Inventory Service_ is working again.
+**Now the _Inventory Service_ is working again.**
 
 To make your application more robust and reliable, a **Liveness check**  will be used to check 
 if the container itself has become unresponsive. If the liveness probe fails due to a condition such as a deadlock, 
@@ -121,29 +121,20 @@ In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/worksho
     </dependency>
 ----
 
-`*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
-
-image::che-runtask.png[Che - RunTask, 500]
-
-image::che-inventory-build.png[Che - Inventory Build, 500]
-
-Then, `*push the updated component to the OpenShift cluster*`.
-
-image::che-openshift-push-again-inventory.png[Che - OpenShift Push Inventory, 400]
+Then, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 
 Once completed, verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
-In your {CHE_URL}[Workspace^, role='params-link'], open a new Terminal by `*clicking 
-on the 'My Workspace' white box in the right menu, then 'Plugins' -> 'workshop-tools' -> '>_ New terminal'*`:
-
-image::che-open-workshop-terminal.png[Che - Open OpenShift Terminal, 700]
-
-In the **'>_ workshop-tools'** terminal window, `*execute the following commands*`:
+In your {CHE_URL}[Workspace^, role='params-link'], 
+`*execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 curl -w "\n" http://inventory-coolstore.my-project{USER_ID}.svc:8080/health
 ----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+
 
 You should have the following output:
 
@@ -236,11 +227,43 @@ The service is up and running again.
 
 Let's imagine you have traffic to the _Catalog Service_
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Generate Traffic'*`
+In your {CHE_URL}[Workspace^, role='params-link'],
+
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Generate Traffic'*`
 
 image::che-runtask.png[Che - RunTask, 500]
+--
 
-image::che-catalog-generate-traffic.png[Che - Catalog Generate Traffic, 500]
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+for i in {1..60}
+do 
+    if [ $(curl -s -w "%{http_code}" -o /dev/null http://catalog-coolstore.my-project{USER_ID}.svc:8080/actuator/health) == "200" ]
+    then 
+        MSG="\033[0;32mThe request to Catalog Service has succeeded\033[0m"
+    else 
+        MSG="\033[0;31mERROR - The request to Catalog Service has failed\033[0m" 
+    fi
+    
+    echo -e $MSG
+    sleep 2s
+done
+----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+--
+====
 
 You should have the following output:
 
@@ -254,13 +277,29 @@ on the right side of the pod blue circle*`.
 
 image::openshift-scale-out-catalog.png[OpenShift Scale Out Catalog, 700]
 
+[WARNING, subs="{markup-in-source}"]
+====
+**Only if you get an error when scaling out the _Catalog Service_. Otherwise, please skip this warning section.**
+
+
+Indeed, **odo** sets up its mechanisms with a ReadWriteOnce (RWO) Persistent Volume. It means only one node could read/write this volume at a time.
+However, it may happen the new instances of the _Catalog Service_ will not be located in the same node.
+
+To avoid that, you need to add a **PodAffinity** configuration to ensure that all the instances of the _Catalog Service_ will always be co-located in the same node.
+
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Add PodAffinity'*`
+
+image::che-runtask.png[Che - RunTask, 500]
+
+====
+
 You should see the 2 instances (pods) running. 
 Now, `*switch back to your {CHE_URL}[Workspace^, role='params-link'] and check the output of the 'Catalog Generate Traffic' task*`.
 
 image::che-catalog-traffic-ko.png[Che - Catalog Traffic KO, 500]
 
-Why do some requests failed? Because as soon as the container is created, 
-the traffic is sent to this new instance even if the application is not ready. The _Catalog Service_ takes more than 20 seconds to start up). 
+**Why do some requests failed? Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready.** 
+(The _Catalog Service_ takes more than 20 seconds to start up). 
 
 In order to prevent this behaviour, a **Readiness check** is needed. It determines if the container in which it is scheduled is ready to service requests. 
 If the readiness probe fails a container, the endpoints controller ensures the container has its IP address removed from the endpoints of all services. 
@@ -345,11 +384,13 @@ image::openshift-catalog-add-readiness-probe.png[Che - Catalog Add Readiness Pro
 |===
 
 Finally `*click on the check icon and the 'add' button*`. The Readiness check is now set up.
+
+[#testing_Readiness]
+== Testing Readiness Probes
+
 Now let's test it as you did previously.
-
-In your {CHE_URL}[Workspace^, role='params-link'], `*run the 'Catalog - Generate Traffic' task*`.
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*scale out the Catalog Service to 2 instances (pods)*`
+`*Generate traffic to  Catalog Service*` and then, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], 
+`*scale out the Catalog Service to 2 instances (pods)*`
 
 In your {CHE_URL}[Workspace^, role='params-link'], `*check the output of the 'Catalog Generate Traffic' task*`.
 
