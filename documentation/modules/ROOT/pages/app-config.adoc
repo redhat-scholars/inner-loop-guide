@@ -192,15 +192,7 @@ Leave the **'quarkus.datasource.url'**, **'quarkus.datasource.username'** and **
 parameters unchanged. They will be overridden later.
 ====
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
-
-image::che-runtask.png[Che - RunTask, 500]
-
-image::che-inventory-build.png[Che - Build Inventory, 500]
-
-Then, `*push the updated component to the OpenShift cluster*`.
-
-image::che-openshift-push-again-inventory.png[Che - OpenShift Push Inventory, 400]
+Once the source code is updated, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 
 Now, let's create the Quarkus configuration content using the database credentials.
 
@@ -228,16 +220,27 @@ data:
     quarkus.datasource.password=inventory
 ----
 
-`*Click on the 'Create button*` and then `*configure the container to use the newly Config Map and overlay on the default application.properties*`:
+`*Click on the 'Create' button*`.
 
-Now, let’s mount this Config Map as a volume inside the Inventory Service Pod.
+Now, **let’s mount this Config Map** as a volume inside the Inventory Service Pod to overlay the default 'application.properties'.
 
-In your {CHE_URL}[Workspace^, role='params-link'], open a new Terminal by `*clicking 
-on the 'My Workspace' white box in the right menu, then 'Plugins' -> 'workshop-tools' -> '>_ New terminal'*`:
+In your {CHE_URL}[Workspace^, role='params-link'],
 
-image::che-open-workshop-terminal.png[Che - Open OpenShift Terminal, 700]
+[tabs, subs="attributes+,+macros"]
+====
 
-In the **'>_ workshop-tools' terminal window, `*execute the following commands*`:
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Mount ConfigMap'*`
+
+image::che-runtask.png[Che - RunTask, 500]
+--
+
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -246,9 +249,14 @@ oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-pa
 <1> Mounts the content of the **Inventory Config Map** as a file inside the **Inventory container**
 at **/deployments/config/application.properties **
 
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+--
+====
+
 The Inventory pod gets restarted automatically due to the configuration changes. Wait till it's ready, 
-and then verify that the config map is in fact injected into the container by `*running 
-a shell command inside the Inventory Container*`:
+and then **verify that the config map is in fact injected into the container** by running a shell command inside the Inventory Container:
+
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -264,8 +272,10 @@ quarkus.datasource.username=inventory
 quarkus.datasource.password=inventory
 ----
 
-You can also connect to Inventory MariaDB database and check if the seed data is 
-loaded into the database.
+You can also **connect to Inventory MariaDB database and check if the seed data is 
+loaded into the database**.
+
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
