@@ -164,14 +164,14 @@ create a scalable API Gateway that aggregates Catalog and Inventory APIs.</p>
 <div class="paragraph">
 <p><a href="https://docs.microsoft.com/en-us/dotnet/core/introduction/" target="_blank" rel="noopener">.NET (Core)</a> is a
 is a free, open-source development platform for building many kinds of apps, from web, serverless, mobile, desktop and console apps.
-With .NET, your code and project files look and feel the same no matter which type of app you&#8217;re building and you have access to the
-same runtime, API, and language capabilities with each app.
+With .NET your code and project files look and feel the same no matter which type of app you&#8217;re building and you have access to the
+same runtime, API and language capabilities with each app.
 You can create .NET apps for many operating systems, including Windows, Linux and MacOS on a variety of hardware. .NET lets
 you use platform-specific capabilities, such as operating system APIs. Examples are Windows Forms and WPF on Windows .NET is open
 source, <a href="https://github.com/dotnet/runtime/blob/master/LICENSE.TXT" target="_blank" rel="noopener">using MIT and Apache 2 licenses</a> .NET is a project of the <a href="https://dotnetfoundation.org/" target="_blank" rel="noopener">.NET Foundation.</a></p>
 </div>
 <div class="paragraph">
-<p>\.NET supports a number of programming faces and development environments, but today we will be using C# inside CodeReady Workspaces.</p>
+<p>.NET supports a number of programming faces and development environments, but today we will be looking at C# inside CodeReady Workspaces.</p>
 </div>
 <div class="paragraph">
 <p>We will also be using the standard web server pattern provided by ASP .NET libraries for creating non-blocking web services.</p>
@@ -199,7 +199,7 @@ the project laid out in different subdirectories according to ASP .NET best prac
 <p><code><strong>Examine 'Startup.cs' class</strong></code> in the <strong>/projects/workshop/labs/gateway-dotnet/</strong> directory.</p>
 </div>
 <div class="paragraph">
-<p>See how the basic web server is started with minimal services, health checks and a basic controllers deployed.</p>
+<p>See how the basic web server is started with minimal services, health checks and a basic REST controller is deployed.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -253,13 +253,25 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 <div class="paragraph">
 <p><code><strong>Examine 'ProductsController.cs' class</strong></code> in the <strong>/projects/workshop/labs/gateway-dotnet/Controllers</strong> directory.</p>
 </div>
-<div class="paragraph">
-<p>Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET <strong>/api/products</strong></p>
-</div>
-<div class="paragraph">
-<p>In this case the Get() service first requests a list of products from the Catalog microservice and then steps through each in turn
-to discover the amount of product in stock. It does this by calling the Inventory service for each product.
-By using an HttpClient class for each service, .NET will efficiently manage the connection handling.</p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET <strong>/api/products</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>In this case the Get() service first requests a list of products from the Catalog microservice</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>By using an HttpClient class for each service, .NET will efficiently manage the connection handling.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables.</p>
@@ -267,22 +279,22 @@ By using an HttpClient class for each service, .NET will efficiently manage the 
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-dotnet hljs" data-lang="dotnet">[ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]")] <i class="conum" data-value="1"></i><b>(1)</b>
 public class ProductsController : ControllerBase
 {
     [HttpGet]
     public IEnumerable&lt;Products&gt; Get()
     {
-        private static HttpClient catalogHttpClient = new HttpClient();
+        private static HttpClient catalogHttpClient = new HttpClient(); <i class="conum" data-value="4"></i><b>(4)</b>
         private static HttpClient inventoryHttpClient = new HttpClient();
 
         try
         {
             // get the product list
-            IEnumerable&lt;Products&gt; productsList = GetCatalog();
+            IEnumerable&lt;Products&gt; productsList = GetCatalog(); <i class="conum" data-value="2"></i><b>(2)</b>
 
             // update each item with their inventory value
-            foreach(Products p in productsList)
+            foreach(Products p in productsList) <i class="conum" data-value="3"></i><b>(3)</b>
             {
                 Inventory inv = GetInventory(p.ItemId);
                 if (inv != null)
@@ -305,6 +317,7 @@ public class ProductsController : ControllerBase
         var data = catalogHttpClient.GetStringAsync("/api/catalog").Result;
         return JsonConvert.DeserializeObject&lt;IEnumerable&lt;Products&gt;&gt;(data);
     }
+
     private Inventory GetInventory(string itemId)
     {
         var data = inventoryHttpClient.GetStringAsync("/api/inventory/" + itemId).Result;
@@ -323,8 +336,8 @@ public class ProductsController : ControllerBase
 <p>It’s time to build and deploy your service on OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>As you did previously, <code><strong>create a new Component, a New URL then Push it in to the OpenShift cluster</strong></code>
-by using the following inputs:</p>
+<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and URL and then Push it in to the OpenShift cluster</strong></code>
+by using the following parameters:</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -333,8 +346,8 @@ by using the following inputs:</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Unlike Catalog and Inventory service, you are going to push the <strong>'gateway-dotnet/'</strong> folder as a source to OpenShift.
-OpenShift will generate the dll file for you.
+Unlike Catalog and Inventory service, you are going to push the <strong>'gateway-dotnet/'</strong> folder as an input to OpenShift.
+OpenShift will build the .NET .dll file from the project file and source code for you.
 </td>
 </tr>
 </table>
@@ -353,6 +366,10 @@ OpenShift will generate the dll file for you.
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local project working directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/projects/workshop/labs/gateway-dotnet</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dotnet</p></td>
 </tr>
@@ -361,20 +378,16 @@ OpenShift will generate the dll file for you.
 <td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">In which Application you want to create a Component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Binary as a source</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enforce S2I type components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use Source-to-image (S2I) components</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">In which Project/Namespace you want to create a Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The OpenShift Project where the Component is created</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">my-project%USER_ID%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Application where you want to create the Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
 </tr>
 </tbody>
 </table>
@@ -402,9 +415,11 @@ OpenShift will generate the dll file for you.
 </tbody>
 </table>
 <div class="paragraph">
-<p>The Gateway Component needs to be connected to the Inventory and Catalog components in order to interact.
-OpenShift Container Platform provides linking mechanisms to publish communication bindings from a program to its clients,
-especially by injecting the variables <strong>COMPONENT_xxx_HOST</strong> and <strong>COMPONENT_xxx_PORT</strong>.</p>
+<p>The Gateway Component needs to be <code><strong>connected to the Inventory and Catalog components</strong></code> in order to interact.
+OpenShift provides linking mechanisms to publish communication bindings from a program to its clients by injecting the environment variables <strong>COMPONENT_xxx_HOST</strong> and <strong>COMPONENT_xxx_PORT</strong>.</p>
+</div>
+<div class="paragraph">
+<p>We are using a simple binding here between services, but in advanced labs you may learn about using service discovery or Service Mesh to make this binding dynamic.</p>
 </div>
 <div class="paragraph">
 <p>In your %CHE_URL%[Workspace^, role='params-link'],</p>
