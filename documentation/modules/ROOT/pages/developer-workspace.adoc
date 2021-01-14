@@ -45,7 +45,7 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 [NOTE]
 .Devfile
 ====
-https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning of a specific workspace by defining:
+https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] uses https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning of a specific workspace by defining:
 
 * projects to clone
 * browser IDE to use
@@ -67,14 +67,6 @@ image::developer-workspace-button.svg[Developer Workspace - Button, 300]
 Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let the magic happens...
 
 image::che-login.png[Che - Login, 500]
-
-
-[TIP]
-====
-If you have the following screen, please `*click on 'Allow selected permissions'*`
-
-image::che-openshift-authorize-access.png[Che - OpenShift OAuth Authorize Access, 600]
-====
 
 Once completed, you will have a fully functional Browser-based IDE within the source code already imported.
 
