@@ -500,7 +500,7 @@ Please use \`odo push` command to create the component with source deployed
 [TIP]
 ====
 Now the configuration file **'config.yaml'** is in the local directory of the inventory component 
-(**'/projects/workshop/labs/inventory-quarkus.odo'**) that contains information about the component for deployment.
+(**'/projects/workshop/labs/inventory-quarkus/.odo'**) that contains information about the component for deployment.
 ====
 
 Then, **expose the service** to Internet by creating an OpenShift Route for the component.
