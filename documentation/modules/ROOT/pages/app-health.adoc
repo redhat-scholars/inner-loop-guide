@@ -86,7 +86,7 @@ image::openshift-inventory-events.png[OpenShift Inventory Events, 500]
 
 image::openshift-inventory-logs.png[OpenShift Inventory Logs, 500]
 
-Now, `*access to your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
+Now, `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
 **You don't have any response anymore** (as the process has been stopped previously).
 
 Often, applications need a restart to work correctly again.
@@ -95,7 +95,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*cl
 
 image::openshift-inventory-delete-pod.png[OpenShift Inventory Delete Pod, 700]
 
-A new instance (pod) will be redeployed. Once done, `*access to your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
+A new instance (pod) will be redeployed. Once done, `*try to access again your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
 
 **Now the _Inventory Service_ is working again.**
 

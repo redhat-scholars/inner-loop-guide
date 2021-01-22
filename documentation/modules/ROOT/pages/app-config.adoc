@@ -79,7 +79,7 @@ Then, enter the following information:
 |Value
 
 |Namespace*
-|PR my-project{USER_ID}
+|my-project{USER_ID}
 
 |Memory Limit*
 |512Mi
@@ -111,7 +111,7 @@ Then, enter the following information:
 
 image::openshift-inventory-mariadb-topology.png[OpenShift - Inventory MariaDB, 700]
 
-`*Click again on '+ Add' and select 'Database', delect 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
+`*Click again on '+ Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
 to create the Catalog Database as follows:
 
 Then, enter the following information:
@@ -123,7 +123,7 @@ Then, enter the following information:
 |Value
 
 |Namespace*
-|PR my-project{USER_ID}
+|my-project{USER_ID}
 
 |Memory Limit*
 |512Mi
