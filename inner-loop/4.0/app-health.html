@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Monitor Application Health :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/4.0/app-health.html">
+    <link rel="prev" href="webui-deployment.html">
+    <link rel="next" href="app-config.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="4.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .Net</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">4.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="app-health.html">7. Monitor Application Health</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/4.0/documentation/modules/ROOT/pages/app-health.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Monitor Application Health</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>15 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab we will learn how to monitor application health using OpenShift
+health probes and how you can see container resource consumption using metrics.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">OpenShift Health Probes</div>
+<div class="paragraph">
+<p>When building microservices, monitoring becomes of extreme importance to make sure all services
+are running at all times, and when they don&#8217;t there are automatic actions triggered to rectify
+the issues.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift, using Kubernetes health probes, offers a solution for monitoring application
+health and trying to automatically heal faulty containers through restarting them to fix issues such as
+a deadlock in the application which can be resolved by restarting the container. Restarting a container
+in such a state can help to make the application more available despite bugs.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, there are of course a category of issues that can&#8217;t be resolved by restarting the container.
+In those scenarios, OpenShift would remove the faulty container from the built-in load-balancer and send traffic
+only to the healthy containers that remain.</p>
+</div>
+<div class="paragraph">
+<p>There are three types of health probes available in OpenShift: <a href="https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_application-health" target="_blank" rel="noopener">startup, readiness and liveness probes</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Startup probes</strong> determine if the container in which it is scheduled is started</p>
+</li>
+<li>
+<p><strong>Readiness probes</strong> determine if the container in which it is scheduled is ready to service requests</p>
+</li>
+<li>
+<p><strong>Liveness probes</strong> determine if the container in which it is scheduled is still running</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Health probes also provide crucial benefits when automating deployments with practices like rolling updates in
+order to remove downtime during deployments. A readiness health probe would signal OpenShift when to switch
+traffic from the old version of the container to the new version so that the users don&#8217;t get affected during
+deployments.</p>
+</div>
+<div class="paragraph">
+<p>There are <a href="https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_types_application-health" target="_blank" rel="noopener">three ways to define a health probe</a> for a container:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>HTTP Checks:</strong> healthiness of the container is determined based on the response code of an HTTP
+endpoint. Anything between 200 and 399 is considered success. A HTTP check is ideal for applications
+that return HTTP status codes when completely initialized.</p>
+</li>
+<li>
+<p><strong>Container Execution Checks:</strong> a specified command is executed inside the container and the healthiness is
+determined based on the return value (0 is success).</p>
+</li>
+<li>
+<p><strong>TCP Socket Checks:</strong> a socket is opened on a specified port to the container and it&#8217;s considered healthy
+only if the check can establish a connection. TCP socket check is ideal for applications that do not
+start listening until initialization is complete.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="understanding_liveness"><a class="anchor" href="#understanding_liveness"></a>Understanding Liveness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>What happens if you DON&#8217;T setup Liveness checks?</strong></p>
+</div>
+<div class="paragraph">
+<p>Imagine the <em>Inventory Service</em> is stuck in a state (Deadlock, NullPointer exception, Out of Memory, ..)
+where it cannot perform as it should. Let&#8217;s access inside the container and simulate this state.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Resources' &#8594; 'P inventory-coolstore-x-xxxxx'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-pod.png" alt="OpenShift Inventory Pod" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, <code><strong>from the Terminal tab, run the following command</strong></code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-pkill.png" alt="OpenShift Inventory pkill" width="700">
+</div>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">pkill -STOP java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So <strong>you just suspend the <em>Inventory Service</em> java process</strong> to simulate a stuck situation.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code>*click on the 'Events' and 'Logs' tabs *</code> and notice that
+<strong>everything seems to be ok</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-events.png" alt="OpenShift Inventory Events" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-logs.png" alt="OpenShift Inventory Logs" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, <code><strong>try to access your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
+<strong>You don&#8217;t have any response anymore</strong> (as the process has been stopped previously).</p>
+</div>
+<div class="paragraph">
+<p>Often, applications need a restart to work correctly again.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on 'Actions' &#8594; 'Delete Pod' &#8594; 'Delete'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-delete-pod.png" alt="OpenShift Inventory Delete Pod" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>A new instance (pod) will be redeployed. Once done, <code><strong>try to access again your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Now the <em>Inventory Service</em> is working again.</strong></p>
+</div>
+<div class="paragraph">
+<p>To make your application more robust and reliable, a <strong>Liveness check</strong>  will be used to check
+if the container itself has become unresponsive. If the liveness probe fails due to a condition such as a deadlock,
+the container could automatically restart (based on its restart policy).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring_liveness"><a class="anchor" href="#configuring_liveness"></a>Configuring Liveness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://quarkus.io/guides/health-guide" target="_blank" rel="noopener">SmallRye Health</a> is a Quarkus extension which utilizes the MicroProfile Health specification.
+It allows applications to provide information about their state to external viewers which is typically useful
+in cloud environments where automated processes must be able to determine whether the application should be discarded or restarted.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s add the needed dependencies to <strong>/projects/workshop/labs/inventory-quarkus/pom.xml</strong>.
+In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file</strong></code>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-smallrye-health&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, <code><strong>build and push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>Once completed, verify that the health endpoint works for the <strong>Inventory Service</strong> using <code><strong>curl</strong></code></p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
+<code><strong>execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">curl -w "\n" http://inventory-coolstore.my-project%USER_ID%.svc:8080/health</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "status": "UP",
+    "checks": [
+        {
+            "name": "Database connection(s) health check",
+            "status": "UP"
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-add-health-check.png" alt="Che - Inventory Add Health Check" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Add Liveness Probe'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-add-liveness-probe.png" alt="Che - Inventory Add Liveness Probe" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Enter the following information:</strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Liveness Probe</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use HTTPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Headers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/health/live</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial Delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Period</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Finally <code><strong>click on the check icon and the 'add' button</strong></code>. OpenShift automates deployments using
+<a href="https://docs.openshift.com/container-platform/4.2/welcome/index.html" target="_blank" rel="noopener">deployment triggers</a>
+that react to changes to the container image or configuration.
+Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing_liveness"><a class="anchor" href="#testing_liveness"></a>Testing Liveness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you did previously, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>access into the container and suspend the <em>Inventory Service</em> java process</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>Then, still in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on the 'Events' tab</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>After 3 failed checks, OpenShift automatically restarts the container.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-events-failed-check.png" alt="OpenShift Inventory Event Failed Check" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, <code><strong>access to your <a href="http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Inventory Service</a></strong></code>.
+The service is up and running again.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="understanding_readiness"><a class="anchor" href="#understanding_readiness"></a>Understanding Readiness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>What happens if you DON&#8217;T setup Readiness checks?</strong></p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s imagine you have traffic to the <em>Catalog Service</em></p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Generate Traffic'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">for i in {1..60}
+do
+    if [ $(curl -s -w "%{http_code}" -o /dev/null http://catalog-coolstore.my-project%USER_ID%.svc:8080/actuator/health) == "200" ]
+    then
+        MSG="\033[0;32mThe request to Catalog Service has succeeded\033[0m"
+    else
+        MSG="\033[0;31mERROR - The request to Catalog Service has failed\033[0m"
+    fi
+
+    echo -e $MSG
+    sleep 2s
+done</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-traffic-ok.png" alt="Che - Catalog Traffic OK" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s scale out your <em>Catalog Service</em> to 2 instances.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the up arrows
+on the right side of the pod blue circle</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-scale-out-catalog.png" alt="OpenShift Scale Out Catalog" width="700">
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Only if you get an error when scaling out the <em>Catalog Service</em>. Otherwise, please skip this warning section.</strong></p>
+</div>
+<div class="paragraph">
+<p>Indeed, <strong>odo</strong> sets up its mechanisms with a ReadWriteOnce (RWO) Persistent Volume. It means only one node could read/write this volume at a time.
+However, it may happen the new instances of the <em>Catalog Service</em> will not be located in the same node.</p>
+</div>
+<div class="paragraph">
+<p>To avoid that, you need to add a <strong>PodAffinity</strong> configuration to ensure that all the instances of the <em>Catalog Service</em> will always be co-located in the same node.</p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Add PodAffinity'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You should see the 2 instances (pods) running.
+Now, <code><strong>switch back to your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a> and check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-traffic-ko.png" alt="Che - Catalog Traffic KO" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Why do some requests failed? Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready.</strong>
+(The <em>Catalog Service</em> takes more than 20 seconds to start up).</p>
+</div>
+<div class="paragraph">
+<p>In order to prevent this behaviour, a <strong>Readiness check</strong> is needed. It determines if the container in which it is scheduled is ready to service requests.
+If the readiness probe fails a container, the endpoints controller ensures the container has its IP address removed from the endpoints of all services.
+A readiness probe can be used to signal to the endpoints controller that even though a container is running, it should not receive any traffic from a proxy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring_readiness"><a class="anchor" href="#configuring_readiness"></a>Configuring Readiness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First, scale down your <em>Catalog Service</em> to 1 instance. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the down arrows
+on the right side of the pod blue circle</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready" target="_blank" rel="noopener">Spring Boot Actuator</a> is a
+sub-project of Spring Boot which adds health and management HTTP endpoints to the application. Enabling Spring Boot
+Actuator is done via adding <strong>org.springframework.boot:spring-boot-starter-actuator</strong> dependency to the Maven project
+dependencies which is already done for the <strong>Catalog Service</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Verify that the health endpoint works for the <strong>Catalog Service</strong> using <code><strong>curl</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, in the window called <strong>'&gt;_ workshop-tools terminal'</strong>,
+<code><strong>execute the following commands</strong></code>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">curl -w "\n" http://catalog-coolstore.my-project%USER_ID%.svc:8080/actuator/health</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"status":"UP"}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-catalog-add-health-check.png" alt="Che - Catalog Add Health Check" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Add Readiness Probe'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-catalog-add-readiness-probe.png" alt="Che - Catalog Add Readiness Probe" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Enter the following information:</strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Readiness Probe</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use HTTPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Headers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/actuator/health</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial Delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Period</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Finally <code><strong>click on the check icon and the 'add' button</strong></code>. The Readiness check is now set up.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing_Readiness"><a class="anchor" href="#testing_Readiness"></a>Testing Readiness Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now let&#8217;s test it as you did previously.
+<code><strong>Generate traffic to  Catalog Service</strong></code> and then, in the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>,
+<code><strong>scale out the Catalog Service to 2 instances (pods)</strong></code></p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>You should not see any error means that you can now <strong>scale out your <em>Catalog Service</em> with no downtime.</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-catalog-traffic-ok.png" alt="Che - Catalog Traffic OK" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="understanding_startup"><a class="anchor" href="#understanding_startup"></a>Understanding Startup Probes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Startup probes</strong> are similar to liveness probes but only executed at startup.
+When a startup probe is configured, the other probes are disabled until it suceeds.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes, some (legacy) applications might need extra times for their first initialization.
+In such cases, setting a longer liveness internal might compromise the main benefit of this probe ie providing
+the fast response to stuck states.</p>
+</div>
+<div class="paragraph">
+<p><strong>Startup probes</strong> are useful to cover this worse case startup time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="monitoring_all_applications"><a class="anchor" href="#monitoring_all_applications"></a>Monitoring All Application Healths</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now you understand and know how to configure Readiness, Liveness and Startup probes, let&#8217;s confirm your expertise!</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Configure the remaining Probes to for Inventory and Catalog Probes</strong></code> using the following information:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Inventory Service</th>
+<th class="tableblock halign-left valign-top">Readiness</th>
+<th class="tableblock halign-left valign-top">Startup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use HTTPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Headers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/health/ready</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/health/live</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial Delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Period</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Catalog Service</th>
+<th class="tableblock halign-left valign-top">Liveness</th>
+<th class="tableblock halign-left valign-top">Startup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP GET</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use HTTPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Unchecked</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP Headers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/actuator/health</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/actuator/health</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success Threshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial Delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Period</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Finally, let&#8217;s configure probes for Gateway and Web Service.
+In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Probes - Configure Gateway &amp; Web'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-probes-configure-gateway-web.png" alt="Che - Probes Configure Gateway &amp; Web" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="monitoring_application_metrics"><a class="anchor" href="#monitoring_application_metrics"></a>Monitoring Applications Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metrics are another important aspect of monitoring applications which is required in order to
+gain visibility into how the application behaves and particularly in identifying issues.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift provides container metrics out-of-the-box and displays how much memory, cpu and network
+each container has been consuming over time.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Monitoring' then select your 'my-project%USER_ID%' project</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>In the project overview, you can see the different <strong>Resource Usage</strong> sections.
+<code><strong>click on one graph to get more details</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-monitoring.png" alt="OpenShift Monitoring" width="740">
+</div>
+</div>
+<div class="paragraph">
+<p>From the <strong>Developer view</strong>, <code><strong>click on 'Topology' &#8594; any Deployment Config (DC) and click on the associated Pod (P)</strong></code></p>
+</div>
+<div class="paragraph">
+<p>In the pod overview, you can see a more detailed view of the pod consumption.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-pod-details.png" alt="OpenShift Pod Details" width="740">
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="webui-deployment.html" class="query-params-link">6. Deploy Web UI with with Node.js and AngularJS</a></span>
+  <span class="next"><a href="app-config.html" class="query-params-link">8. Externalize Application Configuration</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
