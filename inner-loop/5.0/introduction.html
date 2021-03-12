@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welcome to Inner Loop Workshop :: OpenShift Inner Loop Workshop</title>
-    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/5.0/index.html">
-    <link rel="next" href="introduction.html">
+    <title>Introduction :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/5.0/introduction.html">
+    <link rel="prev" href="index.html">
+    <link rel="next" href="developer-workspace.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -61,7 +62,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="inner-loop" data-version="4.0">
+<div class="nav-container" data-component="inner-loop" data-version="5.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -70,7 +71,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="introduction.html">1. Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -102,17 +103,17 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">OpenShift Inner Loop Workshop</span>
-    <span class="version">4.0</span>
+    <span class="version">5.0</span>
   </div>
   <ul class="components">
     <li class="component is-current">
       <span class="title">OpenShift Inner Loop Workshop</span>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../5.0/index.html">5.0</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">5.0</a>
         </li>
-        <li class="version is-current">
-          <a href="index.html">4.0</a>
+        <li class="version">
+          <a href="../4.0/index.html">4.0</a>
         </li>
       </ul>
     </li>
@@ -124,47 +125,78 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../5.0/index.html" class="home-link"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
-    <li><a href="index.html">Welcome to Inner Loop Workshop</a></li>
+    <li><a href="introduction.html">1. Introduction</a></li>
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">4.0</button>
+  <button class="version-menu-toggle" title="Show other versions of page">5.0</button>
   <div class="version-menu">
-    <a class="version" href="../5.0/index.html">5.0</a>
-    <a class="version is-current" href="index.html">4.0</a>
+    <a class="version is-current" href="introduction.html">5.0</a>
+    <a class="version" href="../4.0/introduction.html">4.0</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/4.0/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/5.0/documentation/modules/ROOT/pages/introduction.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Welcome to Inner Loop Workshop</h1>
-<div class="sect1 text-center strong">
-<h2>Ready to become a Cloud Native Developer?</h2>
-<div class="sectionbody">
+<h1 class="page">Introduction</h1>
 <div class="paragraph">
-<p>This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on OpenShift using rich and advanced development services.</p>
+<p><em>2 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this workshop you will learn how to develop and deploy a microservices based application.</p>
+</div>
+<div class="paragraph">
+<p>The overall architecture of the application that you will deploy is the following:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/inner-loop.png" alt="Developer Inner Loop" width="400">
+<img src="_images/coolstore-arch.png" alt="Coolstore Architecture" width="400">
 </div>
 </div>
 <div class="paragraph">
-<p>The goal of this hands-workshop is to provide a Developer Experience through the Inner Loop using Cloud Native Technologies.</p>
+<p>During the various steps of the the workshop you will use CodeReady Workspaces, an online IDE that is running on Red Hat OpenShift to write, test and deploy these services:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Catalog Service</strong> exposes using a REST API content of a catalog stored in a relational database</p>
+</li>
+<li>
+<p><strong>Inventory Service</strong> exposes using a REST API the inventory stored in a relational database</p>
+</li>
+<li>
+<p><strong>Gateway Service</strong> calls the <strong>Catalog Service</strong> and <strong>Inventory Service</strong> in an efficient way</p>
+</li>
+<li>
+<p><strong>WebUI Service</strong> calls <strong>Gateway Service</strong> to retrieve all the informations.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>To be a part of this journey, all you need is to come your modern web browser.
-Everything else is running on the Cloud, on OpenShift</p>
+<p>The outcome is an online store with a catalog of product items and an inventory of stock:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-web.png" alt="CoolStore Shop" width="840">
 </div>
 </div>
+<div class="paragraph">
+<p>In addition to the application code, you will learn how to deploy the various services to OpenShift and how to use it to route the trafic to these services and monitor them.</p>
+</div>
+<div class="paragraph">
+<p>You will also have the opportunity to look at some optional steps such as debugging, continuous delivery, externalized configuration and more.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start the workshop with the discovery of OpenShift and CodeReady Workspaces.</p>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="introduction.html" class="query-params-link">1. Introduction</a></span>
+  <span class="prev"><a href="index.html" class="query-params-link">OpenShift Inner Loop Workshop</a></span>
+  <span class="next"><a href="developer-workspace.html" class="query-params-link">2. Get your Developer Workspace</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
