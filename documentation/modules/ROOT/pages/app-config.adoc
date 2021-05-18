@@ -182,7 +182,7 @@ Then `*add the '%prod.quarkus.datasource.driver' parameter in
 
 [source,properties,subs="{markup-in-source}",role=copypaste]
 ----
-%prod.quarkus.datasource.driver=org.mariadb.jdbc.Driver #<1> 
+%prod.quarkus.datasource.driver=org.mariadb.jdbc.Driver#<1> 
 ----
 <1> With the **%prod** prefix, this option is only activated when building the jar intended for deployments.
 
