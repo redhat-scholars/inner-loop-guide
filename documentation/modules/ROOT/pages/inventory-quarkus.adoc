@@ -474,14 +474,45 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-odo component create \
-    java:11 \
-    inventory \
-    --app coolstore \
-    --binary target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar \
-    --s2i \
-    --project my-project{USER_ID}
+odo component create --s2i 
 ----
+
+`*Enter the following parameters in the interactive menu:*`
+
+.OpenShift New Component
+[%header,cols=2*]
+|===
+|Question 
+|Answer
+
+|? Which component type do you wish to create
+|**java**
+
+|? Which version of 'java' component type do you wish to create 
+|**latest**
+
+|? Which input type do you wish to use for the component
+|**binary**
+
+|Location of context component, relative to '/projects/workshop/labs/inventory-quarkus' (.)
+|_Empty ('/projects/workshop/labs/inventory-quarkus' by default)_
+
+|? Location of binary component, relative to '.'
+|**target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar**
+
+|? What do you wish to name the new component (java-inventory-xxx)
+|**inventory**
+
+|? Which application do you want the component to be associated with (app)
+| **coolstore**
+
+|? Which project go you want the component to be created in (my-project{USER_ID})
+|_Empty ('my-project{USER_ID}' by default)_
+
+|? Do you wish to set advanced options
+|_Empty ('No' by default)_
+
+|===
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
@@ -525,9 +556,11 @@ CLI::
 ----
 cd /projects/workshop/labs/inventory-quarkus
 odo url create \
-    inventory \
-    --port 8080
+    inventory \#<1>
+    --port 8080#<2>
 ----
+<1> Name of the URL
+<2> Port number for the URL
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --

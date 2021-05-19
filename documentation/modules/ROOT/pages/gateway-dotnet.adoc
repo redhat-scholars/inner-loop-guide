@@ -100,16 +100,6 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 `*Examine 'ProductsController.cs' class*` in the **/projects/workshop/labs/gateway-dotnet/Controllers** directory.
 
-<1> Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET */api/products*
-
-<2> In this case the Get() service first requests a list of products from the Catalog microservice
-
-<3> It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.
-
-<4> By using an HttpClient class for each service, .NET will efficiently manage the connection handling.
-
-The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables. 
-
 [source,dotnet]
 ----
 [ApiController]
@@ -160,6 +150,12 @@ public class ProductsController : ControllerBase
 
 }
 ----
+<1> Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET */api/products*
+<2> In this case the Get() service first requests a list of products from the Catalog microservice
+<3> It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.
+<4> By using an HttpClient class for each service, .NET will efficiently manage the connection handling.
+
+The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables. 
 
 == Deploy on OpenShift
 
@@ -168,32 +164,61 @@ It’s time to build and deploy your service on OpenShift.
 As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and URL and then Push it in to the OpenShift cluster*`
 by using the following parameters:
 
-IMPORTANT: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' and execute the 'Gateway' tasks in the correct order.*`
+
+image::che-runtask.png[Che - RunTask, 500]
+--
+
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+cd /projects/workshop/labs/gateway-dotnet
+----
+
+`*Execute the proper commands with the following parameters:*`
+
+NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
 OpenShift will build the .NET .dll file from the project file and source code for you.
 
 .OpenShift New Component
 [%header,cols=2*]
 |===
-|Parameter 
-|Value
+|Question 
+|Answer
 
-|Local project working directory
-|/projects/workshop/labs/gateway-dotnet
+|? Which component type do you wish to create
+|**dotnet**
 
-|Component type
-|dotnet
+|? Which version of 'dotnet' component type do you wish to create 
+|**3.1-ubi8**
 
-|Component name
-|gateway
+|? Which input type do you wish to use for the component
+|**local**
 
-|Use Source-to-image (S2I) components
-|true
+|Location of context component, relative to '/projects/workshop/labs/gateway-dotnet' (.)
+|_Empty ('/projects/workshop/labs/gateway-dotnet' by default)_
 
-|The OpenShift Project where the Component is created
-|my-project{USER_ID}
+|? What do you wish to name the new component (dotnet-gateway--xxx)
+|**gateway**
 
-|The Application where you want to create the Component
-|coolstore
+|? Which application do you want the component to be associated with (app)
+| **coolstore**
+
+|? Which project go you want the component to be created in (my-project{USER_ID})
+|_Empty ('my-project{USER_ID}' by default)_
+
+|? Do you wish to set advanced options
+|_Empty ('No' by default)_
 
 |===
 
@@ -210,6 +235,12 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 |8080
 
 |===
+
+IMPORTANT: Do not forget to **push** your new component
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+--
+====
 
 The Gateway Component needs to be `*connected to the Inventory and Catalog components*` in order to interact.
 OpenShift provides linking mechanisms to publish communication bindings from a program to its clients by injecting the environment variables **COMPONENT_xxx_HOST** and **COMPONENT_xxx_PORT**.

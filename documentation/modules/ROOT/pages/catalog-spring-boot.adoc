@@ -396,13 +396,57 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/catalog-spring-boot
-odo component create java:11 catalog --app coolstore --binary target/catalog-1.0-SNAPSHOT.jar --s2i --project my-project{USER_ID}
+odo component create --s2i 
+----
+
+`*Enter the following parameters in the interactive menu:*`
+
+.OpenShift New Component
+[%header,cols=2*]
+|===
+|Question 
+|Answer
+
+|? Which component type do you wish to create
+|**java**
+
+|? Which version of 'java' component type do you wish to create 
+|**latest**
+
+|? Which input type do you wish to use for the component
+|**binary**
+
+|Location of context component, relative to '/projects/workshop/labs/catalog-spring-boot' (.)
+|_Empty ('/projects/workshop/labs/catalog-spring-boot' by default)_
+
+|? Location of binary component, relative to '.'
+|**target/catalog-1.0-SNAPSHOT.jar**
+
+|? What do you wish to name the new component (java-catalog-xxx)
+|**catalog**
+
+|? Which application do you want the component to be associated with (app)
+| **coolstore**
+
+|? Which project go you want the component to be created in (my-project{USER_ID})
+|_Empty ('my-project{USER_ID}' by default)_
+
+|? Do you wish to set advanced options
+|_Empty ('No' by default)_
+
+|===
+
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
 odo url create catalog --port 8080
 odo push
 ----
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
+
 ====
 
 Once this completes, your application should be up and running. OpenShift runs the different components of 
