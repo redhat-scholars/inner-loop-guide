@@ -727,8 +727,69 @@ by using the following inputs:</p>
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/catalog-spring-boot
-odo component create java:11 catalog --app coolstore --binary target/catalog-1.0-SNAPSHOT.jar --s2i --project my-project%USER_ID%
-odo url create catalog --port 8080
+odo component create --s2i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Enter the following parameters in the interactive menu:</strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. OpenShift New Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Question</th>
+<th class="tableblock halign-left valign-top">Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>java</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which version of 'java' component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>latest</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which input type do you wish to use for the component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>binary</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of context component, relative to '/projects/workshop/labs/catalog-spring-boot' (.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('/projects/workshop/labs/catalog-spring-boot' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Location of binary component, relative to '.'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>target/catalog-1.0-SNAPSHOT.jar</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? What do you wish to name the new component (java-catalog-xxx)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>catalog</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which application do you want the component to be associated with (app)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>coolstore</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which project go you want the component to be created in (my-project%USER_ID%)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Do you wish to set advanced options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('No' by default)</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">odo url create catalog --port 8080
 odo push</code></pre>
 </div>
 </div>

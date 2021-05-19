@@ -263,29 +263,6 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 <div class="paragraph">
 <p><code><strong>Examine 'ProductsController.cs' class</strong></code> in the <strong>/projects/workshop/labs/gateway-dotnet/Controllers</strong> directory.</p>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET <strong>/api/products</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>In this case the Get() service first requests a list of products from the Catalog microservice</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>By using an HttpClient class for each service, .NET will efficiently manage the connection handling.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables.</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-dotnet hljs" data-lang="dotnet">[ApiController]
@@ -337,6 +314,29 @@ public class ProductsController : ControllerBase
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET <strong>/api/products</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>In this case the Get() service first requests a list of products from the Catalog microservice</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>By using an HttpClient class for each service, .NET will efficiently manage the connection handling.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -349,11 +349,45 @@ public class ProductsController : ControllerBase
 <p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and URL and then Push it in to the OpenShift cluster</strong></code>
 by using the following parameters:</p>
 </div>
-<div class="admonitionblock important">
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' and execute the 'Gateway' tasks in the correct order.</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/gateway-dotnet</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Execute the proper commands with the following parameters:</strong></code></p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 Unlike Catalog and Inventory service, you are going to push the <strong>'gateway-dotnet/'</strong> folder as an input to OpenShift.
@@ -370,34 +404,42 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Question</th>
+<th class="tableblock halign-left valign-top">Answer</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Local project working directory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/projects/workshop/labs/gateway-dotnet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dotnet</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">dotnet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which version of 'dotnet' component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3.1-ubi8</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Component name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which input type do you wish to use for the component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>local</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use Source-to-image (S2I) components</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of context component, relative to '/projects/workshop/labs/gateway-dotnet' (.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('/projects/workshop/labs/gateway-dotnet' by default)</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The OpenShift Project where the Component is created</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">my-project%USER_ID%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? What do you wish to name the new component (dotnet-gateway&#8212;&#8203;xxx)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>gateway</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Application where you want to create the Component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">coolstore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which application do you want the component to be associated with (app)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>coolstore</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which project go you want the component to be created in (my-project%USER_ID%)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Do you wish to set advanced options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('No' by default)</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -424,6 +466,33 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Do not forget to <strong>push</strong> your new component
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>The Gateway Component needs to be <code><strong>connected to the Inventory and Catalog components</strong></code> in order to interact.
 OpenShift provides linking mechanisms to publish communication bindings from a program to its clients by injecting the environment variables <strong>COMPONENT_xxx_HOST</strong> and <strong>COMPONENT_xxx_PORT</strong>.</p>
@@ -438,15 +507,15 @@ OpenShift provides linking mechanisms to publish communication bindings from a p
 <div class="ulist tabs">
 <ul>
 <li>
-<p><a id="tabset1_ide-task"></a>IDE Task</p>
+<p><a id="tabset2_ide-task"></a>IDE Task</p>
 </li>
 <li>
-<p><a id="tabset1_cli"></a>CLI</p>
+<p><a id="tabset2_cli"></a>CLI</p>
 </li>
 </ul>
 </div>
 <div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="tab-pane" aria-labelledby="tabset2_ide-task">
 <div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Link to Gateway'</strong></code></p>
 </div>
@@ -459,7 +528,7 @@ OpenShift provides linking mechanisms to publish communication bindings from a p
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="tab-pane" aria-labelledby="tabset2_cli">
 <div class="paragraph">
 <p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>

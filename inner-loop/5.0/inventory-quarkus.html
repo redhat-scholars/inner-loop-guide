@@ -828,15 +828,63 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
-odo component create \
-    java:11 \
-    inventory \
-    --app coolstore \
-    --binary target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar \
-    --s2i \
-    --project my-project%USER_ID%</code></pre>
+odo component create --s2i</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><code><strong>Enter the following parameters in the interactive menu:</strong></code></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. OpenShift New Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Question</th>
+<th class="tableblock halign-left valign-top">Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>java</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which version of 'java' component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>latest</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which input type do you wish to use for the component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>binary</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of context component, relative to '/projects/workshop/labs/inventory-quarkus' (.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('/projects/workshop/labs/inventory-quarkus' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Location of binary component, relative to '.'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? What do you wish to name the new component (java-inventory-xxx)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inventory</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which application do you want the component to be associated with (app)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>coolstore</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Which project go you want the component to be created in (my-project%USER_ID%)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">? Do you wish to set advanced options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('No' by default)</em></p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -911,9 +959,21 @@ Please use `odo push` command to create the component with source deployed</code
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
 odo url create \
-    inventory \
-    --port 8080</code></pre>
+    inventory \<i class="conum" data-value="1"></i><b>(1)</b>
+    --port 8080<i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the URL</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Port number for the URL</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
