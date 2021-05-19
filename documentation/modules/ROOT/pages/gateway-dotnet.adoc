@@ -196,28 +196,28 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 |Question 
 |Answer
 
-|? Which component type do you wish to create
+|Which component type do you wish to create
 |**dotnet**
 
-|? Which version of 'dotnet' component type do you wish to create 
+|Which version of 'dotnet' component type do you wish to create 
 |**3.1-ubi8**
 
-|? Which input type do you wish to use for the component
+|Which input type do you wish to use for the component
 |**local**
 
 |Location of context component, relative to '/projects/workshop/labs/gateway-dotnet' (.)
 |_Empty ('/projects/workshop/labs/gateway-dotnet' by default)_
 
-|? What do you wish to name the new component (dotnet-gateway--xxx)
+|What do you wish to name the new component (dotnet-gateway--xxx)
 |**gateway**
 
-|? Which application do you want the component to be associated with (app)
+|Which application do you want the component to be associated with (app)
 | **coolstore**
 
-|? Which project go you want the component to be created in (my-project{USER_ID})
+|Which project go you want the component to be created in (my-project{USER_ID})
 |_Empty ('my-project{USER_ID}' by default)_
 
-|? Do you wish to set advanced options
+|Do you wish to set advanced options
 |_Empty ('No' by default)_
 
 |===
