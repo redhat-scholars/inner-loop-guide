@@ -200,7 +200,7 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 |**dotnet**
 
 |Which version of 'dotnet' component type do you wish to create 
-|**3.1-ubi8**
+|**2.1-ubi8**
 
 |Which input type do you wish to use for the component
 |**local**
