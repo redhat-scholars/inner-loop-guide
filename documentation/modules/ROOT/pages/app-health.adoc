@@ -540,6 +540,7 @@ image::openshift-monitoring.png[OpenShift Monitoring,740]
 From the **Developer view**, `*click on 'Topology' -> any Deployment Config (DC) and click on the associated Pod (P)*`
 
 In the pod overview, you can see a more detailed view of the pod consumption.
+The graphs can be found under the Metrics heading, or Details in earlier versions of the OpenShift console.
 
 image::openshift-pod-details.png[OpenShift Pod Details,740]
 
