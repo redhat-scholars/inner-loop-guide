@@ -489,7 +489,7 @@ odo component create --s2i
 |**java**
 
 |Which version of 'java' component type do you wish to create 
-|**latest**
+|**openjdk-11-el7**
 
 |Which input type do you wish to use for the component
 |**binary**

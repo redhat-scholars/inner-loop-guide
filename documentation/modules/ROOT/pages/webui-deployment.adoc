@@ -88,7 +88,9 @@ Then, enter the following information:
 
 |Labels
 |app=coolstore
+
 app.kubernetes.io/instance=web
+
 app.kubernetes.io/part-of=coolstore
 
 
