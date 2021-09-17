@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create Gateway Service with .Net :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/5.1/gateway-dotnet.html">
+    <link rel="prev" href="catalog-spring-boot.html">
+    <link rel="next" href="webui-deployment.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="5.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .Net</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">5.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">5.1</a>
+        </li>
+        <li class="version">
+          <a href="../5.0/index.html">5.0</a>
+        </li>
+        <li class="version">
+          <a href="../4.0/index.html">4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="gateway-dotnet.html">5. Create Gateway Service with .Net</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">5.1</button>
+  <div class="version-menu">
+    <a class="version is-current" href="gateway-dotnet.html">5.1</a>
+    <a class="version" href="../5.0/gateway-dotnet.html">5.0</a>
+    <a class="version" href="../4.0/gateway-dotnet.html">4.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/5.1/documentation/modules/ROOT/pages/gateway-dotnet.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Create Gateway Service with .Net</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>15 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about .NET and how you can
+build microservices using ASP.NET principles. During this lab you will
+create a scalable API Gateway that aggregates Catalog and Inventory APIs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch-gateway-dotnet.png" alt="CoolStore Architecture" width="400">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_net_previously_net_core"><a class="anchor" href="#_what_is_net_previously_net_core"></a>What is .NET (previously .NET Core)?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/240px-NET_Core_Logo.png" alt=".NET" width="240">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.microsoft.com/en-us/dotnet/core/introduction/" target="_blank" rel="noopener">.NET (Core)</a> is a
+is a free, open-source development platform for building many kinds of apps, from web, serverless, mobile, desktop and console apps.
+With .NET your code and project files look and feel the same no matter which type of app you&#8217;re building and you have access to the
+same runtime, API and language capabilities with each app.
+You can create .NET apps for many operating systems, including Windows, Linux and MacOS on a variety of hardware. .NET lets
+you use platform-specific capabilities, such as operating system APIs. Examples are Windows Forms and WPF on Windows .NET is open
+source, <a href="https://github.com/dotnet/runtime/blob/master/LICENSE.TXT" target="_blank" rel="noopener">using MIT and Apache 2 licenses</a> .NET is a project of the <a href="https://dotnetfoundation.org/" target="_blank" rel="noopener">.NET Foundation.</a></p>
+</div>
+<div class="paragraph">
+<p>.NET supports a number of programming faces and development environments, but today we will be looking at C# inside CodeReady Workspaces.</p>
+</div>
+<div class="paragraph">
+<p>We will also be using the standard web server pattern provided by ASP .NET libraries for creating non-blocking web services.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_net_gateway_project"><a class="anchor" href="#_net_gateway_project"></a>.NET Gateway Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>gateway-dotnet</strong> project has the following structure which shows the components of
+the project laid out in different subdirectories according to ASP .NET best practices:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dotnet-gateway-project.png" alt="Gateway Project" width="340">
+</div>
+</div>
+<div class="paragraph">
+<p>This is a minimal ASP .NET project with support for asynchronous REST services.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Examine 'Startup.cs' class</strong></code> in the <strong>/projects/workshop/labs/gateway-dotnet/</strong> directory.</p>
+</div>
+<div class="paragraph">
+<p>See how the basic web server is started with minimal services, health checks and a basic REST controller is deployed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dotnet hljs" data-lang="dotnet">// This method gets called by the runtime. Use this method to add services to the container.
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddCors();
+
+    services.AddControllers().AddJsonOptions(options=&gt;
+    {
+            options.JsonSerializerOptions.IgnoreNullValues = true;
+    });
+
+    services.AddHealthChecks();
+    services.AddControllersWithViews();
+}
+
+// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+
+    ProductsController.Config();
+
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+
+    app.UseCors(builder =&gt; builder
+            .AllowAnyOrigin ()
+            .AllowAnyHeader ()
+            .AllowAnyMethod ());
+
+    app.UseHealthChecks("/health");
+
+    app.UseRouting();
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+
+    app.UseEndpoints(endpoints =&gt;
+    {
+        endpoints.MapControllers();
+        endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+    });
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Examine 'ProductsController.cs' class</strong></code> in the <strong>/projects/workshop/labs/gateway-dotnet/Controllers</strong> directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dotnet hljs" data-lang="dotnet">[ApiController]
+[Route("api/[controller]")] <i class="conum" data-value="1"></i><b>(1)</b>
+public class ProductsController : ControllerBase
+{
+    [HttpGet]
+    public IEnumerable&lt;Products&gt; Get()
+    {
+        private static HttpClient catalogHttpClient = new HttpClient(); <i class="conum" data-value="4"></i><b>(4)</b>
+        private static HttpClient inventoryHttpClient = new HttpClient();
+
+        try
+        {
+            // get the product list
+            IEnumerable&lt;Products&gt; productsList = GetCatalog(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+            // update each item with their inventory value
+            foreach(Products p in productsList) <i class="conum" data-value="3"></i><b>(3)</b>
+            {
+                Inventory inv = GetInventory(p.ItemId);
+                if (inv != null)
+                    p.Availability = new Availability(inv);
+            }
+
+            return productsList;
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine("Using Catalog service: " + catalogApiHost + " and Inventory service: " + inventoryApiHost);
+            Console.WriteLine("Failure to get service data: " + e.Message);
+            // on failures return error
+            throw e;
+        }
+    }
+
+    private IEnumerable&lt;Products&gt; GetCatalog()
+    {
+        var data = catalogHttpClient.GetStringAsync("/api/catalog").Result;
+        return JsonConvert.DeserializeObject&lt;IEnumerable&lt;Products&gt;&gt;(data);
+    }
+
+    private Inventory GetInventory(string itemId)
+    {
+        var data = inventoryHttpClient.GetStringAsync("/api/inventory/" + itemId).Result;
+        return JsonConvert.DeserializeObject&lt;Inventory&gt;(data);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Not unlike the Quarkus and Spring boot apps previously built, the ProductsController has a single defined REST entrypoint for GET <strong>/api/products</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>In this case the Get() service first requests a list of products from the Catalog microservice</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>It then steps through each in turn to discover the amount of product in stock. It does this by calling the Inventory service for each product.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>By using an HttpClient class for each service, .NET will efficiently manage the connection handling.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The location or binding to the existing Catalog and Inventory REST services is injected at runtime via environment variables.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_on_openshift"><a class="anchor" href="#_deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It’s time to build and deploy your service on OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and URL and then Push it in to the OpenShift cluster</strong></code>
+by using the following parameters:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' and execute the 'Gateway' tasks in the correct order.</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/gateway-dotnet</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Execute the proper commands with the following parameters:</strong></code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unlike Catalog and Inventory service, you are going to push the <strong>'gateway-dotnet/'</strong> folder as an input to OpenShift.
+OpenShift will build the .NET .dll file from the project file and source code for you.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. OpenShift New Component</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Question</th>
+<th class="tableblock halign-left valign-top">Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dotnet</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which version of 'dotnet' component type do you wish to create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3.1-ubi8</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which input type do you wish to use for the component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>local</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of context component, relative to '/projects/workshop/labs/gateway-dotnet' (.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('/projects/workshop/labs/gateway-dotnet' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What do you wish to name the new component (dotnet-gateway&#8212;&#8203;xxx)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>gateway</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which application do you want the component to be associated with (app)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>coolstore</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which project go you want the component to be created in (my-project%USER_ID%)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do you wish to set advanced options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('No' by default)</em></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. OpenShift New URL</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">port to expose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Do not forget to <strong>push</strong> your new component
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The Gateway Component needs to be <code><strong>connected to the Inventory and Catalog components</strong></code> in order to interact.
+OpenShift provides linking mechanisms to publish communication bindings from a program to its clients by injecting the environment variables <strong>COMPONENT_xxx_HOST</strong> and <strong>COMPONENT_xxx_PORT</strong>.</p>
+</div>
+<div class="paragraph">
+<p>We are using a simple binding here between services, but in advanced labs you may learn about using service discovery or Service Mesh to make this binding dynamic.</p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset2_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Link to Gateway'</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Then, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Link to Gateway'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/gateway-dotnet
+odo link catalog --port 8080 --component gateway
+odo link inventory --port 8080 --component gateway</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration information of the Inventory and Catalog component is added to the Gateway component
+and the Gateway component restarts.</p>
+</div>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running. OpenShift runs the different components of
+the application in one or more pods which are the unit of runtime deployment and consists of the running
+containers for the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_your_service"><a class="anchor" href="#_test_your_service"></a>Test your Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%/graph" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Gateway Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-gateway-topology.png" alt="OpenShift - Gateway Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect on <strong>your Gateway Service running on OpenShift</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gateway-service.png" alt="Gateway Service" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">[ {
+  "itemId" : "329299",
+  "name" : "Red Fedora",
+  "desc" : "Official Red Hat Fedora",
+  "price" : 34.99,
+  "availability" : {
+    "quantity" : 35
+  }
+},
+...
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="catalog-spring-boot.html" class="query-params-link">4. Create Catalog Service with Spring Boot</a></span>
+  <span class="next"><a href="webui-deployment.html" class="query-params-link">6. Deploy Web UI with with Node.js and AngularJS</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
