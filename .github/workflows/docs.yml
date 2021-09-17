@@ -5,6 +5,7 @@ on:
     branches:
       - "4.0"
       - "5.0"
+      - "5.1"
 env:
   SITE_DIR: "gh-pages"
 jobs:
