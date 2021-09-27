@@ -199,11 +199,7 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 --
 ====
 
-When pop-ups appear, `*confirm you want to expose the 8080 port*`.
-
-image::che-expose-8080-port.png[Che - Expose Port, 500]
-
-And finally `*click on 'Open Link'*`.
+When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in Preview'*`.
 
 image::che-open-8080-link.png[Che - Open Link, 500]
 

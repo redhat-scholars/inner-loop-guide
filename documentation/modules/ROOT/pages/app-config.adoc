@@ -64,7 +64,7 @@ making it simple to re-create complex deployments by just deploying a single tem
 be parameterized to get input for fields like service names and generate values for fields like passwords.
 ====
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '+ Add' and select 'Database'*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '+Add' and select 'Database'*`
 
 image::openshift-add-database.png[OpenShift - Add database, 700]
 
@@ -111,7 +111,7 @@ Then, enter the following information:
 
 image::openshift-inventory-mariadb-topology.png[OpenShift - Inventory MariaDB, 700]
 
-`*Click again on '+ Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
+`*Click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
 to create the Catalog Database as follows:
 
 Then, enter the following information:
