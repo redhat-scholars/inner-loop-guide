@@ -183,6 +183,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/gateway-dotnet
+odo component create --s2i
 ----
 
 `*Execute the proper commands with the following parameters:*`
