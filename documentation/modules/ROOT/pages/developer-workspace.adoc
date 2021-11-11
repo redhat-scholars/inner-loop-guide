@@ -53,7 +53,7 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/mcouliba/cloud-native-workshop/blob/ocp4.6/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
+Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/5.1/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
 to this file.
 ====
 
