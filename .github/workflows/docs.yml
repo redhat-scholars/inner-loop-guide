@@ -6,6 +6,7 @@ on:
       - "4.0"
       - "5.0"
       - "5.1"
+      - "6.0"
 env:
   SITE_DIR: "gh-pages"
 jobs:

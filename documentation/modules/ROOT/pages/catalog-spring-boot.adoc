@@ -393,7 +393,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/catalog-spring-boot
-odo component create --s2i 
+odo create --app coolstore
 ----
 
 `*Enter the following parameters in the interactive menu:*`
@@ -404,32 +404,17 @@ odo component create --s2i
 |Question 
 |Answer
 
-|Which component type do you wish to create
-|**java**
+|Which devfile component type do you wish to create
+|**java-springboot**
 
-|Which version of 'java' component type do you wish to create 
-|**latest**
-
-|Which input type do you wish to use for the component
-|**binary**
-
-|Location of context component, relative to '/projects/workshop/labs/catalog-spring-boot' (.)
-|_Empty ('/projects/workshop/labs/catalog-spring-boot' by default)_
-
-|Location of binary component, relative to '.'
-|**target/catalog-1.0-SNAPSHOT.jar**
-
-|What do you wish to name the new component (java-catalog-xxx)
+|What do you wish to name the new devfile component
 |**catalog**
 
-|Which application do you want the component to be associated with (app)
-| **coolstore**
-
-|Which project go you want the component to be created in (my-project{USER_ID})
+|What project do you want the devfile component to be created in
 |_Empty ('my-project{USER_ID}' by default)_
 
-|Do you wish to set advanced options
-|_Empty ('No' by default)_
+|Do you want to download a starter project 
+|**No**
 
 |===
 

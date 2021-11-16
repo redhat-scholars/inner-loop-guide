@@ -53,13 +53,13 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/5.1/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
+Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.0/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
 to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
 
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-cloud-native]
+[link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-end-to-end-dev]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]

@@ -60,39 +60,28 @@ Then, enter the following information:
 |Value
 
 |Git Repo URL
-|{WORKSHOP_GIT_REPO}
+|**{WORKSHOP_GIT_REPO}**
 
 |Git Reference
-|{WORKSHOP_GIT_REF}
+|**{WORKSHOP_GIT_REF}**
 
 |Context Dir
-|/labs/web-nodejs
+|**/labs/web-nodejs**
 
 |Builder Image
-|Node.js
-
-|Builder Image Version
-|12-ubi7
+|**Node.js**
 
 |Application Name
-|coolstore
+|**coolstore**
 
 |Name
-|web-coolstore
+|**web-coolstore**
 
 |Resources
-|Deployment
+|**Deployment**
 
 |Create a route to the application
-|_Checked_
-
-|Labels
-|app=coolstore
-
-app.kubernetes.io/instance=web
-
-app.kubernetes.io/part-of=coolstore
-
+|**_Checked_**
 
 |===
 

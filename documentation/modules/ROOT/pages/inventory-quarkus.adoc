@@ -470,7 +470,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-odo component create --s2i 
+odo create --app coolstore
 ----
 
 `*Enter the following parameters in the interactive menu:*`
@@ -481,32 +481,17 @@ odo component create --s2i
 |Question 
 |Answer
 
-|Which component type do you wish to create
-|**java**
+|Which devfile component type do you wish to create
+|**java-quarkus**
 
-|Which version of 'java' component type do you wish to create 
-|**openjdk-11-el7**
-
-|Which input type do you wish to use for the component
-|**binary**
-
-|Location of context component, relative to '/projects/workshop/labs/inventory-quarkus' (.)
-|_Empty ('/projects/workshop/labs/inventory-quarkus' by default)_
-
-|Location of binary component, relative to '.'
-|**target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar**
-
-|What do you wish to name the new component (java-inventory-xxx)
+|What do you wish to name the new devfile component
 |**inventory**
 
-|Which application do you want the component to be associated with (app)
-| **coolstore**
-
-|Which project go you want the component to be created in (my-project{USER_ID})
+|What project do you want the devfile component to be created in
 |_Empty ('my-project{USER_ID}' by default)_
 
-|Do you wish to set advanced options
-|_Empty ('No' by default)_
+|Do you want to download a starter project 
+|**No**
 
 |===
 
@@ -518,16 +503,19 @@ The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
+Devfile Object Validation
+ ✓  Checking devfile existence [48252ns]
+ ✓  Creating a devfile component from registry: DefaultDevfileRegistry [94003ns]
 Validation
- ✓  Validating component [21ms]
+ ✓  Validating if devfile name is correct [19771ns]
 
 Please use \`odo push` command to create the component with source deployed
 ----
 
 [TIP]
 ====
-Now the configuration file **'config.yaml'** is in the local directory of the inventory component 
-(**'/projects/workshop/labs/inventory-quarkus/.odo'**) that contains information about the component for deployment.
+Now the configuration file **'env.yaml'** is in the local directory of the inventory component 
+(**'/projects/workshop/labs/inventory-quarkus/.odo/env'**) that contains information about the component for deployment.
 ====
 
 Then, **expose the service** to Internet by creating an OpenShift Route for the component.
@@ -595,20 +583,31 @@ You should get as output:
 [source,shell,subs="{markup-in-source}"]
 ----
 Validation
- ✓  Checking component [72ms]
+ ✓  Validating the devfile [96053ns]
 
-Configuration changes
- ✓  Retrieving component data [36ms]
- ✓  Applying configuration [95ms]
+Creating Services for component inventory
+ ✓  Services are in sync with the cluster, no changes are required
+
+Creating Kubernetes resources for component inventory
+ ✓  Added storage m2 to inventory
+ ✓  Waiting for component to start [51s]
+ ✓  Links are in sync with the cluster, no changes are required
+ ✓  Waiting for component to start [2ms]
 
 Applying URL changes
-** ✓  URL inventory: http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created**
+ ✓  URL 8080-tcp: http://8080-tcp-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created
+ ✓  URL inventory: http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created
 
-Pushing to component inventory of type binary
- ✓  Checking file changes for pushing [1ms]
- ✓  Waiting for component to start [6ms]
- ✓  Syncing files to the component [248ms]
- ✓  Building component [3s]
+Syncing to component inventory
+ ✓  Checking files for pushing [5ms]
+ ✓  Syncing files to the component [5s]
+
+Executing devfile commands for component inventory
+ ✓  Executing build command "mvn clean -Dmaven.repo.local=/home/user/.m2/repository package -Dmaven.test.skip=true" [2m]
+ ✓  Executing run command "mvn -Dmaven.repo.local=/home/user/.m2/repository spring-boot:run" [1s]
+
+Pushing devfile component "inventory"
+ ✓  Changes successfully pushed to component
 ----
 
 Once this completes, your application should be up and running. OpenShift runs the different components of the application 

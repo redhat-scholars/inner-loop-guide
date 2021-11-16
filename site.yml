@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/inner-loop-guide.git
       tags: []
-      branches: ["4.0", "5.0", "5.1"]
+      branches: ["4.0", "5.0", "5.1", "6.0"]
       start_path: documentation
 
 asciidoc:
