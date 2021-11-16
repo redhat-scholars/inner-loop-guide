@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Externalize Application Configuration :: OpenShift Inner Loop Workshop</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/6.0/app-config.html">
+    <link rel="prev" href="app-health.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="6.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Inner Loop Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Workspace</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .Net</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop</span>
+    <span class="version">6.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">6.0</a>
+        </li>
+        <li class="version">
+          <a href="../5.1/index.html">5.1</a>
+        </li>
+        <li class="version">
+          <a href="../5.0/index.html">5.0</a>
+        </li>
+        <li class="version">
+          <a href="../4.0/index.html">4.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop</a></li>
+    <li><a href="app-config.html">8. Externalize Application Configuration</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">6.0</button>
+  <div class="version-menu">
+    <a class="version is-current" href="app-config.html">6.0</a>
+    <a class="version" href="../5.1/app-config.html">5.1</a>
+    <a class="version" href="../5.0/app-config.html">5.0</a>
+    <a class="version" href="../4.0/app-config.html">4.0</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/6.0/documentation/modules/ROOT/pages/app-config.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Externalize Application Configuration</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>15 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn how to manage application configuration and how to provide environment
+specific configuration to the services.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">ConfigMaps</div>
+<div class="paragraph">
+<p>Applications require configuration in order to tweak the application behavior
+or adapt it to a certain environment without the need to write code and repackage
+the application for every change. These configurations are sometimes specific to
+the application itself such as the number of products to be displayed on a product
+page and some other times they are dependent on the environment they are deployed in
+such as the database coordinates for the application.</p>
+</div>
+<div class="paragraph">
+<p>The most common way to provide configurations to applications is using environment
+variables and external configuration files such as properties, JSON or YAML files,
+configuration files and command line arguments. These configuration artifacts
+should be externalized from the application and the container image content in
+order to keep the image portable across environments.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift provides a mechanism called <a href="https://docs.openshift.com/container-platform/4.2/welcome/index.html" target="_blank" rel="noopener"><strong>ConfigMaps</strong></a>
+in order to externalize configurations
+from the applications deployed within containers and provide them to the containers
+in a unified way as files and environment variables. OpenShift also offers a way to
+provide sensitive configuration data such as certificates, credentials, etc. to the
+application containers in a secure and encrypted mechanism called Secrets.</p>
+</div>
+<div class="paragraph">
+<p>This allows developers to build the container image for their application only once,
+and reuse that image to deploy the application across various environments with
+different configurations that are provided to the application at runtime.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_databases"><a class="anchor" href="#create_databases"></a>Create Databases for Inventory and Catalog</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far Catalog and Inventory services have been using an in-memory H2 database. Although H2
+is a convenient database to run locally on your laptop, it&#8217;s in no way appropriate for production or
+even integration tests. Since it&#8217;s strongly recommended to use the same technology stack (operating
+system, JVM, middleware, database, etc.) that is used in production across all environments, you
+should modify Inventory and Catalog services to use PostgreSQL/MariaDB instead of the H2 in-memory database.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, OpenShift supports stateful applications such as databases which require access to
+a persistent storage that survives the container itself. You can deploy databases on OpenShift and
+regardless of what happens to the container itself, the data is safe and can be used by the next
+database container.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create a <a href="https://docs.openshift.com/container-platform/4.2/welcome/index.html" target="_blank" rel="noopener">MariaDB database</a>
+for the <strong>Inventory Service</strong> using the MariaDB template that is provided out-of-the-box:</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.2/openshift_images/using-templates.html" target="_blank" rel="noopener">OpenShift Templates</a> use YAML/JSON to compose
+multiple containers and their configurations as a list of objects to be created and deployed at once,
+making it simple to re-create complex deployments by just deploying a single template. Templates can
+be parameterized to get input for fields like service names and generate values for fields like passwords.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, <code><strong>click on '+Add' and select 'Database'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-add-database.png" alt="OpenShift - Add database" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Select 'MariaDB (Ephemeral)' and click on 'Instantiate Template'</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Then, enter the following information:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Inventory Database</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Namespace*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">my-project%USER_ID%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Memory Limit*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">512Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">openshift</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database Service Name*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory-mariadb</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MariaDB Connection Username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MariaDB Connection Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MariaDB root Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventoryadmin</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MariaDB Database Name*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inventorydb</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version of MariaDB Image*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10.3-el8</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code><strong>Click on 'Create' button</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-mariadb-topology.png" alt="OpenShift - Inventory MariaDB" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'</strong></code>
+to create the Catalog Database as follows:</p>
+</div>
+<div class="paragraph">
+<p>Then, enter the following information:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Catalog Database</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Namespace*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">my-project%USER_ID%</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Memory Limit*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">512Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Namespace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">openshift</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database Service Name*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog-postgresql</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL Connection Username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL Connection Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL Database Name*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalogdb</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version of PostgreSQL Image*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10-el8</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code><strong>Click on 'Create' button</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-catalog-postgresql-topology.png" alt="OpenShift - Catalog PostgreSQL" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can move on to configure the Inventory and Catalog service to use these databases.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="externalize_quarkus_configuration"><a class="anchor" href="#externalize_quarkus_configuration"></a>Externalize Quarkus (Inventory) Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Quarkus supports multiple mechanisms for externalizing configurations such as environment variables,
+Maven properties, command-line arguments and more. The recommended approach for the long-term for externalizing
+configuration is however using an <a href="https://quarkus.io/guides/application-configuration-guide#overriding-properties-at-runtime" target="_blank" rel="noopener">application.properties</a>
+which you have already packaged within the Inventory Maven project.</p>
+</div>
+<div class="paragraph">
+<p>In Quarkus, Driver is a build time property and cannot be overridden. So as you are going to change the database
+technology, you need to change the 'quarkus.datasource.driver' parameter
+in <strong>/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties</strong> and rebuild the application.</p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
+'JDBC Driver - MariaDB' dependency</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-jdbc-mariadb&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>add the '%prod.quarkus.datasource.driver' parameter in
+ the '/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties' file</strong></code> as follows</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">%prod.quarkus.datasource.driver=org.mariadb.jdbc.Driver<i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>With the <strong>%prod</strong> prefix, this option is only activated when building the jar intended for deployments.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Leave the <strong>'quarkus.datasource.url'</strong>, <strong>'quarkus.datasource.username'</strong> and <strong>'quarkus.datasource.password'</strong>
+parameters unchanged. They will be overridden later.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once the source code is updated, <code><strong>build and push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s create the Quarkus configuration content using the database credentials.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-configmap.png" alt="Che - OpenShift Create Config Map" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>replace the content</strong></code> with the following input:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inventory
+  namespace: my-project%USER_ID%
+  labels:
+    app: coolstore
+    app.kubernetes.io/instance: inventory
+data:
+  application.properties: |-
+    quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project%USER_ID%.svc:3306/inventorydb
+    quarkus.datasource.username=inventory
+    quarkus.datasource.password=inventory</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Click on the 'Create' button</strong></code>.</p>
+</div>
+<div class="paragraph">
+<p>Now, <strong>let’s mount this Config Map</strong> as a volume inside the Inventory Service Pod to overlay the default 'application.properties'.</p>
+</div>
+<div class="paragraph">
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Mount ConfigMap'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config -n my-project%USER_ID% <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Mounts the content of the <strong>Inventory Config Map</strong> as a file inside the <strong>Inventory container</strong>
+at <strong>/deployments/config/application.properties </strong></td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The Inventory pod gets restarted automatically due to the configuration changes. Wait till it&#8217;s ready,
+and then <strong>verify that the config map is in fact injected into the container</strong> by running a shell command inside the Inventory Container:</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc rsh -n my-project%USER_ID% -c inventory-coolstore dc/inventory-coolstore cat /deployments/config/application.properties</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project%USER_ID%.svc:3306/inventorydb
+quarkus.datasource.username=inventory
+quarkus.datasource.password=inventory</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also <strong>connect to Inventory MariaDB database and check if the seed data is
+loaded into the database</strong>.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc rsh -n my-project%USER_ID% dc/inventory-mariadb</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once connected to the MariaDB container, <code><strong>run the following</strong></code>:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Run this command inside the Inventory MariaDB container, after opening a remote shell to it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$HOSTNAME --execute="select * from INVENTORY" $MYSQL_DATABASE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">+--------+----------+
+| itemId | quantity |
++--------+----------+
+| 100000 |        0 |
+| 165613 |       45 |
+| 165614 |       87 |
+| 165954 |       43 |
+| 329199 |       12 |
+| 329299 |       35 |
+| 444434 |       32 |
+| 444435 |       53 |
++--------+----------+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Finally, exit from inside the database container</strong></code>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">exit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You have now created a config map that holds the configuration content for Inventory and can be updated
+at anytime for example when promoting the container image between environments without needing to
+modify the Inventory container image itself.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="externalize_spring_boot_configuration"><a class="anchor" href="#externalize_spring_boot_configuration"></a>Externalize Spring Boot (Catalog) Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You should be quite familiar with config maps by now. Spring Boot application configuration is provided
+via a properties file called <strong>application.properties</strong> and can be
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html" target="_blank" rel="noopener">overriden and overlayed via multiple mechanisms</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Check out the default Spring Boot configuration in Catalog Maven project <strong>catalog-spring-boot/src/main/resources/application.properties</strong>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this lab, you will configure the <strong>Catalog Service</strong> which is based on Spring Boot to override the default
+configuration using an alternative <strong>application.properties</strong> backed by a config map.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create the Spring Boot configuration content using the database credentials and create the Config Map.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-create-configmap.png" alt="Che - OpenShift Create Config Map" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>replace the content</strong></code> with the following input:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog
+  namespace: my-project%USER_ID%
+  labels:
+    app: coolstore
+    app.kubernetes.io/instance: catalog
+data:
+  application.properties: |-
+    spring.datasource.url=jdbc:postgresql://catalog-postgresql.my-project%USER_ID%.svc:5432/catalogdb
+    spring.datasource.username=catalog
+    spring.datasource.password=catalog
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.jpa.hibernate.ddl-auto=create
+    spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="https://github.com/spring-cloud-incubator/spring-cloud-kubernetes" target="_blank" rel="noopener">Spring Cloud Kubernetes</a> plug-in implements
+the integration between Kubernetes and Spring Boot and is already added as a dependency to the Catalog Maven
+project. Using this dependency, Spring Boot would search for a config map (by default with the same name as
+the application) to use as the source of application configurations during application bootstrapping and
+if enabled, triggers hot reloading of beans or Spring context when changes are detected on the config map.</p>
+</div>
+<div class="paragraph">
+<p>Although <a href="https://github.com/spring-cloud-incubator/spring-cloud-kubernetes" target="_blank" rel="noopener">Spring Cloud Kubernetes</a>
+tries to discover config maps, due to security reasons containers
+by default are not allowed to snoop around OpenShift clusters and discover objects. Security comes first,
+and discovery is a privilege that needs to be granted to containers in each project.</p>
+</div>
+<div class="paragraph">
+<p>Since you do want Spring Boot to discover the config maps inside the <strong>my-project%USER_ID%</strong> project, you
+need to grant permission to the Spring Boot service account to access the OpenShift REST API and find the
+config maps.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc policy add-role-to-user view -n my-project%USER_ID% -z default</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Delete the Catalog Pod</strong></code> to make it start again and look for the config maps:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l deploymentconfig=catalog-coolstore -n my-project%USER_ID%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the Catalog container is ready, verify that the PostgreSQL database is being
+used. Check the Catalog pod logs:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc logs -c catalog-coolstore dc/catalog-coolstore -n my-project%USER_ID% | grep hibernate.dialect</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">2017-08-10 21:07:51.670  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also connect to the Catalog PostgreSQL database and verify that the seed data is loaded:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc rsh -n my-project%USER_ID% dc/catalog-postgresql</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once connected to the PostgreSQL container, run the following:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Run this command inside the Catalog PostgreSQL container, after opening a remote shell to it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">psql catalogdb -U catalog -c "select item_id, name, price from product"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">  item_id |              name               | price
+  ---------+---------------------------------+-------
+  100000  | Red Fedora                      | 34.99
+  329299  | Quarkus T-shirt                 |    10
+  329199  | Pronounced Kubernetes           |     9
+  165613  | Knit socks                      |  4.15
+  444434  | Red Hat Impact T-shirt          |     9
+  444435  | Quarkus twill cap               |    13
+  165614  | Quarkus H2Go water bottle       | 14.45
+  444437  | Nanobloc Universal Webcam Cover |  2.75
+  165954  | Patagonia Refugio pack 28L      |     6
+  (9 rows)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Finally, exit from inside the database container</strong></code>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">exit</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="explore_secrets"><a class="anchor" href="#explore_secrets"></a>Explore Sensitive Configuration Data</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Secrets</div>
+<div class="paragraph">
+<p><strong>ConfigMaps</strong> are a superb mechanism for externalizing application configuration while keeping
+containers independent of in which environment or on what container platform they are running.
+Nevertheless, due to their clear-text nature, they are not suitable for sensitive data like
+database credentials, SSH certificates, etc. In the current lab, we used config maps for database
+credentials to simplify the steps; however, for production environments, you should opt for a more
+secure way to handle sensitive data.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is
+called <a href="https://docs.openshift.com/container-platform/4.2/welcome/index.html" target="_blank" rel="noopener"><strong>Secrets</strong></a>. Secret objects act and are used
+similarly to config maps however with the difference that they are encrypted as they travel over the wire
+and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into
+containers as environment variables or files on the filesystem using a temporary file-storage
+facility (tmpfs).</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You won&#8217;t create any secrets in this lab; however, you have already created two secrets when you created
+the PostgreSQL and MariaDB databases. The Database template by default stores
+the database credentials in a secret in the project in which it&#8217;s being created:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc describe secret catalog-postgresql</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Name:            catalog-postgresql
+Namespace:       coolstore
+Labels:          app=catalog
+                 template=postgresql-persistent-template
+Annotations:     openshift.io/generated-by=OpenShiftNewApp
+                 template.openshift.io/expose-database_name={.data['database-name']}
+                 template.openshift.io/expose-password={.data['database-password']}
+                 template.openshift.io/expose-username={.data['database-user']}
+
+Type:     Opaque
+
+Data
+====
+database-name:        9 bytes
+database-password:    7 bytes
+database-user:        7 bytes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This secret has three encrypted properties defined as <strong>database-name</strong>, <strong>database-user</strong> and <strong>database-password</strong> which hold
+the PostgreSQL database name, username and password values. These values are injected in the PostgreSQL container as
+environment variables and used to initialize the database.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'DC catalog-postgresql' &#8594; 'DC catalog-postgresql' &#8594; 'Environment'</strong></code>. Notice the values
+from the secret are defined as env vars on the deployment:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/config-psql-secret.png" alt="Secrets as Env Vars" width="900">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service (again)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Having made all those changes with adding databases and the application configuration you should now
+test that the Coolstore application still works. Just like you did a couple of chapters ago you need to use the toplogy
+display in the web console.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Web Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-web-topology.png" alt="OpenShift - Web Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirect to <strong>your Web Service running on OpenShift</strong>.
+You should be able to see the CoolStore application with all products and their inventory status.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-web.png" alt="CoolStore Shop" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s all for this lab! You are ready to move on to the next lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="app-health.html" class="query-params-link">7. Monitor Application Health</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
