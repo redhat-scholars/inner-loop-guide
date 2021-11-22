@@ -161,7 +161,7 @@ The location or binding to the existing Catalog and Inventory REST services is i
 
 It’s time to build and deploy your service on OpenShift. 
 
-As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and URL and then Push it in to the OpenShift cluster*`
+As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and then Push it in to the OpenShift cluster*`
 by using the following parameters:
 
 [tabs, subs="attributes+,+macros"]
@@ -185,44 +185,10 @@ CLI::
 cd /projects/workshop/labs/gateway-dotnet
 ----
 
-`*Execute the proper commands with the following parameters:*`
+`*Then execute the proper commands*`
 
 NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
 OpenShift will build the .NET .dll file from the project file and source code for you.
-
-.OpenShift New Component
-[%header,cols=2*]
-|===
-|Question 
-|Answer
-
-|Which devfile component type do you wish to create
-|**dotnetcore31**
-
-|What do you wish to name the new devfile component
-|**gateway**
-
-|What project do you want the devfile component to be created in
-|_Empty ('my-project{USER_ID}' by default)_
-
-|Do you want to download a starter project 
-|**No**
-
-|===
-
-.OpenShift New URL
-[%header,cols=2*]
-|===
-|Parameter 
-|Value
-
-|URL name
-|gateway
-
-|port to expose
-|8080
-
-|===
 
 IMPORTANT: Do not forget to **push** your new component
 
