@@ -747,7 +747,7 @@ the last path param being the product id which we want to check its inventory st
 <p>It’s time to deploy your service on OpenShift using <a href="https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a>.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <strong>build</strong> your jar file.</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -828,43 +828,17 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
-odo create --app coolstore</code></pre>
+odo create --app coolstore --project my-project%USER_ID% <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><code><strong>Enter the following parameters in the interactive menu:</strong></code></p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. OpenShift New Component</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
+<div class="colist arabic">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Question</th>
-<th class="tableblock halign-left valign-top">Answer</th>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create a new component for the <strong>coolstore</strong> application in the <strong>my-project%USER_ID%</strong> project based on the configuration stored in the <strong>'devfile.yaml'</strong> file</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which devfile component type do you wish to create</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>java-quarkus</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">What do you wish to name the new devfile component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inventory</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">What project do you want the devfile component to be created in</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Do you want to download a starter project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
-</tr>
-</tbody>
 </table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -886,10 +860,9 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Devfile Object Validation
- ✓  Checking devfile existence [48252ns]
- ✓  Creating a devfile component from registry: DefaultDevfileRegistry [94003ns]
+ ✓  Creating a devfile component from devfile path: /projects/workshop/labs/inventory-quarkus/devfile.yaml [62322ns]
 Validation
- ✓  Validating if devfile name is correct [19771ns]
+ ✓  Validating if devfile name is correct [41841ns]
 
 Please use `odo push` command to create the component with source deployed</code></pre>
 </div>
@@ -910,7 +883,7 @@ Please use `odo push` command to create the component with source deployed</code
 </table>
 </div>
 <div class="paragraph">
-<p>Then, <strong>expose the service</strong> to Internet by creating an OpenShift Route for the component.</p>
+<p>Then, <strong>push</strong> the component to the OpenShift cluster:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -926,70 +899,6 @@ Please use `odo push` command to create the component with source deployed</code
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset5_ide-task">
 <div class="paragraph">
-<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Expose'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset5_cli">
-<div class="paragraph">
-<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
-odo url create \
-    inventory \<i class="conum" data-value="1"></i><b>(1)</b>
-    --port 8080<i class="conum" data-value="2"></i><b>(2)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the URL</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Port number for the URL</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Finally, <strong>push</strong> the component to the OpenShift cluster:</p>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset6_ide-task"></a>IDE Task</p>
-</li>
-<li>
-<p><a id="tabset6_cli"></a>CLI</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset6_ide-task">
-<div class="paragraph">
 <p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Push'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -998,7 +907,7 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 </div>
 </div>
-<div class="tab-pane" aria-labelledby="tabset6_cli">
+<div class="tab-pane" aria-labelledby="tabset5_cli">
 <div class="paragraph">
 <p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>
@@ -1029,28 +938,25 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">Validation
- ✓  Validating the devfile [96053ns]
+ ✓  Validating the devfile [89483ns]
 
 Creating Services for component inventory
  ✓  Services are in sync with the cluster, no changes are required
 
 Creating Kubernetes resources for component inventory
- ✓  Added storage m2 to inventory
- ✓  Waiting for component to start [51s]
+ ✓  Waiting for component to start [28s]
  ✓  Links are in sync with the cluster, no changes are required
- ✓  Waiting for component to start [2ms]
+ ✓  Waiting for component to start [3ms]
 
 Applying URL changes
- ✓  URL 8080-tcp: http://8080-tcp-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/ created
  ✓  URL inventory: http://inventory-coolstore-my-project%USER_ID%.%APPS_HOSTNAME_SUFFIX%/ created
 
 Syncing to component inventory
- ✓  Checking files for pushing [5ms]
- ✓  Syncing files to the component [5s]
+ ✓  Checking files for pushing [7ms]
+ ✓  Syncing files to the component [682ms]
 
 Executing devfile commands for component inventory
- ✓  Executing build command "mvn clean -Dmaven.repo.local=/home/user/.m2/repository package -Dmaven.test.skip=true" [2m]
- ✓  Executing run command "mvn -Dmaven.repo.local=/home/user/.m2/repository spring-boot:run" [1s]
+ ✓  Executing dev-run command "java -jar target/quarkus-app/*.jar" [1s]
 
 Pushing devfile component "inventory"
  ✓  Changes successfully pushed to component</code></pre>
