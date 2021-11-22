@@ -224,7 +224,36 @@ controller using the
 https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-spring-beans-and-dependency-injection.html[**@Autowired**^] annotation.
 <3> the **repository** attribute on the controller class is used to retrieve the list of products from the databases. 
 
-Now, let's run your service using **Spring Boot maven plugin** and test the endpoint. 
+Now, let's build and package the updated **Catalog Service** using Maven.
+In your {CHE_URL}[Workspace^, role='params-link'],
+
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
+
+image::che-runtask.png[Che - RunTask, 500]
+--
+
+CLI::
++
+--
+`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+cd /projects/workshop/labs/catalog-spring-boot
+mvn clean package -DskipTests
+----
+
+NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+--
+====
+
+Once done, you can conviently run your service using **Spring Boot maven plugin** and test the endpoint. 
 
 [tabs, subs="attributes+,+macros"]
 ====
