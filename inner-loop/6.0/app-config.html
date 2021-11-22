@@ -373,6 +373,22 @@ to create the Catalog Database as follows:</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_give_permissions_to_discover_kubernetes_objects"><a class="anchor" href="#_give_permissions_to_discover_kubernetes_objects"></a>Give permissions to discover Kubernetes objects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, due to security reasons, <strong>containers are not allowed to snoop around OpenShift clusters and discover objects</strong>. Security comes first and discovery is a privilege that needs to be granted to containers in each project.</p>
+</div>
+<div class="paragraph">
+<p>Since you do want our applications to discover the config maps inside the <strong>my-project%USER_ID%</strong> project, you need <code><strong>to grant permission to the Service Account to access the OpenShift REST API</strong></code> and find the config maps.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc policy add-role-to-user view -n my-project%USER_ID% -z default</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="externalize_quarkus_configuration"><a class="anchor" href="#externalize_quarkus_configuration"></a>Externalize Quarkus (Inventory) Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -393,10 +409,26 @@ in <strong>/projects/workshop/labs/inventory-quarkus/src/main/resources/applicat
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">    &lt;dependency&gt;
-        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
-        &lt;artifactId&gt;quarkus-jdbc-mariadb&lt;/artifactId&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-kubernetes-config&lt;/artifactId&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+      &lt;artifactId&gt;quarkus-jdbc-mariadb&lt;/artifactId&gt; <i class="conum" data-value="2"></i><b>(2)</b>
     &lt;/dependency&gt;</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Extension which allows developers to use Kubernetes ConfigMaps and Secrets as a configuration source, without having to mount them into the Pod running the Quarkus application or make any other modifications to their Kubernetes Deployment.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Extension which allows developers to connect to MariaDB databases using the JDBC driver</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Then <code><strong>add the '%prod.quarkus.datasource.driver' parameter in
@@ -404,14 +436,36 @@ in <strong>/projects/workshop/labs/inventory-quarkus/src/main/resources/applicat
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">%prod.quarkus.datasource.driver=org.mariadb.jdbc.Driver<i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">%prod.quarkus.datasource.db-kind=mariadb<i class="conum" data-value="1"></i><b>(1)</b>
+%prod.quarkus.kubernetes-config.enabled=true<i class="conum" data-value="2"></i><b>(2)</b>
+%prod.quarkus.kubernetes-config.config-maps=inventory<i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>With the <strong>%prod</strong> prefix, this option is only activated when building the jar intended for deployments.</td>
+<td>The kind of database we will connect to</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If set to true, the application will attempt to look up the configuration from the API server</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>ConfigMaps to look for in the namespace that the Kubernetes Client has been configured for</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With the <strong>%prod</strong> prefix, this option is only activated when building the jar intended for deployments.
+</td>
 </tr>
 </table>
 </div>
@@ -423,15 +477,12 @@ in <strong>/projects/workshop/labs/inventory-quarkus/src/main/resources/applicat
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Leave the <strong>'quarkus.datasource.url'</strong>, <strong>'quarkus.datasource.username'</strong> and <strong>'quarkus.datasource.password'</strong>
+<p>Leave the <strong>'quarkus.datasource.jdbc.url'</strong>, <strong>'quarkus.datasource.username'</strong> and <strong>'quarkus.datasource.password'</strong>
 parameters unchanged. They will be overridden later.</p>
 </div>
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Once the source code is updated, <code><strong>build and push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>Now, let&#8217;s create the Quarkus configuration content using the database credentials.</p>
@@ -460,7 +511,7 @@ metadata:
     app.kubernetes.io/instance: inventory
 data:
   application.properties: |-
-    quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project%USER_ID%.svc:3306/inventorydb
+    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.my-project%USER_ID%.svc:3306/inventorydb
     quarkus.datasource.username=inventory
     quarkus.datasource.password=inventory</code></pre>
 </div>
@@ -469,90 +520,11 @@ data:
 <p><code><strong>Click on the 'Create' button</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>Now, <strong>let’s mount this Config Map</strong> as a volume inside the Inventory Service Pod to overlay the default 'application.properties'.</p>
-</div>
-<div class="paragraph">
-<p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
-</div>
-<div class="tabset is-loading">
-<div class="ulist tabs">
-<ul>
-<li>
-<p><a id="tabset1_ide-task"></a>IDE Task</p>
-</li>
-<li>
-<p><a id="tabset1_cli"></a>CLI</p>
-</li>
-</ul>
-</div>
-<div class="content">
-<div class="tab-pane" aria-labelledby="tabset1_ide-task">
-<div class="paragraph">
-<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Inventory - Mount ConfigMap'</strong></code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/che-runtask.png" alt="Che - RunTask" width="500">
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset1_cli">
-<div class="paragraph">
-<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config -n my-project%USER_ID% <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Mounts the content of the <strong>Inventory Config Map</strong> as a file inside the <strong>Inventory container</strong>
-at <strong>/deployments/config/application.properties </strong></td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Terminal' &#8594; 'Open Terminal in specific container' &#8594;  'workshop-tools'</strong></code>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+<p>Once the source code is updated and the ConfigMap is created, <code><strong>build and push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>The Inventory pod gets restarted automatically due to the configuration changes. Wait till it&#8217;s ready,
-and then <strong>verify that the config map is in fact injected into the container</strong> by running a shell command inside the Inventory Container:</p>
-</div>
-<div class="paragraph">
-<p><code><strong>Execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc rsh -n my-project%USER_ID% -c inventory-coolstore dc/inventory-coolstore cat /deployments/config/application.properties</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should have the following output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project%USER_ID%.svc:3306/inventorydb
-quarkus.datasource.username=inventory
-quarkus.datasource.password=inventory</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can also <strong>connect to Inventory MariaDB database and check if the seed data is
+and then <strong>verify that the config map is in fact injected into the container by checking if the seed data is
 loaded into the database</strong>.</p>
 </div>
 <div class="paragraph">
@@ -688,27 +660,11 @@ the application) to use as the source of application configurations during appli
 if enabled, triggers hot reloading of beans or Spring context when changes are detected on the config map.</p>
 </div>
 <div class="paragraph">
-<p>Although <a href="https://github.com/spring-cloud-incubator/spring-cloud-kubernetes" target="_blank" rel="noopener">Spring Cloud Kubernetes</a>
-tries to discover config maps, due to security reasons containers
-by default are not allowed to snoop around OpenShift clusters and discover objects. Security comes first,
-and discovery is a privilege that needs to be granted to containers in each project.</p>
-</div>
-<div class="paragraph">
-<p>Since you do want Spring Boot to discover the config maps inside the <strong>my-project%USER_ID%</strong> project, you
-need to grant permission to the Spring Boot service account to access the OpenShift REST API and find the
-config maps.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc policy add-role-to-user view -n my-project%USER_ID% -z default</code></pre>
-</div>
-</div>
-<div class="paragraph">
 <p><code><strong>Delete the Catalog Pod</strong></code> to make it start again and look for the config maps:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l deploymentconfig=catalog-coolstore -n my-project%USER_ID%</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l component=catalog -n my-project%USER_ID%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -717,7 +673,7 @@ used. Check the Catalog pod logs:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc logs -c catalog-coolstore dc/catalog-coolstore -n my-project%USER_ID% | grep hibernate.dialect</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc logs -c tools deployment/catalog-coolstore -n my-project%USER_ID% | grep hibernate.dialect</code></pre>
 </div>
 </div>
 <div class="paragraph">
