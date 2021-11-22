@@ -354,7 +354,7 @@ public class ProductsController : ControllerBase
 <p>It’s time to build and deploy your service on OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and URL and then Push it in to the OpenShift cluster</strong></code>
+<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and then Push it in to the OpenShift cluster</strong></code>
 by using the following parameters:</p>
 </div>
 <div class="tabset is-loading">
@@ -389,7 +389,7 @@ by using the following parameters:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Execute the proper commands with the following parameters:</strong></code></p>
+<p><code><strong>Then execute the proper commands</strong></code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -404,60 +404,6 @@ OpenShift will build the .NET .dll file from the project file and source code fo
 </tr>
 </table>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. OpenShift New Component</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Question</th>
-<th class="tableblock halign-left valign-top">Answer</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Which devfile component type do you wish to create</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dotnetcore31</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">What do you wish to name the new devfile component</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>gateway</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">What project do you want the devfile component to be created in</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Empty ('my-project%USER_ID%' by default)</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Do you want to download a starter project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. OpenShift New URL</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">URL name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">gateway</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">port to expose</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8080</p></td>
-</tr>
-</tbody>
-</table>
 <div class="admonitionblock important">
 <table>
 <tr>
