@@ -421,7 +421,7 @@ CLI::
 
 It’s time to deploy your service on OpenShift using https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
 
-In your {CHE_URL}[Workspace^, role='params-link'],
+In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -470,30 +470,9 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-odo create --app coolstore
+odo create --app coolstore --project my-project{USER_ID} #<1>
 ----
-
-`*Enter the following parameters in the interactive menu:*`
-
-.OpenShift New Component
-[%header,cols=2*]
-|===
-|Question 
-|Answer
-
-|Which devfile component type do you wish to create
-|**java-quarkus**
-
-|What do you wish to name the new devfile component
-|**inventory**
-
-|What project do you want the devfile component to be created in
-|_Empty ('my-project{USER_ID}' by default)_
-
-|Do you want to download a starter project 
-|**No**
-
-|===
+<1> Create a new component for the **coolstore** application in the **my-project{USER_ID}** project based on the configuration stored in the **'devfile.yaml'** file
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
@@ -504,10 +483,9 @@ The output should be as follows:
 [source,shell,subs="{markup-in-source}"]
 ----
 Devfile Object Validation
- ✓  Checking devfile existence [48252ns]
- ✓  Creating a devfile component from registry: DefaultDevfileRegistry [94003ns]
+ ✓  Creating a devfile component from devfile path: /projects/workshop/labs/inventory-quarkus/devfile.yaml [62322ns]
 Validation
- ✓  Validating if devfile name is correct [19771ns]
+ ✓  Validating if devfile name is correct [41841ns]
 
 Please use \`odo push` command to create the component with source deployed
 ----
@@ -518,39 +496,7 @@ Now the configuration file **'env.yaml'** is in the local directory of the inven
 (**'/projects/workshop/labs/inventory-quarkus/.odo/env'**) that contains information about the component for deployment.
 ====
 
-Then, **expose the service** to Internet by creating an OpenShift Route for the component.
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Expose'*`
-
-image::che-runtask.png[Che - RunTask, 500]
---
-
-CLI::
-+
---
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-cd /projects/workshop/labs/inventory-quarkus
-odo url create \
-    inventory \#<1>
-    --port 8080#<2>
-----
-<1> Name of the URL
-<2> Port number for the URL
-
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
---
-====
-
-Finally, **push** the component to the OpenShift cluster:
+Then, **push** the component to the OpenShift cluster:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -583,28 +529,25 @@ You should get as output:
 [source,shell,subs="{markup-in-source}"]
 ----
 Validation
- ✓  Validating the devfile [96053ns]
+ ✓  Validating the devfile [89483ns]
 
 Creating Services for component inventory
  ✓  Services are in sync with the cluster, no changes are required
 
 Creating Kubernetes resources for component inventory
- ✓  Added storage m2 to inventory
- ✓  Waiting for component to start [51s]
+ ✓  Waiting for component to start [28s]
  ✓  Links are in sync with the cluster, no changes are required
- ✓  Waiting for component to start [2ms]
+ ✓  Waiting for component to start [3ms]
 
 Applying URL changes
- ✓  URL 8080-tcp: http://8080-tcp-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created
  ✓  URL inventory: http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created
 
 Syncing to component inventory
- ✓  Checking files for pushing [5ms]
- ✓  Syncing files to the component [5s]
+ ✓  Checking files for pushing [7ms]
+ ✓  Syncing files to the component [682ms]
 
 Executing devfile commands for component inventory
- ✓  Executing build command "mvn clean -Dmaven.repo.local=/home/user/.m2/repository package -Dmaven.test.skip=true" [2m]
- ✓  Executing run command "mvn -Dmaven.repo.local=/home/user/.m2/repository spring-boot:run" [1s]
+ ✓  Executing dev-run command "java -jar target/quarkus-app/*.jar" [1s]
 
 Pushing devfile component "inventory"
  ✓  Changes successfully pushed to component

@@ -66,41 +66,7 @@ The database is configured using the Spring application configuration file which
 and note that an in-memory H2 database is used in this lab for local development and will be replaced
 with a PostgreSQL database in the following labs. Be patient! More on that later.
 
-You can use Maven to make sure the skeleton project builds successfully. You should get a **BUILD SUCCESS** message 
-in the build logs, otherwise the build has failed.
-
-In your {CHE_URL}[Workspace^, role='params-link'],
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
-
-image::che-runtask.png[Che - RunTask, 500]
---
-
-CLI::
-+
---
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-cd /projects/workshop/labs/catalog-spring-boot
-mvn clean package -DskipTests
-----
-
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
---
-====
-
-Once successfully built, the resulting **catalog-1.0-SNAPSHOT.jar** is located in the **/projects/workshop/labs/catalog-spring-boot/target/** directory.
-This is an uber-jar with all the dependencies required packaged in the **jar** to enable running the application with **java -jar**.
-
-Now that the project is ready, let's get coding and create a domain model, data repository, and a  
+Let's get coding and create a domain model, data repository, and a  
 RESTful endpoint to create the Catalog service:
 
 image::springboot-catalog-arch.png[Catalog RESTful Service,640]
@@ -258,37 +224,7 @@ controller using the
 https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-spring-beans-and-dependency-injection.html[**@Autowired**^] annotation.
 <3> the **repository** attribute on the controller class is used to retrieve the list of products from the databases. 
 
-Now, let's build and package the updated **Catalog Service** using Maven.
-In your {CHE_URL}[Workspace^, role='params-link'],
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
-
-image::che-runtask.png[Che - RunTask, 500]
---
-
-CLI::
-+
---
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-cd /projects/workshop/labs/catalog-spring-boot
-mvn clean package -DskipTests
-----
-
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
---
-====
-
-Once done, you can conviently run your service using **Spring Boot maven plugin** and test the endpoint. 
-
+Now, let's run your service using **Spring Boot maven plugin** and test the endpoint. 
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -365,7 +301,7 @@ CLI::
 [#deploy_on_openshift]
 == Deploy on OpenShift
 
-It’s time to build and deploy your service on OpenShift. 
+It’s time to deploy your service on OpenShift. 
 
 As you did previously, `*create a new Component, a New URL then Push it in to the OpenShift cluster*`
 by using the following inputs:
@@ -378,9 +314,7 @@ IDE Task::
 -- 
 `*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Create Component'*`
 
-Then, `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Expose'*`
-
-Finally, `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Push'*`
+Then, `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Push'*`
 
 image::che-runtask.png[Che - RunTask, 500]
 --
@@ -393,36 +327,12 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/catalog-spring-boot
-odo create --app coolstore
+odo create --app coolstore --project my-project{USER_ID}
 ----
-
-`*Enter the following parameters in the interactive menu:*`
-
-.OpenShift New Component
-[%header,cols=2*]
-|===
-|Question 
-|Answer
-
-|Which devfile component type do you wish to create
-|**java-springboot**
-
-|What do you wish to name the new devfile component
-|**catalog**
-
-|What project do you want the devfile component to be created in
-|_Empty ('my-project{USER_ID}' by default)_
-
-|Do you want to download a starter project 
-|**No**
-
-|===
-
 `*Execute the following commands in the '>_ workshop_tools' terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-odo url create catalog --port 8080
 odo push
 ----
 
