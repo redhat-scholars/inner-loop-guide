@@ -154,6 +154,17 @@ image::openshift-catalog-postgresql-topology.png[OpenShift - Catalog PostgreSQL,
 
 Now you can move on to configure the Inventory and Catalog service to use these databases.
 
+== Give permissions to discover Kubernetes objects
+
+By default, due to security reasons, **containers are not allowed to snoop around OpenShift clusters and discover objects**. Security comes first and discovery is a privilege that needs to be granted to containers in each project. 
+
+Since you do want our applications to discover the config maps inside the **my-project{USER_ID}** project, you need `*to grant permission to the Service Account to access the OpenShift REST API*` and find the config maps. 
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+oc policy add-role-to-user view -n my-project{USER_ID} -z default
+----
+
 [#externalize_quarkus_configuration]
 ==  Externalize Quarkus (Inventory) Configuration
 
@@ -172,27 +183,37 @@ In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/worksho
 [source,xml,subs="{markup-in-source}",role=copypaste]
 ----
     <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-jdbc-mariadb</artifactId>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-kubernetes-config</artifactId> #<1>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-mariadb</artifactId> #<2>
     </dependency>
 ----
+<1> Extension which allows developers to use Kubernetes ConfigMaps and Secrets as a configuration source, without having to mount them into the Pod running the Quarkus application or make any other modifications to their Kubernetes Deployment.
+<2> Extension which allows developers to connect to MariaDB databases using the JDBC driver
 
 Then `*add the '%prod.quarkus.datasource.driver' parameter in 
  the '/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties' file*` as follows
 
 [source,properties,subs="{markup-in-source}",role=copypaste]
 ----
-%prod.quarkus.datasource.driver=org.mariadb.jdbc.Driver#<1> 
+%prod.quarkus.datasource.db-kind=mariadb#<1>
+%prod.quarkus.kubernetes-config.enabled=true#<2>
+%prod.quarkus.kubernetes-config.config-maps=inventory#<3>
 ----
-<1> With the **%prod** prefix, this option is only activated when building the jar intended for deployments.
+<1> The kind of database we will connect to
+<2> If set to true, the application will attempt to look up the configuration from the API server
+<3> ConfigMaps to look for in the namespace that the Kubernetes Client has been configured for
+
+NOTE: With the **%prod** prefix, this option is only activated when building the jar intended for deployments.
 
 [WARNING]
 ====
-Leave the **'quarkus.datasource.url'**, **'quarkus.datasource.username'** and **'quarkus.datasource.password'**
+Leave the **'quarkus.datasource.jdbc.url'**, **'quarkus.datasource.username'** and **'quarkus.datasource.password'**
 parameters unchanged. They will be overridden later.
 ====
-
-Once the source code is updated, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 
 Now, let's create the Quarkus configuration content using the database credentials.
 
@@ -215,64 +236,17 @@ metadata:
     app.kubernetes.io/instance: inventory
 data:
   application.properties: |-
-    quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project{USER_ID}.svc:3306/inventorydb
+    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.my-project{USER_ID}.svc:3306/inventorydb
     quarkus.datasource.username=inventory
     quarkus.datasource.password=inventory
 ----
 
 `*Click on the 'Create' button*`.
 
-Now, **let’s mount this Config Map** as a volume inside the Inventory Service Pod to overlay the default 'application.properties'.
-
-In your {CHE_URL}[Workspace^, role='params-link'],
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Mount ConfigMap'*`
-
-image::che-runtask.png[Che - RunTask, 500]
---
-
-CLI::
-+
---
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-oc set volume dc/inventory-coolstore --add --configmap-name=inventory --mount-path=/deployments/config -n my-project{USER_ID} #<1> 
-----
-<1> Mounts the content of the **Inventory Config Map** as a file inside the **Inventory container**
-at **/deployments/config/application.properties **
-
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
---
-====
+Once the source code is updated and the ConfigMap is created, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 
 The Inventory pod gets restarted automatically due to the configuration changes. Wait till it's ready, 
-and then **verify that the config map is in fact injected into the container** by running a shell command inside the Inventory Container:
-
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-oc rsh -n my-project{USER_ID} -c inventory-coolstore dc/inventory-coolstore cat /deployments/config/application.properties
-----
-
-You should have the following output:
-
-[source,properties,subs="{markup-in-source}"]
-----
-quarkus.datasource.url=jdbc:mariadb://inventory-mariadb.my-project{USER_ID}.svc:3306/inventorydb
-quarkus.datasource.username=inventory
-quarkus.datasource.password=inventory
-----
-
-You can also **connect to Inventory MariaDB database and check if the seed data is 
+and then **verify that the config map is in fact injected into the container by checking if the seed data is 
 loaded into the database**.
 
 `*Execute the following commands in the '>_ workshop_tools' terminal window*`
@@ -373,25 +347,11 @@ project. Using this dependency, Spring Boot would search for a config map (by de
 the application) to use as the source of application configurations during application bootstrapping and 
 if enabled, triggers hot reloading of beans or Spring context when changes are detected on the config map.
 
-Although https://github.com/spring-cloud-incubator/spring-cloud-kubernetes[Spring Cloud Kubernetes^] 
-tries to discover config maps, due to security reasons containers 
-by default are not allowed to snoop around OpenShift clusters and discover objects. Security comes first, 
-and discovery is a privilege that needs to be granted to containers in each project. 
-
-Since you do want Spring Boot to discover the config maps inside the **my-project{USER_ID}** project, you 
-need to grant permission to the Spring Boot service account to access the OpenShift REST API and find the 
-config maps. 
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-oc policy add-role-to-user view -n my-project{USER_ID} -z default
-----
-
 `*Delete the Catalog Pod*` to make it start again and look for the config maps:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc delete pod -l deploymentconfig=catalog-coolstore -n my-project{USER_ID}
+oc delete pod -l component=catalog -n my-project{USER_ID}
 ----
 
 When the Catalog container is ready, verify that the PostgreSQL database is being 
@@ -399,7 +359,7 @@ used. Check the Catalog pod logs:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc logs -c catalog-coolstore dc/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
+oc logs -c tools deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
 ----
 
 You should have the following output:
