@@ -130,7 +130,7 @@ In your {CHE_URL}[Workspace^, role='params-link'],
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-curl -w "\n" http://inventory-coolstore.my-project{USER_ID}.svc:8080/health
+curl -w "\n" http://inventory-coolstore.my-project{USER_ID}.svc:8080/q/health
 ----
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
@@ -178,7 +178,7 @@ image::openshift-inventory-add-liveness-probe.png[Che - Inventory Add Liveness P
 |_Empty_
 
 |Path
-|/health/live
+|/q/health/live
 
 |Port
 |8080
@@ -436,8 +436,8 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |_Empty_
 
 |Path
-|/health/ready
-|/health/live
+|/q/health/ready
+|/q/health/live
 
 |Port
 |8080
