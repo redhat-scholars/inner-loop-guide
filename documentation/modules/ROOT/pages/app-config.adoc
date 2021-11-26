@@ -359,7 +359,7 @@ used. Check the Catalog pod logs:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc logs -c tools deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
+oc logs -c application deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
 ----
 
 You should have the following output:
