@@ -84,7 +84,7 @@
     <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .Net</a>
+    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .NET</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
@@ -155,7 +155,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>15 MINUTE EXERCISE</em></p>
+<p><em>20 MINUTE EXERCISE</em></p>
 </div>
 <div class="paragraph">
 <p>In this lab we will learn how to monitor application health using OpenShift
@@ -181,7 +181,7 @@ In those scenarios, OpenShift would remove the faulty container from the built-i
 only to the healthy containers that remain.</p>
 </div>
 <div class="paragraph">
-<p>There are three types of health probes available in OpenShift: <a href="https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_application-health" target="_blank" rel="noopener">startup, readiness and liveness probes</a>.</p>
+<p>There are three types of health probes available in OpenShift: <a href="https://docs.openshift.com/container-platform/4.9/applications/application-health.html#application-health-about_application-health" target="_blank" rel="noopener">startup, readiness and liveness probes</a>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -203,7 +203,7 @@ traffic from the old version of the container to the new version so that the use
 deployments.</p>
 </div>
 <div class="paragraph">
-<p>There are <a href="https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_types_application-health" target="_blank" rel="noopener">three ways to define a health probe</a> for a container:</p>
+<p>There are <a href="https://docs.openshift.com/container-platform/4.9/applications/application-health.html#application-health-about_types_application-health" target="_blank" rel="noopener">three ways to define a health probe</a> for a container:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -239,7 +239,7 @@ where it cannot perform as it should. Let&#8217;s access inside the container an
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Resources' &#8594; 'P inventory-coolstore-x-xxxxx'</strong></code></p>
+<code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Resources' &#8594; 'P inventory-coolstore-x-xxxxx'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -369,7 +369,7 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Topology' &#8594; 'DC inventory-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
+<code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -556,7 +556,7 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the up arrows
+<code><strong>click on 'Topology' &#8594; '(D) catalog-coolstore' &#8594; 'Details' then click once on the up arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -618,7 +618,7 @@ A readiness probe can be used to signal to the endpoints controller that even th
 <div class="sectionbody">
 <div class="paragraph">
 <p>First, scale down your <em>Catalog Service</em> to 1 instance. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Details' then click once on the down arrows
+<code><strong>click on 'Topology' &#8594; '(D) catalog-coolstore' &#8594; 'Details' then click once on the down arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
 <div class="paragraph">
@@ -649,7 +649,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 </div>
 <div class="paragraph">
 <p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
-<code><strong>click on 'Topology' &#8594; 'DC catalog-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
+<code><strong>click on 'Topology' &#8594; '(D) catalog-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -745,6 +745,11 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 <div class="content">
 <img src="_images/che-catalog-traffic-ok.png" alt="Che - Catalog Traffic OK" width="500">
 </div>
+</div>
+<div class="paragraph">
+<p>Now scale down your <em>Catalog Service</em> to 1 instance. In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<code><strong>click on 'Topology' &#8594; '(D) catalog-coolstore' &#8594; 'Details' then click once on the down arrows
+on the right side of the pod blue circle</strong></code>.</p>
 </div>
 </div>
 </div>
@@ -947,7 +952,7 @@ each container has been consuming over time.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>From the <strong>Developer view</strong>, <code><strong>click on 'Topology' &#8594; any Deployment Config (DC) and click on the associated Pod (P)</strong></code></p>
+<p>From the <strong>Developer view</strong>, <code><strong>click on 'Topology' &#8594; any Deployment (D) and click on the associated Pod (P)</strong></code></p>
 </div>
 <div class="paragraph">
 <p>In the pod overview, you can see a more detailed view of the pod consumption.
