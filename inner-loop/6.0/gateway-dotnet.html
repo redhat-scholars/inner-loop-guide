@@ -475,6 +475,70 @@ containers for the project.</p>
 ]</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_discovery"><a class="anchor" href="#_service_discovery"></a>Service discovery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You might be wondering how the Gateway service knows how to contact the <strong>Catalog</strong> and <strong>Inventory</strong> services.
+As discussed earlier, these values are injected as environment variables at runtime. You can see the code
+that consumes those variables below. This is from <strong>ProductsController.cs class</strong> in the
+<strong>/projects/workshop/labs/gateway-dotnet/</strong> directory.</p>
+</div>
+<div class="paragraph">
+<p>The REST URLs are built from the environment variables:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dotnet hljs" data-lang="dotnet">public static void Config()
+{
+    try
+    {
+        // discover the URL of the services we are going to call
+        catalogApiHost = "http://" +
+            Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_HOST") + ":" +
+            Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_PORT");
+
+        inventoryApiHost = "http://" +
+            Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_HOST") + ":" +
+            Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_PORT");
+
+        // set up the Http conection pools
+        inventoryHttpClient.BaseAddress = new Uri(inventoryApiHost);
+        catalogHttpClient.BaseAddress = new Uri(catalogApiHost);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can inspect the variables available in the Gateway service pod by <code><strong>selecting the Gateway
+service and then the running Pod.</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-gateway-pod.png" alt="Gateway Service" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>You can look at the environment variables by <code><strong>selecting the Pod Terminal.</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-gateway-terminal-env.png" alt="Gateway Service" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can inspect the runtime environment by <code><strong>executing this shell command:</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">env | grep COOLSTORE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are values added for all the services in the current project. We have highlighted a couple that
+are used by the code to access the Catalog Service.</p>
+</div>
 <div class="paragraph">
 <p>Well done! You are ready to move on to the next lab.</p>
 </div>
