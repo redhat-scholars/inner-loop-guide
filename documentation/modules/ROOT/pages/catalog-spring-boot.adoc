@@ -2,12 +2,12 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}/graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
 = Create Catalog Service with Spring Boot
 :navtitle: Create Catalog Service with Spring Boot
 
-_35 MINUTE EXERCISE_
+_30 MINUTE EXERCISE_
 
 In this lab you will learn about Spring Boot and how you can build microservices 
 using Spring Boot and JBoss technologies. During this lab, you will create a REST API for 

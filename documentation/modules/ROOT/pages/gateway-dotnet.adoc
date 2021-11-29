@@ -1,10 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}/graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
-= Create Gateway Service with .Net
-:navtitle: Create Gateway Service with .Net
+= Create Gateway Service with .NET
+:navtitle: Create Gateway Service with .NET
 
 _15 MINUTE EXERCISE_
 
@@ -162,7 +162,6 @@ The location or binding to the existing Catalog and Inventory REST services is i
 It’s time to build and deploy your service on OpenShift. 
 
 As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and then Push it in to the OpenShift cluster*`
-by using the following parameters:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -185,16 +184,16 @@ CLI::
 cd /projects/workshop/labs/gateway-dotnet
 ----
 
-`*Then execute the proper commands*`
-
-NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
-OpenShift will build the .NET .dll file from the project file and source code for you.
+`*Then execute the odo commands like you did for Catalog service*`
 
 IMPORTANT: Do not forget to **push** your new component
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
 ====
+
+NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
+OpenShift will build the .NET .dll file from the project file and source code for you.
 
 Once this completes, your application should be up and running. OpenShift runs the different components of 
 the application in one or more pods which are the unit of runtime deployment and consists of the running 

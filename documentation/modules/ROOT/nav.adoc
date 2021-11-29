@@ -2,7 +2,7 @@
 * xref:developer-workspace.adoc[2. Get your Developer Workspace]
 * xref:inventory-quarkus.adoc[3. Create Inventory Service with Quarkus]
 * xref:catalog-spring-boot.adoc[4. Create Catalog Service with Spring Boot]
-* xref:gateway-dotnet.adoc[5. Create Gateway Service with .Net]
+* xref:gateway-dotnet.adoc[5. Create Gateway Service with .NET]
 * xref:webui-deployment.adoc[6. Deploy Web UI with with Node.js and AngularJS]
 * xref:app-health.adoc[7. Monitor Application Health]
 * xref:app-config.adoc[8. Externalize Application Configuration]
