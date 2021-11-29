@@ -107,11 +107,11 @@ Then, enter the following information:
 
 |===
 
-`*Click on 'Create' button*`
+`*Click on 'Create' button*`, shortly a Maria database pod should be created:-
 
 image::openshift-inventory-mariadb-topology.png[OpenShift - Inventory MariaDB, 700]
 
-`*Click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
+`*Now click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
 to create the Catalog Database as follows:
 
 Then, enter the following information:
@@ -148,7 +148,7 @@ Then, enter the following information:
 
 |===
 
-`*Click on 'Create' button*`
+`*Click on 'Create' button*`, shortly a Postgresql dtabase pod should be created:-
 
 image::openshift-catalog-postgresql-topology.png[OpenShift - Catalog PostgreSQL, 700]
 
