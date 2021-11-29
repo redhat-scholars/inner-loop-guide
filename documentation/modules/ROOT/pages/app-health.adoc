@@ -373,7 +373,7 @@ image::openshift-catalog-add-readiness-probe.png[Che - Catalog Add Readiness Pro
 |1
 
 |Initial Delay
-|_Empty_
+|0
 
 |Period
 |10
@@ -456,8 +456,8 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |1
 
 |Initial Delay
-|_Empty_
-|_Empty_
+|0
+|0
 
 |Period
 |5
@@ -504,8 +504,8 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |1
 
 |Initial Delay
-|_Empty_
-|_Empty_
+|0
+|0
 
 |Period
 |5
