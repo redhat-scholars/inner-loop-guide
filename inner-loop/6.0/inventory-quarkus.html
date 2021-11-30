@@ -742,10 +742,99 @@ the last path param being the product id which we want to check its inventory st
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift using Odo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It’s time to deploy your service on OpenShift using <a href="https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a>.</p>
+<p>It’s time to use <a href="https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">odo</a>
+to deploy your service on OpenShift using
+<a href="https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html" target="_blank" rel="noopener">devfiles</a>.</p>
+</div>
+<div class="paragraph">
+<p>In this section you will locally build a .jar file, then <strong>create</strong> the odo component
+and finally <strong>push</strong> it to OpenShift. The details of what and how this is deployed is defined below in the <strong>devfile</strong>.
+This can be found in the Inventory project
+<strong>/projects/workshop/labs/inventory-quarkus/devfile.yaml</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The big benefit of using <strong>odo</strong> is the ease of defining what to deploy and the speed it can get
+your application running in OpenShift. The devfile is stored in source control alongside the code,
+so ready for all of the team to use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">schemaVersion: 2.0.0
+metadata:
+  description: Quarkus with Java
+  displayName: Quarkus Java
+  icon: https://design.jboss.org/quarkus/logo/final/SVG/quarkus_icon_rgb_default.svg
+  language: java <i class="conum" data-value="1"></i><b>(1)</b>
+  name: inventory <i class="conum" data-value="2"></i><b>(2)</b>
+  projectType: quarkus
+  tags:
+  - Java
+  - Quarkus
+  version: 1.1.0
+  website: https://quarkus.io
+commands:
+- exec:
+    commandLine: java -jar target/*.jar
+    component: application
+    group:
+      isDefault: true
+      kind: run <i class="conum" data-value="3"></i><b>(3)</b>
+    workingDir: /projects
+  id: dev-run
+components:
+- container:
+    endpoints: <i class="conum" data-value="4"></i><b>(4)</b>
+    - exposure: public
+      name: inventory
+      path: /
+      protocol: http
+      targetPort: 8080
+    image: registry.redhat.io/openjdk/openjdk-11-rhel7:latest <i class="conum" data-value="5"></i><b>(5)</b>
+    memoryLimit: 1024Mi
+  name: application</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is a <strong>Java</strong> component</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Its called <strong>inventory</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <strong>odo push</strong> command copies all the Inventory project files to OpenShift
+and then executes any <strong>jar</strong> file it finds in the <strong>/projects/target</strong> directory there</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The service port 8080 will be used for HTTP and there will be public access</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>This is the base container image used to run the application</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You might have noticed that both CodeReady Workspaces and odo use yaml devfiles. One describes
+the attributes of IDE environment and tools while the other describes the build and deployment
+attributes of an individual component.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>In your <a href="http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <strong>build</strong> your jar file.</p>
@@ -868,23 +957,23 @@ Validation
 Please use `odo push` command to create the component with source deployed</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Now the configuration file <strong>'env.yaml'</strong> is in the local directory of the inventory component
-(<strong>'/projects/workshop/labs/inventory-quarkus/.odo/env'</strong>) that contains information about the component for deployment.</p>
+<p>You have just provided the OpenShift destination project and application name. These are stored locally
+in the configuration file <strong>'env.yaml'</strong> which can be found here (<strong>/projects/workshop/labs/inventory-quarkus/.odo/env</strong>)</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Then, <strong>push</strong> the component to the OpenShift cluster:</p>
+<p>Now, <strong>push</strong> the component to the OpenShift cluster:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -964,8 +1053,11 @@ Pushing devfile component "inventory"
 </div>
 </div>
 <div class="paragraph">
-<p>Once this completes, your application should be up and running. OpenShift runs the different components of the application
-in one or more pods which are the unit of runtime deployment and consists of the running containers for the project.</p>
+<p>Once this completes, your application should be up and running.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift runs the different components of the application
+in one or more pods. A pod is the unit of runtime deployment and consists of the running containers for the project.</p>
 </div>
 </div>
 </div>
