@@ -1,10 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}/graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
-= Create Gateway Service with .Net
-:navtitle: Create Gateway Service with .Net
+= Create Gateway Service with .NET
+:navtitle: Create Gateway Service with .NET
 
 _15 MINUTE EXERCISE_
 
@@ -162,7 +162,6 @@ The location or binding to the existing Catalog and Inventory REST services is i
 It’s time to build and deploy your service on OpenShift. 
 
 As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and then Push it in to the OpenShift cluster*`
-by using the following parameters:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -185,16 +184,16 @@ CLI::
 cd /projects/workshop/labs/gateway-dotnet
 ----
 
-`*Then execute the proper commands*`
-
-NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
-OpenShift will build the .NET .dll file from the project file and source code for you.
+`*Then execute the odo commands like you did for Catalog service*`
 
 IMPORTANT: Do not forget to **push** your new component
 
 NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
 --
 ====
+
+NOTE: Unlike Catalog and Inventory service, you are going to push the **'gateway-dotnet/'** folder as an input to OpenShift. 
+OpenShift will build the .NET .dll file from the project file and source code for you.
 
 Once this completes, your application should be up and running. OpenShift runs the different components of 
 the application in one or more pods which are the unit of runtime deployment and consists of the running 
@@ -228,5 +227,53 @@ Then `*click on 'Test it'*`. You should have the following output:
 ...
 ]
 ----
+
+== Service discovery
+
+You might be wondering how the Gateway service knows how to contact the *Catalog* and *Inventory* services. 
+As discussed earlier, these values are injected as environment variables at runtime. You can see the code 
+that consumes those variables below. This is from *ProductsController.cs class* in the 
+**/projects/workshop/labs/gateway-dotnet/** directory.
+
+The REST URLs are built from the environment variables:-
+[source,dotnet]
+----
+public static void Config()
+{
+    try
+    {
+        // discover the URL of the services we are going to call
+        catalogApiHost = "http://" +
+            Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_HOST") + ":" + 
+            Environment.GetEnvironmentVariable("CATALOG_COOLSTORE_SERVICE_PORT");
+        
+        inventoryApiHost = "http://" +
+            Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_HOST") + ":" + 
+            Environment.GetEnvironmentVariable("INVENTORY_COOLSTORE_SERVICE_PORT");
+
+        // set up the Http conection pools
+        inventoryHttpClient.BaseAddress = new Uri(inventoryApiHost);
+        catalogHttpClient.BaseAddress = new Uri(catalogApiHost);
+    }
+----
+
+You can inspect the variables available in the Gateway service pod by `*selecting the Gateway
+service and then the running Pod.*`
+
+image::openshift-gateway-pod.png[Gateway Service,500]
+
+You can look at the environment variables by `*selecting the Pod Terminal.*` 
+
+image::openshift-gateway-terminal-env.png[Gateway Service,500]
+
+Now you can inspect the runtime environment by `*executing this shell command:*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+env | grep COOLSTORE
+----
+
+There are values added for all the services in the current project. We have highlighted a couple that 
+are used by the code to access the Catalog Service.
 
 Well done! You are ready to move on to the next lab.

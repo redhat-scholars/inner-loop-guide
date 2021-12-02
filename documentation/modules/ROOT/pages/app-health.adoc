@@ -7,7 +7,7 @@
 = Monitor Application Health
 :navtitle: Monitor Application Health
 
-_15 MINUTE EXERCISE_
+_20 MINUTE EXERCISE_
 
 In this lab we will learn how to monitor application health using OpenShift 
 health probes and how you can see container resource consumption using metrics.
@@ -29,7 +29,7 @@ Furthermore, there are of course a category of issues that can't be resolved by 
 In those scenarios, OpenShift would remove the faulty container from the built-in load-balancer and send traffic 
 only to the healthy containers that remain.
 
-There are three types of health probes available in OpenShift: https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_application-health[startup, readiness and liveness probes^]. 
+There are three types of health probes available in OpenShift: https://docs.openshift.com/container-platform/4.9/applications/application-health.html#application-health-about_application-health[startup, readiness and liveness probes^]. 
 
 * **Startup probes** determine if the container in which it is scheduled is started
 * **Readiness probes** determine if the container in which it is scheduled is ready to service requests
@@ -41,7 +41,7 @@ order to remove downtime during deployments. A readiness health probe would sign
 traffic from the old version of the container to the new version so that the users don't get affected during 
 deployments.
 
-There are https://docs.openshift.com/container-platform/4.6/applications/application-health.html#application-health-about_types_application-health[three ways to define a health probe^] for a container:
+There are https://docs.openshift.com/container-platform/4.9/applications/application-health.html#application-health-about_types_application-health[three ways to define a health probe^] for a container:
 
 * **HTTP Checks:** healthiness of the container is determined based on the response code of an HTTP 
 endpoint. Anything between 200 and 399 is considered success. A HTTP check is ideal for applications 
@@ -64,7 +64,7 @@ Imagine the _Inventory Service_ is stuck in a state (Deadlock, NullPointer excep
 where it cannot perform as it should. Let's access inside the container and simulate this state.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> 'DC inventory-coolstore' -> 'Resources' -> 'P inventory-coolstore-x-xxxxx'*`
+`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Resources' -> 'P inventory-coolstore-x-xxxxx'*`
 
 image::openshift-inventory-pod.png[OpenShift Inventory Pod, 700]
 
@@ -152,7 +152,7 @@ You should have the following output:
 ----
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> 'DC inventory-coolstore' -> 'Add Health Checks'*`.
+`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Add Health Checks'*`.
 
 image::openshift-inventory-add-health-check.png[Che - Inventory Add Health Check, 700]
 
@@ -272,7 +272,7 @@ image::che-catalog-traffic-ok.png[Che - Catalog Traffic OK, 500]
 Now let's scale out your _Catalog Service_ to 2 instances. 
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> 'DC catalog-coolstore' -> 'Details' then click once on the up arrows 
+`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the up arrows 
 on the right side of the pod blue circle*`.
 
 image::openshift-scale-out-catalog.png[OpenShift Scale Out Catalog, 700]
@@ -309,7 +309,7 @@ A readiness probe can be used to signal to the endpoints controller that even th
 ==  Configuring Readiness Probes
 
 First, scale down your _Catalog Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> 'DC catalog-coolstore' -> 'Details' then click once on the down arrows 
+`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the down arrows 
 on the right side of the pod blue circle*`.
 
 http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready[Spring Boot Actuator^] is a 
@@ -335,7 +335,7 @@ You should have the following output:
 ----
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> 'DC catalog-coolstore' -> 'Add Health Checks'*`.
+`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Add Health Checks'*`.
 
 image::openshift-catalog-add-health-check.png[Che - Catalog Add Health Check, 700]
 
@@ -373,7 +373,7 @@ image::openshift-catalog-add-readiness-probe.png[Che - Catalog Add Readiness Pro
 |1
 
 |Initial Delay
-|_Empty_
+|0
 
 |Period
 |10
@@ -397,6 +397,10 @@ In your {CHE_URL}[Workspace^, role='params-link'], `*check the output of the 'Ca
 You should not see any error means that you can now **scale out your _Catalog Service_ with no downtime.**
 
 image::che-catalog-traffic-ok.png[Che - Catalog Traffic OK, 500]
+
+Now scale down your _Catalog Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the down arrows 
+on the right side of the pod blue circle*`.
 
 [#understanding_startup]
 ==  Understanding Startup Probes
@@ -452,8 +456,8 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |1
 
 |Initial Delay
-|_Empty_
-|_Empty_
+|0
+|0
 
 |Period
 |5
@@ -500,8 +504,8 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |1
 
 |Initial Delay
-|_Empty_
-|_Empty_
+|0
+|0
 
 |Period
 |5
@@ -537,7 +541,7 @@ In the project overview, you can see the different **Resource Usage** sections.
 
 image::openshift-monitoring.png[OpenShift Monitoring,740]
 
-From the **Developer view**, `*click on 'Topology' -> any Deployment Config (DC) and click on the associated Pod (P)*`
+From the **Developer view**, `*click on 'Topology' -> any Deployment (D) and click on the associated Pod (P)*`
 
 In the pod overview, you can see a more detailed view of the pod consumption.
 The graphs can be found under the Metrics heading, or Details in earlier versions of the OpenShift console.

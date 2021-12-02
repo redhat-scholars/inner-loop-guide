@@ -2,7 +2,7 @@
 :CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}/graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
 = Get your Developer Workspace
 :navtitle: Get your Developer Workspace
@@ -31,7 +31,7 @@ As an open-source project, the core goals of https://access.redhat.com/products/
 To achieve those core goals, https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  provides:
 
 * **Workspaces:** Container-based developer workspaces providing all the tools and dependencies needed to code, build, test, run, and debug applications.
-* **Browser-based IDEs:** Bundled browser-based IDEs with language tooling, debuggers, terminal, VCS integration, and much more.
+* **Browser-based IDEs:** Bundled browser-based IDEs with language tooling, debuggers, terminal, source control (SCM) integration, and much more.
 * **Extensible platform:** Bring your own IDE. Define, configure, and extend the tools that you need for your application by using plug-ins, which are compatible with Visual Studio Code extensions.
 * **Enterprise Integration:** Multi-user capabilities, including Keycloak for authentication and integration with LDAP or AD.
 --
@@ -79,12 +79,12 @@ image::che-workspace.png[Che - Workspace, 800]
 .OpenShift Do (odo)
 --
 
-https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift Container Platform and Kubernetes. 
-With https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, and debug applications on a cluster without the need to administer the cluster itself. 
-Creating deployment configurations, build configurations, service routes and other OpenShift Container Platform or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
+https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift and Kubernetes. 
+With https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, deploy and debug applications on a cluster without the need to administer the cluster itself. 
+Creating deployment configurations, build configurations, service routes and other OpenShift or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
 
-Existing tools such as https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift Container Platform concepts. 
-https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift Container Platform concepts allowing developers to focus on what is most important to them: **code**.
+Existing tools such as https://docs.openshift.com/container-platform/4.9/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift concepts. 
+https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift concepts allowing developers to focus on what is most important to them: **code**.
 
 --
 
