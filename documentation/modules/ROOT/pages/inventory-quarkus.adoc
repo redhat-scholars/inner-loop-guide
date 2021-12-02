@@ -327,7 +327,7 @@ quarkus.hibernate-orm.log.sql=true
 quarkus.hibernate-orm.sql-load-script=import.sql
 quarkus.http.host=0.0.0.0
 
-%prod.quarkus.package.type=uber-jar # <1> 
+%prod.quarkus.package.type=uber-jar#<1> 
 ----
 <1> An **uber-jar** contains all the dependencies required packaged in the **jar** to enable running the 
 application with **java -jar**. By default, in Quarkus, the generation of the uber-jar is disabled. With the
