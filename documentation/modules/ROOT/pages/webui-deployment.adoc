@@ -87,6 +87,9 @@ Then, enter the following information:
 
 `*Click on 'Create' button*` 
 
+Now wait a few minutes for the application to built by OpenShift and deployed to your project. In the toplogy view, 
+the web application pod will not be ready until the blue ring goes dark blue.
+
 [#test_your_service]
 == Test your Service
 
