@@ -47,7 +47,7 @@ OpenShift will obtain the application code directly from the source repository t
 container image of it.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on '+Add' and select 'From Git'*`
+`*click on '+Add' and select 'Import from Git'*`
 
 image::openshift-add-from-git.png[OpenShift - Add from Git, 700]
 
@@ -71,7 +71,7 @@ Then, enter the following information:
 |Builder Image
 |**Node.js**
 
-|Application Name
+|Application
 |**coolstore**
 
 |Name
