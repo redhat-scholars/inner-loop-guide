@@ -282,7 +282,7 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 ====
 
 
-When pop-ups appear, *confirm you want to expose the 9000 port* by `*clicking on 'Open in Preview'*`.
+When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in Preview'*`.
 
 image::che-open-9000-link.png[Che - Open Link, 500]
 
