@@ -31,7 +31,7 @@ Finally utilise external configuration to leverage OpenShift database access.
 
 === Audience
 
-A Developer, Architect, DevOps, or manager wishing to learn about the Cloud Native development  with OpenShift. 
+A Developer, Architect, DevOps, or manager wishing to learn about the Cloud Native development with OpenShift. 
 Some programming experience, especially with Java would be useful.
 
 
