@@ -5,11 +5,41 @@
 [.text-center.strong]
 == Ready to become a Cloud Native Developer?
 
-This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on OpenShift using rich and advanced development services.
+This immersive workshop will put you in the Cloud Native world as a Developer: code, run and deploy modern applications on 
+OpenShift using rich and advanced development services.
 
 image::inner-loop.png[Developer Inner Loop, 400]
 
 The goal of this hands-workshop is to provide a Developer Experience through the Inner Loop using Cloud Native Technologies.
 
-To be a part of this journey, all you need is to come your modern web browser. 
-Everything else is running on the Cloud, on OpenShift
+To be a part of this journey, all you need is to bring your modern web browser. 
+Everything else is running on the Cloud, on OpenShift.
+
+== Session Summary
+
+Get hands-on with cloud based code Development using CodeReady Workspaces.
+
+Explore the inner loop by creating simple microservices with Quarkus, Spring Boot, .NET and Nodejs.
+
+Deploy a web based application to OpenShift.
+
+Monitor its health.
+
+Discover OpenShift service resilience, scale and fault tolerance.
+
+Finally utilise external configuration to leverage OpenShift database access.
+
+=== Audience
+
+A Developer, Architect, DevOps, or manager wishing to learn about the Cloud Native development  with OpenShift. 
+Some programming experience, especially with Java would be useful.
+
+
+[cols="1,3,2"]  
+|===
+| *Duration* | *Audience* | *Level*
+|3.5 hour
+|Developers that want to learn OpenShift and Kubernetes
+|Beginner with OpenShift
+|===
+
