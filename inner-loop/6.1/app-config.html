@@ -179,7 +179,7 @@ should be externalized from the application and the container image content in
 order to keep the image portable across environments.</p>
 </div>
 <div class="paragraph">
-<p>OpenShift provides a mechanism called <a href="https://docs.openshift.com/container-platform/4.9/welcome/index.html" target="_blank" rel="noopener"><strong>ConfigMaps</strong></a>
+<p>OpenShift provides a mechanism called <a href="https://docs.openshift.com/container-platform/4.10/welcome/index.html" target="_blank" rel="noopener"><strong>ConfigMaps</strong></a>
 in order to externalize configurations
 from the applications deployed within containers and provide them to the containers
 in a unified way as files and environment variables. OpenShift also offers a way to
@@ -212,7 +212,7 @@ regardless of what happens to the container itself, the data is safe and can be 
 database container.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s create a <a href="https://docs.openshift.com/container-platform/4.9/welcome/index.html" target="_blank" rel="noopener">MariaDB database</a>
+<p>Let&#8217;s create a <a href="https://docs.openshift.com/container-platform/4.10/welcome/index.html" target="_blank" rel="noopener">MariaDB database</a>
 for the <strong>Inventory Service</strong> using the MariaDB template that is provided out-of-the-box:</p>
 </div>
 <div class="admonitionblock tip">
@@ -223,7 +223,7 @@ for the <strong>Inventory Service</strong> using the MariaDB template that is pr
 </td>
 <td class="content">
 <div class="paragraph">
-<p><a href="https://docs.openshift.com/container-platform/4.9/openshift_images/using-templates.html" target="_blank" rel="noopener">OpenShift Templates</a> use YAML/JSON to compose
+<p><a href="https://docs.openshift.com/container-platform/4.10/openshift_images/using-templates.html" target="_blank" rel="noopener">OpenShift Templates</a> use YAML/JSON to compose
 multiple containers and their configurations as a list of objects to be created and deployed at once,
 making it simple to re-create complex deployments by just deploying a single template. Templates can
 be parameterized to get input for fields like service names and generate values for fields like passwords.</p>
@@ -759,7 +759,7 @@ secure way to handle sensitive data.</p>
 </div>
 <div class="paragraph">
 <p>Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is
-called <a href="https://docs.openshift.com/container-platform/4.9/welcome/index.html" target="_blank" rel="noopener"><strong>Secrets</strong></a>. Secret objects act and are used
+called <a href="https://docs.openshift.com/container-platform/4.10/welcome/index.html" target="_blank" rel="noopener"><strong>Secrets</strong></a>. Secret objects act and are used
 similarly to config maps however with the difference that they are encrypted as they travel over the wire
 and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into
 containers as environment variables or files on the filesystem using a temporary file-storage
