@@ -297,7 +297,7 @@ If you have the following result on the 'Preview' window, please `*click on the 
 image::che-preview-na.png[Che - Preview Not Available, 500]
 ====
 
-Then `*click on 'Test it'*`. You should have the following output:
+Then `*click on 'Test it'*`. You should have similar output to this array of json:
 
 [source,json]
 ----
@@ -386,7 +386,7 @@ Your browser will be redirect on **your Catalog Service running on OpenShift**.
 
 image::catalog-service.png[Catalog Service,500]
 
-Then `*click on 'Test it'*`. You should have the following output:
+Then `*click on 'Test it'*`. You should have a similar array of json output:
 
 [source,json]
 ----

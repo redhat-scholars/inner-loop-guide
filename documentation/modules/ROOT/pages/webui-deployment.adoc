@@ -42,7 +42,7 @@ in OpenShift.
 
 In the previous labs, you only used the S2I builder image for 
 injecting developer source code inside a running container.
-In this lab, you will fully use OpenShift https://docs.openshift.com/container-platform/4.9/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^].
+In this lab, you will fully use OpenShift https://docs.openshift.com/container-platform/4.10/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^].
 OpenShift will obtain the application code directly from the source repository then build and deploy a 
 container image of it.
 
@@ -83,7 +83,15 @@ Then, enter the following information:
 |Create a route to the application
 |**_Checked_**
 
+|Show advanced routing options
+|**_Expand - see below_**
+
 |===
+
+From the advanced routing options `*de-select the Secure Route option*`, so this creates an *HTTP* route
+like below:-
+
+image::openshift-add-http-route.png[OpenShift - Add route, 600]
 
 `*Click on 'Create' button*` 
 

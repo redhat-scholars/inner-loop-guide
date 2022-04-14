@@ -27,7 +27,7 @@ configuration files and command line arguments. These configuration artifacts
 should be externalized from the application and the container image content in
 order to keep the image portable across environments.
 
-OpenShift provides a mechanism called https://docs.openshift.com/container-platform/4.9/welcome/index.html[**ConfigMaps**^] 
+OpenShift provides a mechanism called https://docs.openshift.com/container-platform/4.10/welcome/index.html[**ConfigMaps**^] 
 in order to externalize configurations 
 from the applications deployed within containers and provide them to the containers 
 in a unified way as files and environment variables. OpenShift also offers a way to 
@@ -53,12 +53,12 @@ a persistent storage that survives the container itself. You can deploy database
 regardless of what happens to the container itself, the data is safe and can be used by the next 
 database container.
 
-Let's create a https://docs.openshift.com/container-platform/4.9/welcome/index.html[MariaDB database^] 
+Let's create a https://docs.openshift.com/container-platform/4.10/welcome/index.html[MariaDB database^] 
 for the **Inventory Service** using the MariaDB template that is provided out-of-the-box:
 
 [TIP]
 ====
-https://docs.openshift.com/container-platform/4.9/openshift_images/using-templates.html[OpenShift Templates^] use YAML/JSON to compose 
+https://docs.openshift.com/container-platform/4.10/openshift_images/using-templates.html[OpenShift Templates^] use YAML/JSON to compose 
 multiple containers and their configurations as a list of objects to be created and deployed at once, 
 making it simple to re-create complex deployments by just deploying a single template. Templates can 
 be parameterized to get input for fields like service names and generate values for fields like passwords.
@@ -427,7 +427,7 @@ credentials to simplify the steps; however, for production environments, you sho
 secure way to handle sensitive data.
 
 Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is 
-called https://docs.openshift.com/container-platform/4.9/welcome/index.html[**Secrets**^]. Secret objects act and are used 
+called https://docs.openshift.com/container-platform/4.10/welcome/index.html[**Secrets**^]. Secret objects act and are used 
 similarly to config maps however with the difference that they are encrypted as they travel over the wire 
 and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into 
 containers as environment variables or files on the filesystem using a temporary file-storage 

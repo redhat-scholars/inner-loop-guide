@@ -420,9 +420,9 @@ CLI::
 [#deploy_on_openshift]
 == Deploy on OpenShift using Odo
 
-It’s time to use https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^] 
+It’s time to use https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^] 
 to deploy your service on OpenShift using
-https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[devfiles^].
+https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[devfiles^].
 
 In this section you will locally build a .jar file, then *create* the odo component
 and finally *push* it to OpenShift. The details of what and how this is deployed is defined below in the *devfile*. 

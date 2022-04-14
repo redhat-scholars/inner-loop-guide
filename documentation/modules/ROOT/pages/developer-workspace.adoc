@@ -79,12 +79,12 @@ image::che-workspace.png[Che - Workspace, 800]
 .OpenShift Do (odo)
 --
 
-https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift and Kubernetes. 
-With https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, deploy and debug applications on a cluster without the need to administer the cluster itself. 
-Creating deployment configurations, build configurations, service routes and other OpenShift or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
+https://docs.openshift.com/container-platform/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift and Kubernetes. 
+With https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, deploy and debug applications on a cluster without the need to administer the cluster itself. 
+Creating deployment configurations, build configurations, service routes and other OpenShift or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
 
-Existing tools such as https://docs.openshift.com/container-platform/4.9/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift concepts. 
-https://docs.openshift.com/container-platform/4.9/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift concepts allowing developers to focus on what is most important to them: **code**.
+Existing tools such as https://docs.openshift.com/container-platform/4.10/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift concepts. 
+https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift concepts allowing developers to focus on what is most important to them: **code**.
 
 --
 
