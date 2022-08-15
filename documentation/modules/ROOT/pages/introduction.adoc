@@ -9,7 +9,7 @@ The overall architecture of the application that you will deploy is the followin
 
 image::coolstore-arch.png[Coolstore Architecture, 400]
 
-During the various steps of the the workshop you will use CodeReady Workspaces, an online IDE that is running on Red Hat OpenShift to write, test and deploy these services:
+During the various steps of the the workshop you will use OpenShift Dev Spaces, an online IDE that is running on Red Hat OpenShift to write, test and deploy these services:
 
 * **Catalog Service** exposes using a REST API content of a catalog stored in a relational database
 * **Inventory Service** exposes using a REST API the inventory stored in a relational database
@@ -24,4 +24,4 @@ In addition to the application code, you will learn how to deploy the various se
 
 You will also have the opportunity to look at probes and externalized configuration.
 
-Let's start the workshop with the discovery of OpenShift and CodeReady Workspaces.
+Let's start the workshop with the discovery of OpenShift and OpenShift Dev Spaces.

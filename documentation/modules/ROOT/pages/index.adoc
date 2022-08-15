@@ -17,7 +17,7 @@ Everything else is running on the Cloud, on OpenShift.
 
 == Session Summary
 
-Get hands-on with cloud based code Development using CodeReady Workspaces.
+Get hands-on with cloud based code Development using OpenShift Dev Spaces.
 
 Explore the inner loop by creating simple microservices with Quarkus, Spring Boot, .NET and Nodejs.
 

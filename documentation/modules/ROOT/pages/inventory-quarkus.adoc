@@ -1,6 +1,6 @@
 :markup-in-source: verbatim,attributes,quotes
 :APPS_HOSTNAME_SUFFIX: %APPS_HOSTNAME_SUFFIX%
-:CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:CHE_URL: http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
@@ -477,7 +477,7 @@ and then executes any *jar* file it finds in the */projects/target* directory th
 <4> The service port 8080 will be used for HTTP and there will be public access
 <5> This is the base container image used to run the application
 
-NOTE: You might have noticed that both CodeReady Workspaces and odo use yaml devfiles. One describes 
+NOTE: You might have noticed that both OpenShift Dev Spaces and odo use yaml devfiles. One describes 
 the attributes of IDE environment and tools while the other describes the build and deployment 
 attributes of an individual component.
 

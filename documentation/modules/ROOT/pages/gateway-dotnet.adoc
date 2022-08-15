@@ -1,5 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:CHE_URL: http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 
@@ -29,7 +29,7 @@ You can create .NET apps for many operating systems, including Windows, Linux an
 you use platform-specific capabilities, such as operating system APIs. Examples are Windows Forms and WPF on Windows .NET is open 
 source, https://github.com/dotnet/runtime/blob/master/LICENSE.TXT[using MIT and Apache 2 licenses^] .NET is a project of the https://dotnetfoundation.org/[.NET Foundation.^]
 
-pass:[.NET] supports a number of programming faces and development environments, but today we will be looking at C# inside CodeReady Workspaces.
+pass:[.NET] supports a number of programming faces and development environments, but today we will be looking at C# inside OpenShift Dev Spaces.
 
 We will also be using the standard web server pattern provided by ASP .NET libraries for creating non-blocking web services.
 --

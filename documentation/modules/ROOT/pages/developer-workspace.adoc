@@ -1,5 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://codeready-workspaces.%APPS_HOSTNAME_SUFFIX%
+:CHE_URL: http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
@@ -13,39 +13,37 @@ In this lab you will learn about providing your Developer Workspace with a Kuber
 and getting familiar with the OpenShift CLI and OpenShift Web Console.
 
 [#what_is_codeready_workspaces]
-== What is CodeReady Workspaces?
+== What is Red Hat OpenShift Dev Spaces?
 
-[sidebar]
---
+.Red Hat OpenShift DevSpaces
+****
 [window=_blank, align="center"]
-image::codereadyworkspaces-logo.png[CodeReady Workspaces, 400]
+https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] is a Kubernetes-native IDE and developer collaboration platform.
 
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] is a Kubernetes-native IDE and developer collaboration platform.
+As an open-source project, the core goals of https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  are to:
 
-As an open-source project, the core goals of https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  are to:
-
-* **Accelerate project and developer onboarding:** As a zero-install development environment that runs in your browser, https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  makes it easy for anyone to join your team and contribute to a project.
+* **Accelerate project and developer onboarding:** As a zero-install development environment that runs in your browser, https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  makes it easy for anyone to join your team and contribute to a project.
 * **Remove inconsistency between developer environments:** No more: “But it works on my machine.” Your code works exactly the same way in everyone’s environment.
-* **Provide built-in security and enterprise readiness:** As https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  becomes a viable replacement for VDI solutions, it must be secure and it must support enterprise requirements, such as role-based access control and the ability to remove all source code from developer machines.
+* **Provide built-in security and enterprise readiness:** As https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  becomes a viable replacement for VDI solutions, it must be secure and it must support enterprise requirements, such as role-based access control and the ability to remove all source code from developer machines.
 
-To achieve those core goals, https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  provides:
+To achieve those core goals, https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  provides:
 
 * **Workspaces:** Container-based developer workspaces providing all the tools and dependencies needed to code, build, test, run, and debug applications.
 * **Browser-based IDEs:** Bundled browser-based IDEs with language tooling, debuggers, terminal, source control (SCM) integration, and much more.
 * **Extensible platform:** Bring your own IDE. Define, configure, and extend the tools that you need for your application by using plug-ins, which are compatible with Visual Studio Code extensions.
 * **Enterprise Integration:** Multi-user capabilities, including Keycloak for authentication and integration with LDAP or AD.
---
+****
 
 [#get_your_developer_workspace]
 == Getting your Developer Workspace with a single click
 
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^]  will provide you an out-of-box 
+https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  will provide you an out-of-box 
 *Developer Workspace* with all the tools and the dependencies we need to do the job. **And with only one single click!**
 
 [NOTE]
 .Devfile
 ====
-https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] uses https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning of a specific workspace by defining:
+https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] uses https://docs.devfile.io/devfile/index.html[Devfiles^] to automate the provisioning of a specific workspace by defining:
 
 * projects to clone
 * browser IDE to use
@@ -53,13 +51,13 @@ https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Worksp
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.1/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-codeready-workspaces[CodeReady Workspaces^] to configure the project and runtime according 
+Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.2/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
 to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
 
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}/wksp-end-to-end-dev]
+[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
@@ -127,7 +125,10 @@ Connecting to the OpenShift cluster
 
 Login successful.
 
-You have one project on this server: "cn-project{USER_ID}"
+You have access to the following projects and can switch between them with 'odo project set <project-name>':
+
+  * cn-project{USER_ID}
+    user{USERID}-devspaces
 
 Using project "cn-project{USER_ID}".
 
