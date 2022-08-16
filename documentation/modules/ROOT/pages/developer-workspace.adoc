@@ -3,6 +3,8 @@
 :USER_ID: %USER_ID%
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
+:WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
+:WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
 
 = Get your Developer Workspace
 :navtitle: Get your Developer Workspace
@@ -51,16 +53,21 @@ https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Sp
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.2/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
+Providing a {WORKSHOP_GIT_REPO}/blob/{WORKSHOP_GIT_REF}/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
 to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
 
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
+//[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
+[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
+
+Then `*Click 'Log in with OpenShift'*`
+
+image::login-with-openshift.png[OpenShift - Login, 500]
 
 Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let the magic happens...
 
@@ -128,7 +135,7 @@ Login successful.
 You have access to the following projects and can switch between them with 'odo project set <project-name>':
 
   * cn-project{USER_ID}
-    user{USERID}-devspaces
+    user{USER_ID}-devspaces
 
 Using project "cn-project{USER_ID}".
 
