@@ -314,7 +314,7 @@ in cloud environments where automated processes must be able to determine whethe
 </div>
 <div class="paragraph">
 <p>Let&#8217;s add the needed dependencies to <strong>/projects/workshop/labs/inventory-quarkus/pom.xml</strong>.
-In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file</strong></code>:</p>
+In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file</strong></code>:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -331,7 +331,7 @@ In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" cl
 <p>Once completed, verify that the health endpoint works for the <strong>Inventory Service</strong> using <code><strong>curl</strong></code></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
 <code><strong>execute the following commands in the '&gt;_ workshop_tools' terminal window</strong></code></p>
 </div>
 <div class="listingblock copypaste">
@@ -484,7 +484,7 @@ The service is up and running again.</p>
 <p>Let&#8217;s imagine you have traffic to the <em>Catalog Service</em></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -582,7 +582,7 @@ However, it may happen the new instances of the <em>Catalog Service</em> will no
 <p>To avoid that, you need to add a <strong>PodAffinity</strong> configuration to ensure that all the instances of the <em>Catalog Service</em> will always be co-located in the same node.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Add PodAffinity'</strong></code></p>
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Catalog - Add PodAffinity'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -595,7 +595,7 @@ However, it may happen the new instances of the <em>Catalog Service</em> will no
 </div>
 <div class="paragraph">
 <p>You should see the 2 instances (pods) running.
-Now, <code><strong>switch back to your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a> and check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+Now, <code><strong>switch back to your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a> and check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -631,7 +631,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 <p>Verify that the health endpoint works for the <strong>Catalog Service</strong> using <code><strong>curl</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, in the window called <strong>'&gt;_ workshop-tools terminal'</strong>,
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, in the window called <strong>'&gt;_ workshop-tools terminal'</strong>,
 <code><strong>execute the following commands</strong></code>:</p>
 </div>
 <div class="listingblock copypaste">
@@ -736,7 +736,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 <code><strong>scale out the Catalog Service to 2 instances (pods)</strong></code></p>
 </div>
 <div class="paragraph">
-<p>In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>check the output of the 'Catalog Generate Traffic' task</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>You should not see any error means that you can now <strong>scale out your <em>Catalog Service</em> with no downtime.</strong></p>
@@ -913,7 +913,7 @@ the fast response to stuck states.</p>
 </table>
 <div class="paragraph">
 <p>Finally, let&#8217;s configure probes for Gateway and Web Service.
-In your <a href="http://devspaces-openshift-devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Probes - Configure Gateway &amp; Web'</strong></code></p>
+In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'Probes - Configure Gateway &amp; Web'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
