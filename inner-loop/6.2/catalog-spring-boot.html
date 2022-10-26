@@ -198,7 +198,10 @@ are already made by Spring Boot so that you can get started with minimum effort 
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <strong>catalog-spring-boot</strong> project has the following structure which shows the components of
-the Spring Boot project laid out in different subdirectories according to Maven best practices:</p>
+the Spring Boot project laid out in different subdirectories according to Maven best practices.</p>
+</div>
+<div class="paragraph">
+<p>For the duration of this lab you will be working in the <strong>catalog-spring-boot</strong> directories shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -211,7 +214,7 @@ to a database. This project currently contains no code other than the main class
 which is there to bootstrap the Spring Boot application.</p>
 </div>
 <div class="paragraph">
-<p><code><strong>Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class</strong></code> in the <strong>/projects/workshop/labs/catalog-spring-boot/src/main</strong> directory:</p>
+<p><code><strong>Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class</strong></code> in the <strong>labs/catalog-spring-boot/src/main</strong> directory:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -231,7 +234,7 @@ public class CatalogApplication {
 </div>
 <div class="paragraph">
 <p>The database is configured using the Spring application configuration file which is located at
-<strong>/projects/workshop/labs/catalog-spring-boot/src/main/resources/application.properties</strong>. Examine this file to see the database connection details
+<strong>src/main/resources/application.properties</strong>. Examine this file to see the database connection details
 and note that an in-memory H2 database is used in this lab for local development and will be replaced
 with a PostgreSQL database in the following labs. Be patient! More on that later.</p>
 </div>
@@ -250,7 +253,7 @@ RESTful endpoint to create the Catalog service:</p>
 <h2 id="create_domain_model"><a class="anchor" href="#create_domain_model"></a>Create the Domain Model</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/Product.java' file</code></strong></p>
+<p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>, <code><strong>create the 'src/main/java/com/redhat/cloudnative/catalog/Product.java' file</code></strong></p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -355,7 +358,7 @@ and extend <a href="https://docs.spring.io/spring-data/commons/docs/current/api/
 </div>
 <div class="paragraph">
 <p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
-<code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file</code></strong>.</p>
+<code><strong>create the 'src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file</code></strong>.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -391,7 +394,7 @@ a new Java class named <strong>CatalogController</strong> in <strong>com.redhat.
 </div>
 <div class="paragraph">
 <p>In your <a href="http://devspaces.%APPS_HOSTNAME_SUFFIX%" class="params-link" target="_blank" rel="noopener">Workspace</a>,
-<code><strong>create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file</code></strong>.</p>
+<code><strong>create the 'src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file</code></strong>.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
@@ -545,7 +548,7 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 </div>
 <div class="paragraph">
-<p>When pop-ups appear, <strong>confirm you want to expose the 8080 port</strong> by <code><strong>clicking on 'Open in Preview'</strong></code>.</p>
+<p>When pop-ups appear, <strong>confirm you want to expose the 8080 port</strong> by <code><strong>clicking on 'Open in New Tab'</strong></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -553,7 +556,7 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 </div>
 </div>
 <div class="paragraph">
-<p>Your browser will be redirect on <strong>your Catalog Service running inside your Workspace</strong>.</p>
+<p>Your browser will be directed to <strong>your Catalog Service running inside your Workspace</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -567,9 +570,6 @@ To open a '&gt;_ workshop_tools' terminal window, <code><strong>click on 'Termin
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>If you have the following result on the 'Preview' window, please <code><strong>click on the refresh icon of this same window</code></strong>,</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/che-preview-na.png" alt="Che - Preview Not Available" width="500">
