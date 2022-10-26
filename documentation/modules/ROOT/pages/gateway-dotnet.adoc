@@ -211,7 +211,9 @@ Your browser will be redirect on **your Gateway Service running on OpenShift**.
 
 image::gateway-service.png[Gateway Service,500]
 
-Then `*click on 'Test it'*`. You should have an array of json output like this but with many more products:
+Then `*click on 'Test it'*`. You should have an array of json output like this but with many more products.
+
+Look in the json to see how the *Gateway service* has combined the *product* information together with the *inventory* (quantity) information: 
 
 [source,json]
 ----

@@ -199,19 +199,27 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 --
 ====
 
-When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in Preview'*`.
+When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in New Tab'*`.
 
 image::che-open-8080-link.png[Che - Open Link, 500]
 
-Your browser will be redirect on **your Inventory Service running inside your Workspace**.
+Your browser will be directed to **your Inventory Service running inside your Workspace**.
 
 image::che-quarkus-preview.png[Che - Quarkus Preview, 500]
 
 [NOTE]
 ====
-If you have the following result on the 'Preview' window, please `*click on the refresh icon of this same window`*,
+If you have the following result in the browser window, please `*click on the browser Refresh icon`*,
 
 image::che-preview-na.png[Che - Preview Not Available, 500]
+====
+
+[NOTE]
+====
+Please don't close that Inventory output browser tab, you will need it for the next few steps of this lab.
+
+If by accident you close that browser tab then you should be able to reopen it from your browser history.
+It will likely be called *Inventory Service*
 ====
 
 `*Modify the 'src/main/resources/META-INF/resources/index.html' file*` as follows
@@ -387,7 +395,7 @@ The above REST service defines an endpoint that is accessible via **HTTP GET** a
 for example **/api/inventory/329299** with 
 the last path param being the product id which we want to check its inventory status.
 
-`*Refresh your browser and click on 'Test it'*`. You should have the following output:
+`*Refresh your Inventory output browser and click on 'Test it'*`. You should have the following output:
 
 [source,json]
 ----
@@ -639,4 +647,5 @@ Then `*click on 'Test it'*`. You should have the following output:
 {"itemId":"329299","quantity":35}
 ----
 
-Well done! You are ready to move on to the next lab.
+Well done! You are ready to move on to the next lab, but before you go, you probably should close those 
+Inventory Service output browser tabs.

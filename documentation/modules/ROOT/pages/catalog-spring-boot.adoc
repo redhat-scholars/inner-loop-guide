@@ -35,7 +35,9 @@ are already made by Spring Boot so that you can get started with minimum effort 
 == Spring Boot Maven Project 
 
 The **catalog-spring-boot** project has the following structure which shows the components of 
-the Spring Boot project laid out in different subdirectories according to Maven best practices:
+the Spring Boot project laid out in different subdirectories according to Maven best practices. 
+
+For the duration of this lab you will be working in the *catalog-spring-boot* directories shown below:
 
 image::springboot-catalog-project.png[Catalog Project,300]
 
@@ -43,7 +45,7 @@ This is a minimal Spring Boot project with support for RESTful services and Spri
 to a database. This project currently contains no code other than the main class, ***CatalogApplication***
 which is there to bootstrap the Spring Boot application.
 
-`*Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class*` in the **/projects/workshop/labs/catalog-spring-boot/src/main** directory:
+`*Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class*` in the **labs/catalog-spring-boot/src/main** directory:
 
 [source,java]
 ----
@@ -62,7 +64,7 @@ public class CatalogApplication {
 ----
 
 The database is configured using the Spring application configuration file which is located at 
-**/projects/workshop/labs/catalog-spring-boot/src/main/resources/application.properties**. Examine this file to see the database connection details 
+**src/main/resources/application.properties**. Examine this file to see the database connection details 
 and note that an in-memory H2 database is used in this lab for local development and will be replaced
 with a PostgreSQL database in the following labs. Be patient! More on that later.
 
@@ -74,7 +76,7 @@ image::springboot-catalog-arch.png[Catalog RESTful Service,640]
 [#create_domain_model]
 == Create the Domain Model
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
+In your {CHE_URL}[Workspace^, role='params-link'], `*create the 'src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
 
 [source,java,role=copypaste]
 ----
@@ -161,7 +163,7 @@ Create a new Java interface named **ProductRepository** in **com.redhat.cloudnat
 and extend https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html[CrudRepository^] interface in order to indicate to Spring that you want to expose a complete set of methods to manipulate the entity.
 
 In your {CHE_URL}[Workspace^, role='params-link'], 
-`*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file`*.
+`*create the 'src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file`*.
 
 [source,java,role=copypaste]
 ----
@@ -185,7 +187,7 @@ Spring Boot uses Spring Web MVC as the default RESTful stack in Spring applicati
 a new Java class named **CatalogController** in **com.redhat.cloudnative.catalog** package.
 
 In your {CHE_URL}[Workspace^, role='params-link'], 
-`*create the '/projects/workshop/labs/catalog-spring-boot/src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file`*.
+`*create the 'src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file`*.
 
 [source,java,role=copypaste]
 ----
@@ -282,17 +284,16 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 ====
 
 
-When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in Preview'*`.
+When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in New Tab'*`.
 
 image::che-open-9000-link.png[Che - Open Link, 500]
 
-Your browser will be redirect on **your Catalog Service running inside your Workspace**.
+Your browser will be directed to **your Catalog Service running inside your Workspace**.
 
 image::catalog-service.png[Catalog Service,500]
 
 [NOTE]
 ====
-If you have the following result on the 'Preview' window, please `*click on the refresh icon of this same window`*,
 
 image::che-preview-na.png[Che - Preview Not Available, 500]
 ====

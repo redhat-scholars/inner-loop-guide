@@ -138,7 +138,7 @@ Login successful.
 You have access to the following projects and can switch between them with 'odo project set <project-name>':
 
   * cn-project{USER_ID}
-    user{USER_ID}-devspaces
+    user{USER_ID} -devspaces
 
 Using project "cn-project{USER_ID}".
 

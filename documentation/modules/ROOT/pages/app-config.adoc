@@ -354,8 +354,8 @@ if enabled, triggers hot reloading of beans or Spring context when changes are d
 oc delete pod -l component=catalog -n my-project{USER_ID}
 ----
 
-When the Catalog container is ready, verify that the PostgreSQL database is being 
-used. Check the Catalog pod logs:
+When the Catalog container is *ready*, verify that the PostgreSQL database is being 
+used. Check the Catalog pod logs repeatedly:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
