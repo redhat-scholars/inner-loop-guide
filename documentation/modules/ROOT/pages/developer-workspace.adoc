@@ -76,9 +76,18 @@ Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let the magic happens..
 
 image::che-login.png[Che - Login, 500]
 
+Now there are a couple of steps before we can get started. Firstly you need to `*Trust*` the Git source you need to import for this workshop
+
+image::vscode-trust.png[Che - Workspace, 500]
+
+Then you need to accept or select the Visual Studio Code UI Settings. You can just click `*Mark Done*` to skip these.
+
+image::vscode-settings.png[Che - Workspace, 500]
+
+
 Once completed, you will have a fully functional Browser-based IDE within the source code already imported.
 
-image::che-workspace.png[Che - Workspace, 800]
+image::che-workspace.png[Che - Workspace, 700]
 
 [#what_is_odo]
 == What is OpenShift Do (odo)?
@@ -107,22 +116,22 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Login'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: OpenShift - Login'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 
 --
 ====
@@ -153,22 +162,22 @@ Then, create your **Development Environment**:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Create Development Project'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: OpenShift - Create Development Project'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 odo project create my-project{USER_ID}
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 

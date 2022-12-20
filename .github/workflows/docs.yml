@@ -3,10 +3,10 @@ name: docs
 on:
   push:
     branches:
-      - "5.1"
       - "6.0"
       - "6.1"
       - "6.2"
+      - "6.4"
 env:
   SITE_DIR: "gh-pages"
 jobs:

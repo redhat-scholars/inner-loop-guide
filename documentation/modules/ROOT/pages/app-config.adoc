@@ -249,7 +249,7 @@ The Inventory pod gets restarted automatically due to the configuration changes.
 and then **verify that the config map is in fact injected into the container by checking if the seed data is 
 loaded into the database**.
 
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----

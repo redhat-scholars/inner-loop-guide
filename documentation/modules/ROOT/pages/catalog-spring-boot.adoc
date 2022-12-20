@@ -235,15 +235,15 @@ In your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Build'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Build'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -251,7 +251,7 @@ cd /projects/workshop/labs/catalog-spring-boot
 mvn clean package -DskipTests
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
@@ -263,15 +263,15 @@ Once done, you can conviently run your service using **Spring Boot maven plugin*
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Run'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Run'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -279,7 +279,7 @@ cd /projects/workshop/labs/catalog-spring-boot
 mvn spring-boot:run
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
@@ -324,7 +324,7 @@ IDE Task::
 CLI::
 +
 --
-`*Enter Ctrl+c in the existing '>_ workshop_tools' terminal window*`
+`*Enter Ctrl+c in the existing terminal window*`
 --
 ====
 
@@ -342,31 +342,31 @@ by using the following inputs:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Create Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Create Component'*`
 
-Then, `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Push'*`
+Then, `*click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Push'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/catalog-spring-boot
 odo create --app coolstore --project my-project{USER_ID}
 ----
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 odo push
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 
 ====

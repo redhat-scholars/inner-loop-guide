@@ -126,15 +126,14 @@ Then, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 Once completed, verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
 In your {CHE_URL}[Workspace^, role='params-link'], 
-`*execute the following commands in the '>_ workshop_tools' terminal window*`
+`*execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 curl -w "\n" http://inventory-coolstore.my-project{USER_ID}.svc:8080/q/health
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
-
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 
 You should have the following output:
 
@@ -235,15 +234,15 @@ In your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Catalog - Generate Traffic'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Generate Traffic'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -261,7 +260,7 @@ do
 done
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
@@ -287,9 +286,9 @@ However, it may happen the new instances of the _Catalog Service_ will not be lo
 
 To avoid that, you need to add a **PodAffinity** configuration to ensure that all the instances of the _Catalog Service_ will always be co-located in the same node.
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Catalog - Add PodAffinity'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Add PodAffinity'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 
 ====
 
@@ -319,7 +318,7 @@ dependencies which is already done for the **Catalog Service**.
 
 Verify that the health endpoint works for the **Catalog Service** using `*curl*`.
 
-In your {CHE_URL}[Workspace^, role='params-link'], in the window called **'>_ workshop-tools terminal'**, 
+In your {CHE_URL}[Workspace^, role='params-link'], in the *terminal* window, 
 `*execute the following commands*`:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
@@ -518,11 +517,9 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |===
 
 Finally, let's configure probes for Gateway and Web Service.
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'Probes - Configure Gateway & Web'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: Probes - Configure Gateway & Web'*`
 
-image::che-runtask.png[Che - RunTask, 500]
-
-image::che-probes-configure-gateway-web.png[Che - Probes Configure Gateway & Web, 500]
+image::che-runtask.png[Che - RunTask, 600]
 
 [#monitoring_application_metrics]
 == Monitoring Applications Metrics

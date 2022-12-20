@@ -171,13 +171,13 @@ IDE Task::
 -- 
 `*Click on 'Terminal' -> 'Run Task...' and execute the 'Gateway' tasks in the correct order.*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -188,7 +188,7 @@ cd /projects/workshop/labs/gateway-dotnet
 
 IMPORTANT: Do not forget to **push** your new component
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 

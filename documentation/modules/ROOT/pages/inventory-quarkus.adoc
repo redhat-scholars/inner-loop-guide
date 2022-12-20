@@ -47,7 +47,7 @@ love and use wired on a https://quarkus.io/vision/standards[standard backbone^].
 The **inventory-quarkus** project has the following structure which shows the components of 
 the Quarkus project laid out in different subdirectories according to Maven best practices:
 
-image::inventory-quarkus-project.png[Inventory Project,300]
+image::inventory-quarkus-project.png[Inventory Project,500]
 
 The **'/projects/workshop/labs/inventory-quarkus'** folder contents:
 
@@ -178,15 +178,15 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Compile (Dev Mode)'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Compile (Dev Mode)'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -194,7 +194,7 @@ cd /projects/workshop/labs/inventory-quarkus
 mvn compile quarkus:dev -Ddebug=false
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 
 --
 ====
@@ -202,6 +202,10 @@ NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'O
 When pop-ups appear, *confirm you want to expose the 8080 port* by `*clicking on 'Open in New Tab'*`.
 
 image::che-open-8080-link.png[Che - Open Link, 500]
+
+You then have to confirm the access to external web sites:
+
+image::vscode-external-website.png[Che - Open Link, 500]
 
 Your browser will be directed to **your Inventory Service running inside your Workspace**.
 
@@ -421,7 +425,7 @@ IDE Task::
 CLI::
 +
 --
-`*Enter Ctrl+c in the existing '>_ workshop_tools' terminal window*`
+`*Enter Ctrl+c in the existing terminal window*`
 --
 ====
 
@@ -499,15 +503,15 @@ In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Build'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Build'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -515,7 +519,7 @@ cd /projects/workshop/labs/inventory-quarkus
 mvn clean package -DskipTests
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
@@ -527,15 +531,15 @@ Once this completes, **prepare** your application code/binary for OpenShift.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Create Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Create Component'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -544,7 +548,7 @@ odo create --app coolstore --project my-project{USER_ID} #<1>
 ----
 <1> Create a new component for the **coolstore** application in the **my-project{USER_ID}** project based on the configuration stored in the **'devfile.yaml'** file
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
@@ -574,15 +578,15 @@ Now, **push** the component to the OpenShift cluster:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'Inventory - Push'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Push'*`
 
-image::che-runtask.png[Che - RunTask, 500]
+image::che-runtask.png[Che - RunTask, 600]
 --
 
 CLI::
 +
 --
-`*Execute the following commands in the '>_ workshop_tools' terminal window*`
+`*Execute the following commands in the terminal window*`
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -590,7 +594,7 @@ cd /projects/workshop/labs/inventory-quarkus
 odo push
 ----
 
-NOTE: To open a '>_ workshop_tools' terminal window, `*click on 'Terminal' -> 'Open Terminal in specific container' ->  'workshop-tools'*`
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
