@@ -1,6 +1,7 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
+:NAMESPACE: user%USER_ID%-devspaces
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
@@ -58,12 +59,10 @@ to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
-// CRW
-//[link={CHE_URL}/dashboard/#/ide/user{USER_ID}-devspaces/wksp-end-to-end-dev]
-// Vscode IDE
-//[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml?che-editor=https://eclipse-che.github.io/che-plugin-registry/main/v3/plugins/che-incubator/che-code/insiders/devfile.yaml]
+// precreated workspace
+[link={CHE_URL}/dashboard/#/ide/{NAMESPACE}/wksp-end-to-end-dev]
 // Default IDE
-[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
+//[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.svg[Developer Workspace - Button, 300]
@@ -147,7 +146,7 @@ Login successful.
 You have access to the following projects and can switch between them with 'odo project set <project-name>':
 
   * cn-project{USER_ID}
-    user{USER_ID} -devspaces
+    {NAMESPACE}
 
 Using project "cn-project{USER_ID}".
 
