@@ -39,7 +39,7 @@ To achieve those core goals, https://access.redhat.com/products/red-hat-openshif
 [#get_your_developer_workspace]
 == Getting your Developer Workspace with a single click
 
-https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  will provide you an out-of-box 
+https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  will provide you an out-of-the-box 
 *Developer Workspace* with all the tools and the dependencies we need to do the job. **And with only one single click!**
 
 [NOTE]
@@ -70,7 +70,7 @@ Then `*Click 'Log in with OpenShift'*`
 
 image::login-with-openshift.png[OpenShift - Login, 500]
 
-Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*` and let the magic happens...
+Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*.`
 
 image::che-login.png[Che - Login, 500]
 
@@ -81,7 +81,6 @@ image::vscode-trust.png[Che - Workspace, 500]
 Then you need to accept or select the Visual Studio Code UI Settings. You can just click `*Mark Done*` to skip these.
 
 image::vscode-settings.png[Che - Workspace, 500]
-
 
 Once completed, you will have a fully functional Browser-based IDE within the source code already imported.
 
