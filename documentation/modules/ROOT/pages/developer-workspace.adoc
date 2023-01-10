@@ -1,10 +1,6 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:DEVSPACES: %2Ddevspaces
-:DEVNAMESPACE: user{USER_ID}{DEVSPACES}
-:DEVNAMESPACE2: user{USER_ID}%2Ddevspaces
-:DEVNAMESPACE3: user{USER_ID}devspaces
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
@@ -62,8 +58,8 @@ to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
-// precreated workspace
-[link={CHE_URL}/dashboard/#/ide/{DEVNAMESPACE}/wksp-end-to-end-dev]
+// precreated workspace, we escape the - to get the URL userX-devspaces to work around an antora bug
+[link={CHE_URL}/dashboard/#/ide/user{USER_ID}%2Ddevspaces/wksp-end-to-end-dev]
 // Default IDE
 //[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
 [window=_blank, align="center"]
@@ -148,10 +144,8 @@ Login successful.
 
 You have access to the following projects and can switch between them with 'odo project set <project-name>':
 
-  * cn-project{USER_ID}
-    {DEVNAMESPACE}
-    {DEVNAMESPACE2}
-    {DEVNAMESPACE3}
+  *cn-project{USER_ID}
+  user{USER_ID} -devspaces
 
 Using project "cn-project{USER_ID}".
 
