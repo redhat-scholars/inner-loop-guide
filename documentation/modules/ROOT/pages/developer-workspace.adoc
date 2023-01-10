@@ -1,7 +1,8 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:NAMESPACE: user%USER_ID%-devspaces
+:DEVSPACES: -devspaces
+:DEVNAMESPACE: user{USER_ID}{DEVSPACES}
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
@@ -60,7 +61,7 @@ to this file.
 
 `*Click on the 'Developer Workspace' button below*`
 // precreated workspace
-[link={CHE_URL}/dashboard/#/ide/{NAMESPACE}/wksp-end-to-end-dev]
+[link={CHE_URL}/dashboard/#/ide/{DEVNAMESPACE}/wksp-end-to-end-dev]
 // Default IDE
 //[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
 [window=_blank, align="center"]
@@ -146,7 +147,7 @@ Login successful.
 You have access to the following projects and can switch between them with 'odo project set <project-name>':
 
   * cn-project{USER_ID}
-    {NAMESPACE}
+    {DEVNAMESPACE}
 
 Using project "cn-project{USER_ID}".
 
