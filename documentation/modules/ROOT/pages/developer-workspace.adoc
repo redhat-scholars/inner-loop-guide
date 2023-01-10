@@ -1,8 +1,10 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:DEVSPACES: -devspaces
+:DEVSPACES: %2Ddevspaces
 :DEVNAMESPACE: user{USER_ID}{DEVSPACES}
+:DEVNAMESPACE2: user{USER_ID}%2Ddevspaces
+:DEVNAMESPACE3: user{USER_ID}devspaces
 :OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
 :OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
@@ -148,6 +150,8 @@ You have access to the following projects and can switch between them with 'odo 
 
   * cn-project{USER_ID}
     {DEVNAMESPACE}
+    {DEVNAMESPACE2}
+    {DEVNAMESPACE3}
 
 Using project "cn-project{USER_ID}".
 
