@@ -235,7 +235,7 @@ In your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Build'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Build'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -263,7 +263,7 @@ Once done, you can conviently run your service using **Spring Boot maven plugin*
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Run'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Run'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -342,9 +342,9 @@ by using the following inputs:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Create Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Create Component'*`
 
-Then, `*click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Push'*`
+Then, `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Push'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --

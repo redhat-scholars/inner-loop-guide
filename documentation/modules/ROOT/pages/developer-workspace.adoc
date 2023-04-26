@@ -113,7 +113,7 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: OpenShift - Login'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: OpenShift - Login'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -159,7 +159,7 @@ Then, create your **Development Environment**:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: OpenShift - Create Development Project'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: OpenShift - Create Development Project'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --

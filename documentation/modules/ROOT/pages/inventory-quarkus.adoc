@@ -178,7 +178,7 @@ First, in your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Compile (Dev Mode)'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Compile (Dev Mode)'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -503,7 +503,7 @@ In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Build'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Build'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -531,7 +531,7 @@ Once this completes, **prepare** your application code/binary for OpenShift.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Create Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Create Component'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -578,7 +578,7 @@ Now, **push** the component to the OpenShift cluster:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Inventory - Push'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Push'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --

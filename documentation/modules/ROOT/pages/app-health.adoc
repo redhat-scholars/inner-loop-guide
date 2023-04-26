@@ -234,7 +234,7 @@ In your {CHE_URL}[Workspace^, role='params-link'],
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Generate Traffic'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Generate Traffic'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -286,7 +286,7 @@ However, it may happen the new instances of the _Catalog Service_ will not be lo
 
 To avoid that, you need to add a **PodAffinity** configuration to ensure that all the instances of the _Catalog Service_ will always be co-located in the same node.
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: Catalog - Add PodAffinity'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Add PodAffinity'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
@@ -517,7 +517,7 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |===
 
 Finally, let's configure probes for Gateway and Web Service.
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'che: Probes - Configure Gateway & Web'*`
+In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Probes - Configure Gateway & Web'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
