@@ -86,21 +86,6 @@ Once completed, you will have a fully functional Browser-based IDE within the so
 
 image::che-workspace.png[Che - Workspace, 700]
 
-[#what_is_odo]
-== What is OpenShift Do (odo)?
-
-[sidebar]
-.OpenShift Do (odo)
---
-
-https://docs.openshift.com/container-platform/cli_reference/developer_cli_odo/understanding-odo.html[OpenShift Do (odo)^] is a CLI tool for creating applications on OpenShift and Kubernetes. 
-With https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^], you can write, build, deploy and debug applications on a cluster without the need to administer the cluster itself. 
-Creating deployment configurations, build configurations, service routes and other OpenShift or Kubernetes elements are all automated by https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^].
-
-Existing tools such as https://docs.openshift.com/container-platform/4.10/cli_reference/openshift_cli/getting-started-cli.html[OpenShift CLI (oc)^] are operations-focused and require a deep understanding of Kubernetes and OpenShift concepts. 
-https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^] abstracts away complex Kubernetes and OpenShift concepts allowing developers to focus on what is most important to them: **code**.
-
---
 
 [#connect_your_workspace]
 == Connect Your Workspace to Your OpenShift User
@@ -125,7 +110,7 @@ CLI::
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-odo login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
+oc login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
@@ -137,18 +122,14 @@ The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
-Connecting to the OpenShift cluster
-
 Login successful.
 
-You have access to the following projects and can switch between them with 'odo project set <project-name>':
+You have access to the following projects and can switch between them with 'oc project <projectname>':
 
-  *cn-project{USER_ID}
-  user{USER_ID} -devspaces
+  * cn-project{USER_ID}
+    user{USER_ID} -devspaces
 
-Using project "cn-project{USER_ID}".
-
-Welcome! See 'odo help' to get started.
+Using project "user{USER_ID} -devspaces".
 ----
 
 Then, create your **Development Environment**:
@@ -171,7 +152,7 @@ CLI::
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-odo project create my-project{USER_ID}
+oc new-project my-project{USER_ID}
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
@@ -182,8 +163,15 @@ The output should be as follows:
 
 [source,shell,subs="{markup-in-source}"]
 ----
- ✓  Project 'my-project{USER_ID}' is ready for use
- ✓  New project created and now using project: my-project{USER_ID}
+ Now using project "my-project{USER_ID}" on server "https://172.30.0.1:443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
 ----
 
 [#login_to_openshift]

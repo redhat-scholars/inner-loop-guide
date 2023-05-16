@@ -29,7 +29,7 @@ Furthermore, there are of course a category of issues that can't be resolved by 
 In those scenarios, OpenShift would remove the faulty container from the built-in load-balancer and send traffic 
 only to the healthy containers that remain.
 
-There are three types of health probes available in OpenShift: https://docs.openshift.com/container-platform/4.10/applications/application-health.html#application-health-about_application-health[startup, readiness and liveness probes^]. 
+There are three types of health probes available in OpenShift: https://docs.openshift.com/container-platform/4.12/applications/application-health.html#application-health-about_application-health[startup, readiness and liveness probes^]. 
 
 * **Startup probes** determine if the container in which it is scheduled is started
 * **Readiness probes** determine if the container in which it is scheduled is ready to service requests
@@ -41,7 +41,7 @@ order to remove downtime during deployments. A readiness health probe would sign
 traffic from the old version of the container to the new version so that the users don't get affected during 
 deployments.
 
-There are https://docs.openshift.com/container-platform/4.10/applications/application-health.html#application-health-about_types_application-health[three ways to define a health probe^] for a container:
+There are https://docs.openshift.com/container-platform/4.12/applications/application-health.html#application-health-about_types_application-health[three ways to define a health probe^] for a container:
 
 * **HTTP Checks:** healthiness of the container is determined based on the response code of an HTTP 
 endpoint. Anything between 200 and 399 is considered success. A HTTP check is ideal for applications 
@@ -60,48 +60,101 @@ start listening until initialization is complete.
 
 **What happens if you DON'T setup Liveness checks?**
 
-Imagine the _Inventory Service_ is stuck in a state (Deadlock, NullPointer exception, Out of Memory, ..)
-where it cannot perform as it should. Let's access inside the container and simulate this state.
+By default Pods are designed to be resilient, if a pod dies it will get restarted. Let's see
+this happening.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Resources' -> 'P inventory-coolstore-x-xxxxx'*`
 
 image::openshift-inventory-pod.png[OpenShift Inventory Pod, 700]
 
-Then, `*from the Terminal tab, run the following command*`:
-
-image::openshift-inventory-pkill.png[OpenShift Inventory pkill, 700]
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-pkill -STOP java
-----
-
-So **you just suspend the _Inventory Service_ java process** to simulate a stuck situation.
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Events' and 'Logs' tabs *` and notice that 
-**everything seems to be ok**.
-
-image::openshift-inventory-events.png[OpenShift Inventory Events, 500]
-
-image::openshift-inventory-logs.png[OpenShift Inventory Logs, 500]
-
-Now, `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
-**You don't have any response anymore** (as the process has been stopped previously).
-
-Often, applications need a restart to work correctly again.
-
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on 'Actions' -> 'Delete Pod' -> 'Delete'*`
 
 image::openshift-inventory-delete-pod.png[OpenShift Inventory Delete Pod, 700]
 
-A new instance (pod) will be redeployed. Once done, `*try to access again your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
+A new instance (pod) will be redeployed very quickly. Once done, `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
 
-**Now the _Inventory Service_ is working again.**
+However, imagine the _Inventory Service_ is stuck in a state (Stopped listening, Deadlock, etc)
+where it cannot perform as it should. In this case, the pod will not immeditaely die, it will be in a zombie state.
 
 To make your application more robust and reliable, a **Liveness check**  will be used to check 
 if the container itself has become unresponsive. If the liveness probe fails due to a condition such as a deadlock, 
 the container could automatically restart (based on its restart policy).
+
+[#understanding_readiness]
+==  Understanding Readiness Probes
+
+**What happens if you DON'T setup Readiness checks?**
+
+Let's imagine you have traffic coming into the _Inventory Service_. We can do that with simple script.
+
+In your {CHE_URL}[Workspace^, role='params-link'],
+
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Generate Traffic'*`
+
+image::che-runtask.png[Che - RunTask, 600]
+--
+
+CLI::
++
+--
+`*Execute the following commands in the terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+for i in {1..60}
+do 
+    if [ $(curl -s -w "%{http_code}" -o /dev/null http://inventory-coolstore.my-project{USER_ID}.svc:8080/api/inventory/329299) == "200" ]
+    then 
+        MSG="\033[0;32mThe request to Inventory Service has succeeded\033[0m"
+    else 
+        MSG="\033[0;31mERROR - The request to Inventory Service has failed\033[0m" 
+    fi
+    
+    echo -e $MSG
+    sleep 1s
+done
+----
+
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
+--
+====
+
+You should have the following output:
+
+image::che-inventory-traffic.png[Che - Catalog Traffic OK, 500]
+
+Now let's scale out your _Inventory Service_ to 2 instances. 
+
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Details' then click once on the up arrows 
+on the right side of the pod blue circle*`.
+
+image::openshift-scale-out-inventory.png[OpenShift Scale Out Catalog, 700]
+
+You should see the 2 instances (pods) running. 
+Now, `*switch back to your {CHE_URL}[Workspace^, role='params-link'] and check the output of the 'Inventory Generate Traffic' task*`.
+
+image::che-inventory-traffic-ko.png[Che - Catalog Traffic KO, 500]
+
+**Why do some requests failed? Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready.** 
+(The _Inventory Service_ takes a few seconds to start up). 
+
+In order to prevent this behaviour, a **Readiness check** is needed. It determines if the container is ready to service requests. 
+If the readiness probe fails, the endpoints controller ensures the container has its IP address removed from the endpoints of all services. 
+A readiness probe can be used to signal to the endpoints controller that even though a container is running, it should not receive any traffic from a proxy.
+
+First, scale down your _Inventory Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Details' then click once on the down arrows 
+on the right side of the pod blue circle*`.
+
+Now lets go fix some of these problems.
 
 [#configuring_liveness]
 == Configuring Liveness Probes
@@ -123,7 +176,40 @@ In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/worksho
 
 Then, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 
-Once completed, verify that the health endpoint works for the **Inventory Service** using `*curl*`
+[tabs, subs="attributes+,+macros"]
+====
+
+IDE Task::
++
+-- 
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Push Component'*`
+
+image::che-runtask.png[Che - RunTask, 600]
+--
+
+CLI::
++
+--
+`*Execute the following commands in the terminal window*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+cd /projects/workshop/labs/inventory-quarkus
+mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+----
+
+NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
+--
+====
+
+Wait till the build is complete then, `*Delete the Inventory Pod*` to make it starts again with the new code.
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+oc delete pod -l component=inventory -n my-project{USER_ID}
+----
+
+Once started, verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
 In your {CHE_URL}[Workspace^, role='params-link'], 
 `*execute the following commands in the terminal window*`
@@ -200,116 +286,71 @@ image::openshift-inventory-add-liveness-probe.png[Che - Inventory Add Liveness P
 |===
 
 Finally `*click on the check icon and the 'Add' button*`. OpenShift automates deployments using 
-https://docs.openshift.com/container-platform/4.10/welcome/index.html[deployment triggers^] 
+https://docs.openshift.com/container-platform/4.12/welcome/index.html[deployment triggers^] 
 that react to changes to the container image or configuration. 
 Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.
 
-[#testing_liveness]
-== Testing Liveness Probes
-
-As you did previously, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*access into the container and suspend the _Inventory Service_ java process*`.
-
-Then, still in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Events' tab*`.
-
-After 3 failed checks, OpenShift automatically restarts the container.
-
-image::openshift-inventory-events-failed-check.png[OpenShift Inventory Event Failed Check, 500]
-
-Now, `*access to your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
-The service is up and running again.
-
-[#understanding_readiness]
-==  Understanding Readiness Probes
-
-**What happens if you DON'T setup Readiness checks?**
-
-Let's imagine you have traffic to the _Catalog Service_
-
-In your {CHE_URL}[Workspace^, role='params-link'],
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Generate Traffic'*`
-
-image::che-runtask.png[Che - RunTask, 600]
---
-
-CLI::
-+
---
-`*Execute the following commands in the terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-for i in {1..60}
-do 
-    if [ $(curl -s -w "%{http_code}" -o /dev/null http://catalog-coolstore.my-project{USER_ID}.svc:8080/actuator/health) == "200" ]
-    then 
-        MSG="\033[0;32mThe request to Catalog Service has succeeded\033[0m"
-    else 
-        MSG="\033[0;31mERROR - The request to Catalog Service has failed\033[0m" 
-    fi
-    
-    echo -e $MSG
-    sleep 2s
-done
-----
-
-NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
---
-====
-
-You should have the following output:
-
-image::che-catalog-traffic-ok.png[Che - Catalog Traffic OK, 500]
-
-Now let's scale out your _Catalog Service_ to 2 instances. 
-
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the up arrows 
-on the right side of the pod blue circle*`.
-
-image::openshift-scale-out-catalog.png[OpenShift Scale Out Catalog, 700]
-
-[WARNING, subs="{markup-in-source}"]
-====
-**Only if you get an error when scaling out the _Catalog Service_. Otherwise, please skip this warning section.**
-
-
-Indeed, **odo** sets up its mechanisms with a ReadWriteOnce (RWO) Persistent Volume. It means only one node could read/write this volume at a time.
-However, it may happen the new instances of the _Catalog Service_ will not be located in the same node.
-
-To avoid that, you need to add a **PodAffinity** configuration to ensure that all the instances of the _Catalog Service_ will always be co-located in the same node.
-
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Add PodAffinity'*`
-
-image::che-runtask.png[Che - RunTask, 600]
-
-====
-
-You should see the 2 instances (pods) running. 
-Now, `*switch back to your {CHE_URL}[Workspace^, role='params-link'] and check the output of the 'Catalog Generate Traffic' task*`.
-
-image::che-catalog-traffic-ko.png[Che - Catalog Traffic KO, 500]
-
-**Why do some requests failed? Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready.** 
-(The _Catalog Service_ takes more than 20 seconds to start up). 
-
-In order to prevent this behaviour, a **Readiness check** is needed. It determines if the container in which it is scheduled is ready to service requests. 
-If the readiness probe fails a container, the endpoints controller ensures the container has its IP address removed from the endpoints of all services. 
-A readiness probe can be used to signal to the endpoints controller that even though a container is running, it should not receive any traffic from a proxy.
-
 [#configuring_readiness]
-==  Configuring Readiness Probes
+==  Configuring Inventory Readiness Probes
 
-First, scale down your _Catalog Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the down arrows 
-on the right side of the pod blue circle*`.
+Now repeat the same task for the *Inventory* service, but this time set the *Readiness* probes:
+
+.Readiness Probe
+[%header,cols=2*]
+|===
+|Parameter
+|Value
+
+|Type
+|HTTP GET
+
+|Use HTTPS
+|_Unchecked_
+
+|HTTP Headers
+|_Empty_
+
+|Path
+|/q/health/ready
+
+|Port
+|8080
+
+|Failure Threshold
+|3
+
+|Success Threshold
+|1
+
+|Initial Delay
+|0
+
+|Period
+|5
+
+|Timeout
+|1
+
+|===
+
+
+
+[#testing_Readiness]
+== Testing Inventory Readiness Probes
+
+Now let's test it as you did previously.
+`*Generate traffic to Inventory Service*` and then, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], 
+`*scale out the Inventory Service to 2 instances (pods)*`
+
+In your {CHE_URL}[Workspace^, role='params-link'], `*check the output of the 'Inventory Generate Traffic' task*`.
+
+You should not see any errors, this means that you can now **scale out your _Inventory Service_ with no downtime.**
+
+image::che-inventory-traffic.png[Che - Catalog Traffic OK, 500]
+
+Now scale down your _Inventory Service_ back to 1 instance. 
+
+== Catalog Services Probes
 
 http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready[Spring Boot Actuator^] is a 
 sub-project of Spring Boot which adds health and management HTTP endpoints to the application. Enabling Spring Boot 
@@ -333,73 +374,13 @@ You should have the following output:
 {"status":"UP"}
 ----
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Add Health Checks'*`.
+Liveness and Readiness health checks values have already been set for this service as part of the build and deploying 
+using JKube in combination with the Spring Boot actuator. 
 
-image::openshift-catalog-add-health-check.png[Che - Catalog Add Health Check, 700]
+You can check this in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Actions' -> 'Edit Health Checks'*`.
 
-Then `*click on 'Add Readiness Probe'*`
-
-image::openshift-catalog-add-readiness-probe.png[Che - Catalog Add Readiness Probe, 500]
-
-`*Enter the following information:*`
-
-.Readiness Probe
-[%header,cols=2*]
-|===
-|Parameter 
-|Value
-
-|Type
-|HTTP GET
-
-|Use HTTPS
-|_Unchecked_
-
-|HTTP Headers
-|_Empty_
-
-|Path
-|/actuator/health
-
-|Port
-|8080
-
-|Failure Threshold
-|3
-
-|Success Threshold
-|1
-
-|Initial Delay
-|0
-
-|Period
-|10
-
-|Timeout
-|1
-
-|===
-
-Finally `*click on the check icon and the 'Add' button*`. The Readiness check is now set up.
-
-[#testing_Readiness]
-== Testing Readiness Probes
-
-Now let's test it as you did previously.
-`*Generate traffic to  Catalog Service*` and then, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], 
-`*scale out the Catalog Service to 2 instances (pods)*`
-
-In your {CHE_URL}[Workspace^, role='params-link'], `*check the output of the 'Catalog Generate Traffic' task*`.
-
-You should not see any error means that you can now **scale out your _Catalog Service_ with no downtime.**
-
-image::che-catalog-traffic-ok.png[Che - Catalog Traffic OK, 500]
-
-Now scale down your _Catalog Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Topology' -> '(D) catalog-coolstore' -> 'Details' then click once on the down arrows 
-on the right side of the pod blue circle*`.
+image::openshift-catalog-edit-health.png[Che - Catalog Add Health Check, 700]
 
 [#understanding_startup]
 ==  Understanding Startup Probes
@@ -418,100 +399,79 @@ the fast response to stuck states.
 
 Now you understand and know how to configure Readiness, Liveness and Startup probes, let's confirm your expertise! 
 
-`*Configure the remaining Probes to for Inventory and Catalog Probes*` using the following information:
+`*Configure the remaining Probes for Inventory and Catalog*` using the following information:
 
-[%header,cols=3*]
+.Startup Probes
+[%header,cols=2*]
 |===
 |Inventory Service
-|Readiness
 |Startup
 
 |Type
 |HTTP GET
-|HTTP GET
 
 |Use HTTPS
-|_Unchecked_
 |_Unchecked_
 
 |HTTP Headers
 |_Empty_
-|_Empty_
 
 |Path
-|/q/health/ready
 |/q/health/live
 
 |Port
 |8080
-|8080
 
 |Failure Threshold
-|3
 |3
 
 |Success Threshold
 |1
-|1
 
 |Initial Delay
-|0
 |0
 
 |Period
 |5
-|5
 
 |Timeout
 |1
-|1
 
 |===
 
-[%header,cols=3*]
+[%header,cols=2*]
 |===
 |Catalog Service
-|Liveness
 |Startup
 
 |Type
 |HTTP GET
-|HTTP GET
 
 |Use HTTPS
-|_Unchecked_
 |_Unchecked_
 
 |HTTP Headers
 |_Empty_
-|_Empty_
 
 |Path
-|/actuator/health
 |/actuator/health
 
 |Port
 |8080
-|8080
 
 |Failure Threshold
-|3
 |15
 
 |Success Threshold
 |1
-|1
 
 |Initial Delay
 |0
-|0
 
 |Period
-|5
 |10
 
 |Timeout
-|1
 |1
 
 |===

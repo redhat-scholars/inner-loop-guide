@@ -40,11 +40,11 @@ The Web UI is built using Node.js for server-side JavaScript and AngularJS for c
 JavaScript. Let's deploy it on OpenShift using the certified Node.js container image available 
 in OpenShift. 
 
-In the previous labs, you only used the S2I builder image for 
-injecting developer source code inside a running container.
-In this lab, you will fully use OpenShift https://docs.openshift.com/container-platform/4.10/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^].
+In this lab, again you will use OpenShift https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^].
 OpenShift will obtain the application code directly from the source repository then build and deploy a 
 container image of it.
+
+For a change, rather than using the CLI option you will start this process from the web console.
 
 In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on '+Add' and select 'Import from Git'*`
@@ -76,9 +76,6 @@ Then, enter the following information:
 
 |Name
 |**web-coolstore**
-
-|Resources
-|**Deployment**
 
 |Create a route to the application
 |**_Checked_**

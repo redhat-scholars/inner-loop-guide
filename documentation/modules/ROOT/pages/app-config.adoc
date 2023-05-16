@@ -27,7 +27,7 @@ configuration files and command line arguments. These configuration artifacts
 should be externalized from the application and the container image content in
 order to keep the image portable across environments.
 
-OpenShift provides a mechanism called https://docs.openshift.com/container-platform/4.10/welcome/index.html[**ConfigMaps**^] 
+OpenShift provides a mechanism called https://docs.openshift.com/container-platform/4.12/welcome/index.html[**ConfigMaps**^] 
 in order to externalize configurations 
 from the applications deployed within containers and provide them to the containers 
 in a unified way as files and environment variables. OpenShift also offers a way to 
@@ -53,12 +53,12 @@ a persistent storage that survives the container itself. You can deploy database
 regardless of what happens to the container itself, the data is safe and can be used by the next 
 database container.
 
-Let's create a https://docs.openshift.com/container-platform/4.10/welcome/index.html[MariaDB database^] 
+Let's create a https://docs.openshift.com/container-platform/4.12/welcome/index.html[MariaDB database^] 
 for the **Inventory Service** using the MariaDB template that is provided out-of-the-box:
 
 [TIP]
 ====
-https://docs.openshift.com/container-platform/4.10/openshift_images/using-templates.html[OpenShift Templates^] use YAML/JSON to compose 
+https://docs.openshift.com/container-platform/4.12/openshift_images/using-templates.html[OpenShift Templates^] use YAML/JSON to compose 
 multiple containers and their configurations as a list of objects to be created and deployed at once, 
 making it simple to re-create complex deployments by just deploying a single template. Templates can 
 be parameterized to get input for fields like service names and generate values for fields like passwords.
@@ -222,7 +222,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
 
-Then `*replace the content*` with the following input:
+Then switch to `*YAML view*` and  `*replace the content*` with the following input:
 
 [source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
@@ -243,10 +243,16 @@ data:
 
 `*Click on the 'Create' button*`.
 
-Once the source code is updated and the ConfigMap is created, `*build and push the updated Inventory Service to the OpenShift cluster*`.
+Once the source code is updated and the ConfigMap is created, build and `*Push the updated Inventory Service to the OpenShift cluster*`.
 
-The Inventory pod gets restarted automatically due to the configuration changes. Wait till it's ready, 
-and then **verify that the config map is in fact injected into the container by checking if the seed data is 
+Wait till the build is complete then, `*Delete the Inventory Pod*` to make it start again and look for the config maps:
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+oc delete pod -l component=inventory -n my-project{USER_ID}
+----
+
+Now **verify that the config map is in fact injected into the container by checking if the seed data is 
 loaded into the database**.
 
 `*Execute the following commands in the terminal window*`
@@ -286,7 +292,7 @@ You should have the following output:
 +--------+----------+
 ----
 
-`*Finally, exit from inside the database container*`:
+*Finally*, `*VERY IMPORTANT, exit*` *from inside the database container*:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -319,7 +325,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
 
-Then `*replace the content*` with the following input:
+Then switch to `*YAML view*` and `*replace the content*` with the following input:
 
 [source,yaml,subs="{markup-in-source}",role=copypaste]
 ----
@@ -359,7 +365,7 @@ used. Check the Catalog pod logs repeatedly:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc logs -c application deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
+oc logs deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
 ----
 
 You should have the following output:
@@ -406,7 +412,7 @@ You should have the following output:
   (9 rows)
 ----
 
-`*Finally, exit from inside the database container*`:
+*Finally*, `*VERY IMPORTANT, exit*` *from inside the database container*:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -427,7 +433,7 @@ credentials to simplify the steps; however, for production environments, you sho
 secure way to handle sensitive data.
 
 Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is 
-called https://docs.openshift.com/container-platform/4.10/welcome/index.html[**Secrets**^]. Secret objects act and are used 
+called https://docs.openshift.com/container-platform/4.12/welcome/index.html[**Secrets**^]. Secret objects act and are used 
 similarly to config maps however with the difference that they are encrypted as they travel over the wire 
 and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into 
 containers as environment variables or files on the filesystem using a temporary file-storage 

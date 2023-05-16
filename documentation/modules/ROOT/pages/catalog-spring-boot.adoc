@@ -39,7 +39,7 @@ the Spring Boot project laid out in different subdirectories according to Maven 
 
 For the duration of this lab you will be working in the *catalog-spring-boot* directories shown below:
 
-image::springboot-catalog-project.png[Catalog Project,300]
+image::springboot-catalog-project.png[Catalog Project,400]
 
 This is a minimal Spring Boot project with support for RESTful services and Spring Data with JPA for connecting
 to a database. This project currently contains no code other than the main class, ***CatalogApplication***
@@ -331,10 +331,87 @@ CLI::
 [#deploy_on_openshift]
 == Deploy on OpenShift
 
-It’s time to deploy your service on OpenShift. 
+It’s time to deploy your service on OpenShift. This time we are going to use JKube to define the
+build and deployment process on OpenShift, but ultimately we end up using OpenShift source-to-image (S2I)
+to package up the .jar file into a container and run it.
 
-As you did previously, `*create a new Component, a New URL then Push it in to the OpenShift cluster*`
-by using the following inputs:
+This time the configuration for the Catalog application is present in its *pom.xml* file for the JKube plugin.
+
+[source,xml]
+----
+<plugin>
+  <groupId>org.eclipse.jkube</groupId>
+  <artifactId>openshift-maven-plugin</artifactId>
+  <version>1.11.0</version>
+  <configuration>
+    <source>11</source>
+    <target>11</target>
+    <enricher>
+      <includes>
+      <include>jkube-openshift-deploymentconfig</include>
+      </includes>          
+      <config>
+        <jkube-openshift-deploymentconfig>
+          <jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>
+        </jkube-openshift-deploymentconfig>
+      </config>
+      <config>
+        <jkube-openshift-route>
+          <generateRoute>true</generateRoute>
+        </jkube-openshift-route>
+      </config>
+    </enricher>
+    <resources>
+    
+      <controller>
+        <controllerName>catalog-coolstore</controllerName>
+      </controller>
+
+      <services>
+        <service>
+        <name>catlog-coolstore</name>
+        </service>
+      </services>
+
+        <labels>
+            <all>
+                <property>
+                    <name>app.kubernetes.io/part-of</name>
+                    <value>coolstore</value>
+                </property>
+                <property>
+                    <name>component</name>
+                    <value>catalog</value>
+                </property>
+                <property>
+                    <name>app.kubernetes.io/instance</name>
+                    <value>catalog</value>
+                </property>                  
+            </all>
+            <deployment>
+                <property>
+                    <name>app.openshift.io/runtime</name>
+                    <value>spring</value>
+                </property>
+                <property>
+                    <name>app.kubernetes.io/name</name>
+                    <value>catalog</value>
+                </property>
+            </deployment>
+        </labels>
+    </resources>
+  </configuration>
+----
+
+As you did previously, `*create a new Component the OpenShift cluster*`
+
+As before, by watching the log output you should see this activity:
+
+* Push the jar file to OpenShift
+* Create OpenShift deployment components
+* Build a container using a Dockerfile/Containerfile
+* Push this containr image to the OpenShift registry
+* Deploying the application to OpenShift
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -342,9 +419,7 @@ by using the following inputs:
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Create Component'*`
-
-Then, `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Push'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Catalog - Deploy Component'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -357,13 +432,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/catalog-spring-boot
-odo create --app coolstore --project my-project{USER_ID}
-----
-`*Execute the following commands in the terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-odo push
+mvn package -DskipTests oc:build oc:resource oc:apply
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
@@ -387,7 +456,7 @@ Your browser will be redirect on **your Catalog Service running on OpenShift**.
 
 image::catalog-service.png[Catalog Service,500]
 
-Then `*click on 'Test it'*`. You should have a similar array of json output:
+Then `*click on 'Test it'*`. You should have many lines of output similar to this array of json:
 
 [source,json]
 ----

@@ -213,14 +213,14 @@ image::che-quarkus-preview.png[Che - Quarkus Preview, 500]
 
 [NOTE]
 ====
-If you have the following result in the browser window, please `*click on the browser Refresh icon`*,
+If you see the following result in the browser window, please `*click on the browser Refresh icon`*,
 
 image::che-preview-na.png[Che - Preview Not Available, 500]
 ====
 
 [NOTE]
 ====
-Please don't close that Inventory output browser tab, you will need it for the next few steps of this lab.
+Please *don't close* that Inventory output browser tab, you will need it for the next few steps of this lab.
 
 If by accident you close that browser tab then you should be able to reopen it from your browser history.
 It will likely be called *Inventory Service*
@@ -323,7 +323,7 @@ public class Inventory implements Serializable {
 
 [NOTE]
 ====
-You don't need to press a save button! Che automatically saves the changes made to the files.
+You don't need to press a save button! VS Code automatically saves the changes made to the files.
 ====
 
 `*Update the 'src/main/resources/application.properties' file*` to match with the following content:
@@ -340,10 +340,26 @@ quarkus.hibernate-orm.sql-load-script=import.sql
 quarkus.http.host=0.0.0.0
 
 %prod.quarkus.package.type=uber-jar#<1> 
+
+# these value are required for a quarkus openshift plugin build<2>
+%prod.quarkus.openshift.route.expose=true
+%prod.quarkus.openshift.deployment-kind=Deployment
+%prod.quarkus.openshift.labels.app=coolstore
+%prod.quarkus.openshift.labels.component=inventory
+%prod.quarkus.openshift.part-of=coolstore
+%prod.quarkus.container-image.name=inventory-coolstore
+%prod.quarkus.openshift.name=inventory-coolstore
+%prod.quarkus.openshift.ports."http".host-port=8080
+%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest
+%prod.quarkus.openshift.add-version-to-label-selectors=false
+%prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory
+
 ----
 <1> An **uber-jar** contains all the dependencies required packaged in the **jar** to enable running the 
 application with **java -jar**. By default, in Quarkus, the generation of the uber-jar is disabled. With the
 **%prod** prefix, this option is only activated when building the jar intended for deployments.
+<2> There is a lot of additional configuration here to allow the quarkus-maven-plugin to build 
+and then deploy this application to OpenShift - but more of that later
 
 `*Update the 'src/main/resources/import.sql' file`* as follows:
 [source,sql,role=copypaste]
@@ -430,69 +446,34 @@ CLI::
 ====
 
 [#deploy_on_openshift]
-== Deploy on OpenShift using Odo
+== Deploy on OpenShift using the Quarkus-maven-plugin and Source to Image (S2I)
 
-It’s time to use https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[odo^] 
-to deploy your service on OpenShift using
-https://docs.openshift.com/container-platform/4.10/cli_reference/developer_cli_odo/understanding-odo.html[devfiles^].
+It’s time to deploy your service on OpenShift using all that information in the *src/main/resources/application.properties* file
+we saw earlier.
 
-In this section you will locally build a .jar file, then *create* the odo component
-and finally *push* it to OpenShift. The details of what and how this is deployed is defined below in the *devfile*. 
-This can be found in the Inventory project 
-*/projects/workshop/labs/inventory-quarkus/devfile.yaml*. 
+In this section you will locally build a .jar file, then *create* the OpenShift build and deployment components
+and *push* the .jar it to OpenShift. The OpenShift https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^] builder will then package the .jar file into a container
+and run it.
 
-The big benefit of using *odo* is the ease of defining what to deploy and the speed it can get 
-your application running in OpenShift. The devfile is stored in source control alongside the code, 
-so ready for all of the team to use.
-
-
-[source,yaml,subs="{markup-in-source}"]
+[source,java,subs="{markup-in-source}"]
 ----
-schemaVersion: 2.0.0 
-metadata:
-  description: Quarkus with Java
-  displayName: Quarkus Java
-  icon: https://design.jboss.org/quarkus/logo/final/SVG/quarkus_icon_rgb_default.svg
-  language: java <1>
-  name: inventory <2>
-  projectType: quarkus
-  tags:
-  - Java
-  - Quarkus
-  version: 1.1.0
-  website: https://quarkus.io
-commands:
-- exec: 
-    commandLine: java -jar target/*.jar
-    component: application
-    group:
-      isDefault: true
-      kind: run <3>
-    workingDir: /projects
-  id: dev-run
-components:
-- container:
-    endpoints: <4>
-    - exposure: public
-      name: inventory
-      path: /
-      protocol: http
-      targetPort: 8080
-    image: registry.redhat.io/openjdk/openjdk-11-rhel7:latest <5>
-    memoryLimit: 1024Mi
-  name: application
+# these value are required for a quarkus openshift plugin build
+%prod.quarkus.openshift.route.expose=true<4>
+%prod.quarkus.openshift.deployment-kind=Deployment
+%prod.quarkus.openshift.labels.app=coolstore
+%prod.quarkus.openshift.labels.component=inventory<1>
+%prod.quarkus.openshift.part-of=coolstore
+%prod.quarkus.container-image.name=inventory-coolstore
+%prod.quarkus.openshift.name=inventory-coolstore
+%prod.quarkus.openshift.ports."http".host-port=8080<2>
+%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest<3>
+%prod.quarkus.openshift.add-version-to-label-selectors=false
+%prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory<1>
 ----
-<1> This is a *Java* component
-<2> Its called *inventory*
-<3> The *odo push* command copies all the Inventory project files to OpenShift 
-and then executes any *jar* file it finds in the */projects/target* directory there
-<4> The service port 8080 will be used for HTTP and there will be public access
-<5> This is the base container image used to run the application
-
-NOTE: You might have noticed that both OpenShift Dev Spaces and odo use yaml devfiles. One describes 
-the attributes of IDE environment and tools while the other describes the build and deployment 
-attributes of an individual component.
-
+<1> Its called *inventory*
+<2> The service port 8080 will be used for HTTP
+<3> This is the base container image used to run the application
+<4> The application has an external route for public access
 
 
 In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
@@ -523,7 +504,14 @@ NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
-Once this completes, **prepare** your application code/binary for OpenShift.
+Once this completes, **prepare** and **push** your application code/binary for OpenShift. By watching the 
+log output you should see this activity:
+
+* Push the jar file to OpenShift
+* Create OpenShift deployment components
+* Build a container using a Dockerfile/Containerfile
+* Push this containr image to the OpenShift registry
+* Deploying the application to OpenShift
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -531,7 +519,7 @@ Once this completes, **prepare** your application code/binary for OpenShift.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Create Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Deploy Component'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -544,88 +532,73 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-odo create --app coolstore --project my-project{USER_ID} #<1>
+mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
 ----
-<1> Create a new component for the **coolstore** application in the **my-project{USER_ID}** project based on the configuration stored in the **'devfile.yaml'** file
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
-The output should be as follows:
+The output should be like this:
 
 [source,shell,subs="{markup-in-source}"]
 ----
-Devfile Object Validation
- ✓  Creating a devfile component from devfile path: /projects/workshop/labs/inventory-quarkus/devfile.yaml [62322ns]
-Validation
- ✓  Validating if devfile name is correct [41841ns]
+[INFO] [io.quarkus...] STEP 3/9: ENV OPENSHIFT_BUILD_NAME="inventory-coolstore-1"     OPENSHIFT_BUILD_NAMESPACE="my-project2"
+[INFO] [io.quarkus....] STEP 4/9: USER root
+[INFO] [io.quarkus....] STEP 5/9: COPY upload/src /tmp/src
+[INFO] [io.quarkus....] STEP 6/9: RUN chown -R 185:0 /tmp/src
+[INFO] [io.quarkus....] STEP 7/9: USER 185
+[INFO] [io.quarkus....] STEP 8/9: RUN /usr/local/s2i/assemble
+[INFO] [io.quarkus....] INFO S2I source build with plain binaries detected
+[INFO] [io.quarkus....] INFO Copying binaries from /tmp/src to /deployments ...
+[INFO] [io.quarkus....] inventory-quarkus-1.0.0-SNAPSHOT-runner.jar
+[INFO] [io.quarkus....] INFO Cleaning up source directory (/tmp/src)
+[INFO] [io.quarkus....] STEP 9/9: CMD /usr/local/s2i/run
+[INFO] [io.quarkus....] COMMIT temp.builder.openshift.io/my-project2/inventory-coolstore-1:2c2db764
+[INFO] [io.quarkus....] Getting image source signatures
+[INFO] [io.quarkus....] Copying blob sha256:34e7a2afb94b75550a0e9b8685ba4edb5472647c08cbc61fa571a4f6d53dc107
+[INFO] [io.quarkus....] Copying blob sha256:7374092de81bae754b7b497cce97eac8bea3f66b6419a74c7e317c3ebb89fc6f
+[INFO] [io.quarkus....] Copying blob sha256:e8e3263c81c9ab945feeb803074259cac5da121ef39cfa0f7b56dd4e92573d25
+[INFO] [io.quarkus....] Copying config sha256:ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....] Writing manifest to image destination
+[INFO] [io.quarkus....] Storing signatures
+[INFO] [io.quarkus....] --> ab940dedfdc
+[INFO] [io.quarkus....] Successfully tagged temp.builder.openshift.io/my-project2/inventory-coolstore-1:2c2db764
+[INFO] [io.quarkus....] ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....] 
+[INFO] [io.quarkus....] Pushing image image-registry.openshift-image-registry.svc:5000/my-project2/inventory-coolstore:1.0.0-SNAPSHOT ...
+[INFO] [io.quarkus....] Getting image source signatures
+[INFO] [io.quarkus....] Copying blob sha256:e8e3263c81c9ab945feeb803074259cac5da121ef39cfa0f7b56dd4e92573d25
+[INFO] [io.quarkus....] Copying blob sha256:3840fdda5b0af7d845fe3540f5ca8b094b19617bcd7837701270a6cefc68811f
+[INFO] [io.quarkus....] Copying blob sha256:ced05cc33f5c3ba56c84452cadaa23602c29aa67649488da2bfc7664bb2f830e
+[INFO] [io.quarkus....] Copying config sha256:ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....] Writing manifest to image destination
+[INFO] [io.quarkus....] Storing signatures
+[INFO] [io.quarkus....] Successfully pushed image-registry.openshift-image-registry.svc:5000/my-project2/inventory-coolstore@sha256:be5b8ccdf161f4166ea0d040fcc78e1a09f8f20b16eb1b0d12ce288cd70c0643
+[INFO] [io.quarkus....] Push successful
+[INFO] [io.quarkus....] Deploying to openshift server: https://172.30.0.1:443/ in namespace: my-project2.
+[INFO] [io.quarkus....] Applied: ImageStream inventory-coolstore.
+[INFO] [io.quarkus....] Applied: Deployment inventory-coolstore.
+[INFO] [io.quarkus....] Applied: ImageStream openjdk-11-rhel7.
+[INFO] [io.quarkus....] Applied: Service inventory-coolstore.
+[INFO] [io.quarkus....] Applied: Route inventory-coolstore.
+[INFO] [io.quarkus....] Applied: BuildConfig inventory-coolstore.
+[INFO] [io.quarkus....] The deployed application can be accessed at: http://inventory-coolstore-my-project2.apps.cluster-qpgl9.qpgl9.sandbox2688.opentlc.com
+[INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 170564ms
 
-Please use \`odo push` command to create the component with source deployed
+....
+
+[INFO] No primary artifact to install, installing attached artifacts instead.
+[INFO] Installing /projects/workshop/labs/inventory-quarkus/pom.xml to /home/developer/.m2/repository/com/redhat/cloudnative/inventory-quarkus/1.0.0-SNAPSHOT/inventory-quarkus-1.0.0-SNAPSHOT.pom
+[INFO] Installing /projects/workshop/labs/inventory-quarkus/target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar to /home/developer/.m2/repository/com/redhat/cloudnative/inventory-quarkus/1.0.0-SNAPSHOT/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:01 min
+[INFO] Finished at: 2023-05-11T15:19:06Z
+[INFO] ------------------------------------------------------------------------
 ---- 
 
-[NOTE]
-====
-You have just provided the OpenShift destination project and application name. These are stored locally
-in the configuration file **'env.yaml'** which can be found here (**/projects/workshop/labs/inventory-quarkus/.odo/env**)
-====
-
-Now, **push** the component to the OpenShift cluster:
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Push'*`
-
-image::che-runtask.png[Che - RunTask, 600]
---
-
-CLI::
-+
---
-`*Execute the following commands in the terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-cd /projects/workshop/labs/inventory-quarkus
-odo push
-----
-
-NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
---
-====
-
-You should get as output:
-
-[source,shell,subs="{markup-in-source}"]
-----
-Validation
- ✓  Validating the devfile [89483ns]
-
-Creating Services for component inventory
- ✓  Services are in sync with the cluster, no changes are required
-
-Creating Kubernetes resources for component inventory
- ✓  Waiting for component to start [28s]
- ✓  Links are in sync with the cluster, no changes are required
- ✓  Waiting for component to start [3ms]
-
-Applying URL changes
- ✓  URL inventory: http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}/ created
-
-Syncing to component inventory
- ✓  Checking files for pushing [7ms]
- ✓  Syncing files to the component [682ms]
-
-Executing devfile commands for component inventory
- ✓  Executing dev-run command "java -jar target/*.jar" [1s]
-
-Pushing devfile component "inventory"
- ✓  Changes successfully pushed to component
-----
 
 Once this completes, your application should be up and running. 
 
@@ -652,4 +625,4 @@ Then `*click on 'Test it'*`. You should have the following output:
 ----
 
 Well done! You are ready to move on to the next lab, but before you go, you probably should close those 
-Inventory Service output browser tabs.
+Inventory Service output browser tabs from the beginning of this chapter.
