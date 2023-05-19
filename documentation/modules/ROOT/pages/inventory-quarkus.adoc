@@ -110,6 +110,11 @@ If we focus on the dependencies section, you can see the following extensions:
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-jdbc-h2</artifactId>
     </dependency>
+    <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-openshift</artifactId>
+    </dependency>  
+
 ----
 
 .Quarkus Extensions
@@ -126,6 +131,9 @@ If we focus on the dependencies section, you can see the following extensions:
 
 |https://quarkus.io/guides/datasource-guide#h2[Datasources (H2)^]
 |Using datasources is the main way of obtaining connections to a database.
+
+|https://quarkus.io/guides/deploying-to-openshift[OpenShift^]
+|Understands how to deploy an application to OpenShift
 
 |===
 
@@ -350,7 +358,6 @@ quarkus.http.host=0.0.0.0
 %prod.quarkus.container-image.name=inventory-coolstore
 %prod.quarkus.openshift.name=inventory-coolstore
 %prod.quarkus.openshift.ports."http".host-port=8080
-%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest
 %prod.quarkus.openshift.add-version-to-label-selectors=false
 %prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory
 
@@ -446,14 +453,15 @@ CLI::
 ====
 
 [#deploy_on_openshift]
-== Deploy on OpenShift using the Quarkus-maven-plugin and Source to Image (S2I)
+== Deploy on OpenShift
 
-It’s time to deploy your service on OpenShift using all that information in the *src/main/resources/application.properties* file
+Using the Quarkus-maven-plugin, the Quarkus https://quarkus.io/guides/deploying-to-openshift[OpenShift Extension] and Source to Image (S2I)
+it’s time to deploy your service on OpenShift using all that information in the *src/main/resources/application.properties* file
 we saw earlier.
 
 In this section you will locally build a .jar file, then *create* the OpenShift build and deployment components
-and *push* the .jar it to OpenShift. The OpenShift https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^] builder will then package the .jar file into a container
-and run it.
+and *push* the .jar it to OpenShift. The OpenShift https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^] builder 
+will then package the .jar file into a container and run it.
 
 [source,java,subs="{markup-in-source}"]
 ----
@@ -466,7 +474,6 @@ and run it.
 %prod.quarkus.container-image.name=inventory-coolstore
 %prod.quarkus.openshift.name=inventory-coolstore
 %prod.quarkus.openshift.ports."http".host-port=8080<2>
-%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest<3>
 %prod.quarkus.openshift.add-version-to-label-selectors=false
 %prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory<1>
 ----

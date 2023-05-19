@@ -111,6 +111,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 oc login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
+oc project my-project{USER_ID} 2> /dev/null
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`

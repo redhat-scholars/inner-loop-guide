@@ -375,7 +375,7 @@ You should have the following output:
 ----
 
 Liveness and Readiness health checks values have already been set for this service as part of the build and deploying 
-using JKube in combination with the Spring Boot actuator. 
+using Eclipse JKube in combination with the Spring Boot actuator. 
 
 You can check this in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
 `*click on 'Topology' -> '(D) catalog-coolstore' -> 'Actions' -> 'Edit Health Checks'*`.

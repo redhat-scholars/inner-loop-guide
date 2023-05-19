@@ -331,7 +331,7 @@ CLI::
 [#deploy_on_openshift]
 == Deploy on OpenShift
 
-It’s time to deploy your service on OpenShift. This time we are going to use JKube to define the
+It’s time to deploy your service on OpenShift. This time we are going to use Eclipse https://www.eclipse.org/jkube/docs/openshift-maven-plugin/[JKube] to define the
 build and deployment process on OpenShift, but ultimately we end up using OpenShift source-to-image (S2I)
 to package up the .jar file into a container and run it.
 
