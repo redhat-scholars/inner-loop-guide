@@ -307,6 +307,10 @@ of the application and also providing the development mode.</p>
     &lt;dependency&gt;
         &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
         &lt;artifactId&gt;quarkus-jdbc-h2&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-openshift&lt;/artifactId&gt;
     &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -334,6 +338,10 @@ of the application and also providing the development mode.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/datasource-guide#h2" target="_blank" rel="noopener">Datasources (H2)</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Using datasources is the main way of obtaining connections to a database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/deploying-to-openshift" target="_blank" rel="noopener">OpenShift</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Understands how to deploy an application to OpenShift</p></td>
 </tr>
 </tbody>
 </table>
@@ -659,7 +667,6 @@ quarkus.http.host=0.0.0.0
 %prod.quarkus.container-image.name=inventory-coolstore
 %prod.quarkus.openshift.name=inventory-coolstore
 %prod.quarkus.openshift.ports."http".host-port=8080
-%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest
 %prod.quarkus.openshift.add-version-to-label-selectors=false
 %prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory</code></pre>
 </div>
@@ -786,16 +793,17 @@ the last path param being the product id which we want to check its inventory st
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift using the Quarkus-maven-plugin and Source to Image (S2I)</h2>
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It’s time to deploy your service on OpenShift using all that information in the <strong>src/main/resources/application.properties</strong> file
+<p>Using the Quarkus-maven-plugin, the Quarkus <a href="https://quarkus.io/guides/deploying-to-openshift">OpenShift Extension</a> and Source to Image (S2I)
+it’s time to deploy your service on OpenShift using all that information in the <strong>src/main/resources/application.properties</strong> file
 we saw earlier.</p>
 </div>
 <div class="paragraph">
 <p>In this section you will locally build a .jar file, then <strong>create</strong> the OpenShift build and deployment components
-and <strong>push</strong> the .jar it to OpenShift. The OpenShift <a href="https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a> builder will then package the .jar file into a container
-and run it.</p>
+and <strong>push</strong> the .jar it to OpenShift. The OpenShift <a href="https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a> builder
+will then package the .jar file into a container and run it.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -808,7 +816,6 @@ and run it.</p>
 %prod.quarkus.container-image.name=inventory-coolstore
 %prod.quarkus.openshift.name=inventory-coolstore
 %prod.quarkus.openshift.ports."http".host-port=8080<i class="conum" data-value="2"></i><b>(2)</b>
-%prod.quarkus.s2i.base-jvm-image=registry.redhat.io/openjdk/openjdk-11-rhel7:latest<i class="conum" data-value="3"></i><b>(3)</b>
 %prod.quarkus.openshift.add-version-to-label-selectors=false
 %prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory<i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>

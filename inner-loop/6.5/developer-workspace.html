@@ -340,7 +340,8 @@ to this file.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc login $(oc whoami --show-server) --username=user%USER_ID% --password=%OPENSHIFT_PASSWORD% --insecure-skip-tls-verify</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc login $(oc whoami --show-server) --username=user%USER_ID% --password=%OPENSHIFT_PASSWORD% --insecure-skip-tls-verify
+oc project my-project%USER_ID% 2&gt; /dev/null</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
