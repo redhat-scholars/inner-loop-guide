@@ -2,7 +2,7 @@
 :markup-in-source: verbatim,attributes,quotes
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
 
 = Create Catalog Service with Spring Boot
 :navtitle: Create Catalog Service with Spring Boot
@@ -410,7 +410,7 @@ As before, by watching the log output you should see this activity:
 * Push the jar file to OpenShift
 * Create OpenShift deployment components
 * Build a container using a Dockerfile/Containerfile
-* Push this containr image to the OpenShift registry
+* Push this container image to the OpenShift registry
 * Deploying the application to OpenShift
 
 [tabs, subs="attributes+,+macros"]

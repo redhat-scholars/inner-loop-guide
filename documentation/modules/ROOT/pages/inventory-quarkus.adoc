@@ -1,8 +1,7 @@
 :markup-in-source: verbatim,attributes,quotes
-:APPS_HOSTNAME_SUFFIX: %APPS_HOSTNAME_SUFFIX%
 :CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
 :USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}?view=graph
+:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
 
 = Create Inventory Service with Quarkus
 :navtitle: Create Inventory Service with Quarkus
@@ -59,8 +58,8 @@ The **'/projects/workshop/labs/inventory-quarkus'** folder contents:
 * the application configuration file
 
 `*Look at the pom.xml*`. You will find the import of the Quarkus BOM, allowing you to omit the version 
-on the different Quarkus dependencies. In addition, you can see the **quarkus-maven-plugin** responsible of the packaging 
-of the application and also providing the development mode.
+on the different Quarkus dependencies. In addition, you can see the **quarkus-maven-plugin** responsible for the packaging 
+of the application and also providing the *development mode* feature.
 
 [source,xml]
 ----
@@ -267,7 +266,7 @@ It will likely be called *Inventory Service*
 </html>
 ----
 
-`*Refresh your browser*` and you should have the following content **without rebuilding your JAR file**
+`*Refresh your browser*` (for the *Inventory Service* tab just opened) and you should see the new HTML content **without rebuilding your JAR file**
 
 image::inventory-quarkus.png[Inventory Quarkus,500]
 
@@ -466,7 +465,7 @@ will then package the .jar file into a container and run it.
 [source,java,subs="{markup-in-source}"]
 ----
 # these value are required for a quarkus openshift plugin build
-%prod.quarkus.openshift.route.expose=true<4>
+%prod.quarkus.openshift.route.expose=true<3>
 %prod.quarkus.openshift.deployment-kind=Deployment
 %prod.quarkus.openshift.labels.app=coolstore
 %prod.quarkus.openshift.labels.component=inventory<1>
@@ -479,8 +478,7 @@ will then package the .jar file into a container and run it.
 ----
 <1> Its called *inventory*
 <2> The service port 8080 will be used for HTTP
-<3> This is the base container image used to run the application
-<4> The application has an external route for public access
+<3> The application has an external route for public access
 
 
 In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
@@ -511,13 +509,13 @@ NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
-Once this completes, **prepare** and **push** your application code/binary for OpenShift. By watching the 
+Once this completes, **deploy** your application code/binary for OpenShift. By watching the 
 log output you should see this activity:
 
 * Push the jar file to OpenShift
 * Create OpenShift deployment components
 * Build a container using a Dockerfile/Containerfile
-* Push this containr image to the OpenShift registry
+* Push this container image to the OpenShift registry
 * Deploying the application to OpenShift
 
 [tabs, subs="attributes+,+macros"]
@@ -615,7 +613,7 @@ in one or more pods. A pod is the unit of runtime deployment and consists of the
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role=params-link], from the **Developer view**,
 `*click on the 'Open URL' icon of the Inventory Service*`
 
 image::openshift-inventory-topology.png[OpenShift - Inventory Topology, 700]
