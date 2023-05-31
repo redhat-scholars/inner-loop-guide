@@ -256,8 +256,8 @@ the Quarkus project laid out in different subdirectories according to Maven best
 </div>
 <div class="paragraph">
 <p><code><strong>Look at the pom.xml</strong></code>. You will find the import of the Quarkus BOM, allowing you to omit the version
-on the different Quarkus dependencies. In addition, you can see the <strong>quarkus-maven-plugin</strong> responsible of the packaging
-of the application and also providing the development mode.</p>
+on the different Quarkus dependencies. In addition, you can see the <strong>quarkus-maven-plugin</strong> responsible for the packaging
+of the application and also providing the <strong>development mode</strong> feature.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -546,7 +546,7 @@ It will likely be called <strong>Inventory Service</strong></p>
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Refresh your browser</strong></code> and you should have the following content <strong>without rebuilding your JAR file</strong></p>
+<p><code><strong>Refresh your browser</strong></code> (for the <strong>Inventory Service</strong> tab just opened) and you should see the new HTML content <strong>without rebuilding your JAR file</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -808,7 +808,7 @@ will then package the .jar file into a container and run it.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"># these value are required for a quarkus openshift plugin build
-%prod.quarkus.openshift.route.expose=true<i class="conum" data-value="4"></i><b>(4)</b>
+%prod.quarkus.openshift.route.expose=true<i class="conum" data-value="3"></i><b>(3)</b>
 %prod.quarkus.openshift.deployment-kind=Deployment
 %prod.quarkus.openshift.labels.app=coolstore
 %prod.quarkus.openshift.labels.component=inventory<i class="conum" data-value="1"></i><b>(1)</b>
@@ -832,10 +832,6 @@ will then package the .jar file into a container and run it.</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is the base container image used to run the application</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>The application has an external route for public access</td>
 </tr>
 </table>
@@ -891,7 +887,7 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 </div>
 </div>
 <div class="paragraph">
-<p>Once this completes, <strong>prepare</strong> and <strong>push</strong> your application code/binary for OpenShift. By watching the
+<p>Once this completes, <strong>deploy</strong> your application code/binary for OpenShift. By watching the
 log output you should see this activity:</p>
 </div>
 <div class="ulist">
@@ -906,7 +902,7 @@ log output you should see this activity:</p>
 <p>Build a container using a Dockerfile/Containerfile</p>
 </li>
 <li>
-<p>Push this containr image to the OpenShift registry</p>
+<p>Push this container image to the OpenShift registry</p>
 </li>
 <li>
 <p>Deploying the application to OpenShift</p>
@@ -1034,7 +1030,7 @@ in one or more pods. A pod is the unit of runtime deployment and consists of the
 <h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%?view=graph" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
+<p>In the <a href="https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project%USER_ID%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>, from the <strong>Developer view</strong>,
 <code><strong>click on the 'Open URL' icon of the Inventory Service</strong></code></p>
 </div>
 <div class="imageblock">
