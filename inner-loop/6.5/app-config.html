@@ -520,7 +520,7 @@ data:
 <p><code><strong>Click on the 'Create' button</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>Once the source code is updated and the ConfigMap is created, build and <code><strong>Push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
+<p>Once the source code is updated and the ConfigMap is created, as before, build and <code><strong>Push the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
 </div>
 <div class="paragraph">
 <p>Wait till the build is complete then, <code><strong>Delete the Inventory Pod</strong></code> to make it start again and look for the config maps:</p>
@@ -675,7 +675,7 @@ if enabled, triggers hot reloading of beans or Spring context when changes are d
 </div>
 </div>
 <div class="paragraph">
-<p>When the Catalog container is <strong>ready</strong>, verify that the PostgreSQL database is being
+<p>When the Catalog container is <strong>ready</strong> (wait at least 30 seconds), verify that the PostgreSQL database is being
 used. Check the Catalog pod logs repeatedly:</p>
 </div>
 <div class="listingblock copypaste">
@@ -842,7 +842,7 @@ display in the web console.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Your browser will be redirect to <strong>your Web Service running on OpenShift</strong>.
+<p>Your browser will be redirected to <strong>your Web Service running on OpenShift</strong>.
 You should be able to see the CoolStore application with all products and their inventory status.</p>
 </div>
 <div class="imageblock">

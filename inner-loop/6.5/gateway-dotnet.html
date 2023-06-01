@@ -354,11 +354,11 @@ public class ProductsController : ControllerBase
 <p>It’s time to build and deploy your service on OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>create a new Component and then Push it in to the OpenShift cluster</strong></code></p>
+<p>As you did previously for the Inventory and Catalog services in the earlier chapters, you need to <code><strong>build a new Component and then Deploy it in to the OpenShift cluster</strong></code></p>
 </div>
 <div class="paragraph">
-<p>This time we are still going to use OpenShift S2I, but we will invoke it using the OpenShift CLI (oc commands).
-Also, we will use S2I to compile the application and create the .NET artefact .dll before creating a container.</p>
+<p>We are still going to use OpenShift S2I, but this time we will invoke it using the OpenShift CLI (oc commands).
+We will also get S2I to compile the application, create the .NET artefact .dll and then create a container.</p>
 </div>
 <div class="paragraph">
 <p>There are two ways to get OpenShift S2I to build from source:</p>
@@ -468,7 +468,7 @@ containers for the project.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Your browser will be redirect on <strong>your Gateway Service running on OpenShift</strong>.</p>
+<p>Your browser will be redirected to <strong>your Gateway Service running on OpenShift</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -542,7 +542,7 @@ the application starts. You can see the code that consumes those variables below
 </div>
 </div>
 <div class="paragraph">
-<p>You can try this for yourself in the Gateway service pod by <code><strong>selecting the Gateway
+<p>You can try this simple name service discovery for yourself in the Gateway service pod by <code><strong>selecting the Gateway
 service and then the running Pod.</strong></code></p>
 </div>
 <div class="imageblock">
