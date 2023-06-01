@@ -161,10 +161,10 @@ The location or binding to the existing Catalog and Inventory REST services is d
 
 It’s time to build and deploy your service on OpenShift. 
 
-As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*create a new Component and then Push it in to the OpenShift cluster*`
+As you did previously for the Inventory and Catalog services in the earlier chapters, you need to `*build a new Component and then Deploy it in to the OpenShift cluster*`
 
-This time we are still going to use OpenShift S2I, but we will invoke it using the OpenShift CLI (oc commands). 
-Also, we will use S2I to compile the application and create the .NET artefact .dll before creating a container.
+We are still going to use OpenShift S2I, but this time we will invoke it using the OpenShift CLI (oc commands). 
+We will also get S2I to compile the application, create the .NET artefact .dll and then create a container.
 
 There are two ways to get OpenShift S2I to build from source:
 
@@ -226,7 +226,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from
 
 image::openshift-gateway-topology.png[OpenShift - Gateway Topology, 700]
 
-Your browser will be redirect on **your Gateway Service running on OpenShift**.
+Your browser will be redirected to **your Gateway Service running on OpenShift**.
 
 image::gateway-service.png[Gateway Service,500]
 
@@ -289,7 +289,7 @@ public static void Config()
     }
 }
 ----
-You can try this for yourself in the Gateway service pod by `*selecting the Gateway
+You can try this simple name service discovery for yourself in the Gateway service pod by `*selecting the Gateway
 service and then the running Pod.*`
 
 image::openshift-gateway-pod.png[Gateway Service,500]

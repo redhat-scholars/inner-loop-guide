@@ -618,7 +618,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role=params-link], from t
 
 image::openshift-inventory-topology.png[OpenShift - Inventory Topology, 700]
 
-Your browser will be redirect on **your Inventory Service running on OpenShift**.
+Your browser will be redirected to **your Inventory Service running on OpenShift**.
 
 image::inventory-quarkus.png[Inventory Quarkus,500]
 

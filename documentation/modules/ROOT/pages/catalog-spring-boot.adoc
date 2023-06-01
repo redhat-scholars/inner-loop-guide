@@ -45,7 +45,7 @@ This is a minimal Spring Boot project with support for RESTful services and Spri
 to a database. This project currently contains no code other than the main class, ***CatalogApplication***
 which is there to bootstrap the Spring Boot application.
 
-`*Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class*` in the **labs/catalog-spring-boot/src/main** directory:
+`*Examine 'com.redhat.cloudnative.catalog.CatalogApplication' class*` in the **labs/catalog-spring-boot/src/main/java** directory:
 
 [source,java]
 ----
@@ -403,7 +403,7 @@ This time the configuration for the Catalog application is present in its *pom.x
   </configuration>
 ----
 
-As you did previously, `*create a new Component the OpenShift cluster*`
+As you did previously, `*Deploy a new Component the OpenShift cluster*`
 
 As before, by watching the log output you should see this activity:
 
@@ -452,7 +452,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from
 
 image::openshift-catalog-topology.png[OpenShift - Catalog Topology, 700]
 
-Your browser will be redirect on **your Catalog Service running on OpenShift**.
+Your browser will be redirected to **your Catalog Service running on OpenShift**.
 
 image::catalog-service.png[Catalog Service,500]
 

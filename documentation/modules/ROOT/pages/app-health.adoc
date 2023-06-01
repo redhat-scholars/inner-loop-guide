@@ -72,7 +72,7 @@ In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*cl
 
 image::openshift-inventory-delete-pod.png[OpenShift Inventory Delete Pod, 700]
 
-A new instance (pod) will be redeployed very quickly. Once done, `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
+A new instance (pod) will be redeployed very quickly. Once deleted `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
 
 However, imagine the _Inventory Service_ is stuck in a state (Stopped listening, Deadlock, etc)
 where it cannot perform as it should. In this case, the pod will not immeditaely die, it will be in a zombie state.
@@ -202,17 +202,17 @@ NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
-Wait till the build is complete then, `*Delete the Inventory Pod*` to make it starts again with the new code.
+Wait till the build is complete then, `*Delete the Inventory Pod*` to make it start again with the new code.
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 oc delete pod -l component=inventory -n my-project{USER_ID}
 ----
 
-Once started, verify that the health endpoint works for the **Inventory Service** using `*curl*`
+It will take a few seconds to retstart, then verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
 In your {CHE_URL}[Workspace^, role='params-link'], 
-`*execute the following commands in the terminal window*`
+`*execute the following commands in the terminal window*` - it may take a few attempts while the pod restarts.
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
@@ -285,10 +285,7 @@ image::openshift-inventory-add-liveness-probe.png[Che - Inventory Add Liveness P
 
 |===
 
-Finally `*click on the check icon and the 'Add' button*`. OpenShift automates deployments using 
-https://docs.openshift.com/container-platform/4.12/welcome/index.html[deployment triggers^] 
-that react to changes to the container image or configuration. 
-Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.
+Finally `*click on the check icon*`. But don't click *Add* yet, we have more probes to configure.
 
 [#configuring_readiness]
 ==  Configuring Inventory Readiness Probes
@@ -333,6 +330,10 @@ Now repeat the same task for the *Inventory* service, but this time set the *Rea
 
 |===
 
+Finally `*click on the check icon and the 'Add' button*`. OpenShift automates deployments using 
+https://docs.openshift.com/container-platform/4.12/welcome/index.html[deployment triggers^] 
+that react to changes to the container image or configuration. 
+Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.
 
 
 [#testing_Readiness]
