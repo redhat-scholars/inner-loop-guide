@@ -195,7 +195,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q)
+mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q) -Dquarkus.kubernetes-client.trust-certs=true
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
