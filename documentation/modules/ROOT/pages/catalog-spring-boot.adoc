@@ -1,8 +1,6 @@
 
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 
 = Create Catalog Service with Spring Boot
 :navtitle: Create Catalog Service with Spring Boot
@@ -76,7 +74,7 @@ image::springboot-catalog-arch.png[Catalog RESTful Service,640]
 [#create_domain_model]
 == Create the Domain Model
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*create the 'src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
+In your Workspace, `*create the 'src/main/java/com/redhat/cloudnative/catalog/Product.java' file`* 
 
 [source,java,role=copypaste]
 ----
@@ -162,7 +160,7 @@ configures the required persistent technologies and provides an implementation f
 Create a new Java interface named **ProductRepository** in **com.redhat.cloudnative.catalog** package 
 and extend https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html[CrudRepository^] interface in order to indicate to Spring that you want to expose a complete set of methods to manipulate the entity.
 
-In your {CHE_URL}[Workspace^, role='params-link'], 
+In your Workspace, 
 `*create the 'src/main/java/com/redhat/cloudnative/catalog/ProductRepository.java' file`*.
 
 [source,java,role=copypaste]
@@ -186,7 +184,7 @@ let's create a RESTful service that returns the list of products.
 Spring Boot uses Spring Web MVC as the default RESTful stack in Spring applications. Create 
 a new Java class named **CatalogController** in **com.redhat.cloudnative.catalog** package.
 
-In your {CHE_URL}[Workspace^, role='params-link'], 
+In your Workspace, 
 `*create the 'src/main/java/com/redhat/cloudnative/catalog/CatalogController.java' file`*.
 
 [source,java,role=copypaste]
@@ -227,7 +225,7 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-spring
 <3> the **repository** attribute on the controller class is used to retrieve the list of products from the databases. 
 
 Now, let's build and package the updated **Catalog Service** using Maven.
-In your {CHE_URL}[Workspace^, role='params-link'],
+In your Workspace,
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -310,7 +308,7 @@ The REST API returned a JSON object representing the product list. Congratulatio
 [#stop_service]
 == Stop the Service
 
-In your {CHE_URL}[Workspace^, role='params-link'], stop the service as follows:
+In your Workspace, stop the service as follows:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -447,7 +445,7 @@ containers for the project.
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the OpenShift Web Console, from the **Developer view**,
 `*click on the 'Open URL' icon of the Catalog Service*`
 
 image::openshift-catalog-topology.png[OpenShift - Catalog Topology, 700]

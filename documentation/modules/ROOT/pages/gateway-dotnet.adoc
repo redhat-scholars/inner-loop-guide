@@ -1,7 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 
 = Create Gateway Service with .NET
 :navtitle: Create Gateway Service with .NET
@@ -221,7 +219,7 @@ containers for the project.
 
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the OpenShift Web Console, from the **Developer view**,
 `*click on the 'Open URL' icon of the Gateway Service*`
 
 image::openshift-gateway-topology.png[OpenShift - Gateway Topology, 700]

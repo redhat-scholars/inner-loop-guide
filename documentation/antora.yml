@@ -1,6 +1,6 @@
 name: inner-loop
-title: OpenShift Inner Loop Workshop
-version: "6.5"
+title: OpenShift Inner Loop Workshop for Developer Sandbox
+version: "rhds"
 nav:
   - modules/ROOT/nav.adoc
 

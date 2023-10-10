@@ -1,18 +1,52 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_PASSWORD: %OPENSHIFT_PASSWORD%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
-:WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
-:WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
+:PROJECT: %PROJECT%
+:WORKSHOP_GIT_REF: rhds
 
 = Get your Developer Workspace
 :navtitle: Get your Developer Workspace
 
-_10 MINUTE EXERCISE_
+_20 MINUTE EXERCISE_
 
-In this lab you will learn about providing your Developer Workspace with a Kubernetes-native development platform 
-and getting familiar with the OpenShift CLI and OpenShift Web Console.
+n this lab you will learn about getting your Red hat Developer Sandbox with a Kubernetes-native development platform 
+and getting familiar with the OpenShift CLI, OpenShift Web Console and Dev Spaces.
+
+
+[#get_your_developer_sandbox]
+== Getting your Developer Sandbox for OpenShift
+
+The Red Hat Developer Sandbox is a great way to 
+access Red Hat’s products and technologies without setup or configuration, and start developing quicker than ever 
+before with our new sandbox environments for Red Hat OpenShift and Dev Spaces IDE. Try your hand at the technologies 
+with our library of activities as well.
+
+[window=_blank, align="center"]
+image::sandbox-portal.png[Developer Sandbox, 600]
+
+The https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift^] is a Kubernetes-native environment for developing 
+software for OpenShift. You need to follow the *Get Started* process on this web site first, before attempting any of the workshop steps below.
+
+After verifying your email or mobile number you should you get access to your sandbox and be given a link to a login page to access the OpenShift Web Console, which looks like this:- 
+
+[window=_blank, align="center"]
+image::sandbox-login.png[Developer Sandbox, 500]
+
+Then `*login* with DevSandbox`
+
+[#login_to_openshift]
+== Using the OpenShift Developer Console
+
+OpenShift ships with a web-based console that will allow users to
+perform various tasks via a browser.
+
+After you have authenticated to the web console, you will be presented with a
+list of projects that your user has permission to work with. 
+
+`*Select the 'Developer View' then your "-dev" project*` to be taken to the project overview page
+which will list all of the routes, services, deployments, and pods that you have
+running as part of your project. There's maybe nothing much there now, but that's about to
+change.
+
+image::openshift-empty-project.png[OpenShift - Empty Project, 700]
 
 [#what_is_codeready_workspaces]
 == What is Red Hat OpenShift Dev Spaces?
@@ -37,10 +71,10 @@ To achieve those core goals, https://access.redhat.com/products/red-hat-openshif
 ****
 
 [#get_your_developer_workspace]
-== Getting your Developer Workspace with a single click
+== Getting your Developer Workspace
 
 https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^]  will provide you an out-of-the-box 
-*Developer Workspace* with all the tools and the dependencies we need to do the job. **And with only one single click!**
+*Developer Workspace* with all the tools and the dependencies we need to do the job.
 
 [NOTE]
 .Devfile
@@ -53,26 +87,37 @@ https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Sp
 * tools that you need
 * application runtime definition
 
-Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/6.5/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
+Providing a https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/blob/rhds/devfile.yaml[devfile.yaml^] file inside a Git source repository signals to https://access.redhat.com/products/red-hat-openshift-dev-spaces[OpenShift Dev Spaces^] to configure the project and runtime according 
 to this file.
 ====
 
-`*Click on the 'Developer Workspace' button below*`
-// precreated workspace, we escape the - to get the URL userX-devspaces to work around an antora bug
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}%2Ddevspaces/wksp-end-to-end-dev]
-// Default IDE
-//[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
+*OpenShift Dev Spaces* is integrated into the Developer Sandbox and is available from the OpenShift Web Console using the *apps* button in the header bar.
+
 [window=_blank, align="center"]
 [role='params-link']
-image::developer-workspace-button.svg[Developer Workspace - Button, 300]
+image::launch-crw.png[Launch Dev Spaces, 300]
 
 Then `*Click 'Log in with OpenShift'*`
 
 image::login-with-openshift.png[OpenShift - Login, 500]
 
-Then `*login as user{USER_ID}/{OPENSHIFT_PASSWORD}*.`
+Then `*login* with DevSandbox`
 
-image::che-login.png[Che - Login, 500]
+image::sandbox-login.png[Developer Sandbox, 400]
+
+When Dev Spaces starts, enter the following URL into the *Git Repo URL* field to load the devfile and click `*Create & Open*`
+
+[source,shell,subs="{markup-in-source}",role=copypaste]
+----
+https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/rhds/devfile.yaml
+---- 
+
+[window=_blank, align="center"]
+image::enter-devfile.png[Launching the workspace , 500]
+
+Once completed, you will have a fully functional Browser-based IDE within the source code already imported and 
+the IDE configured for our workshop tasks.
+
 
 Now there are a couple of steps before we can get started. Firstly you need to `*Trust*` the Git source you need to import for this workshop
 
@@ -86,117 +131,56 @@ Once completed, you will have a fully functional Browser-based IDE within the so
 
 image::che-workspace.png[Che - Workspace, 700]
 
-
-[#connect_your_workspace]
-== Connect Your Workspace to Your OpenShift User
-
-First, in your {CHE_URL}[Workspace^, role='params-link'],
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: OpenShift - Login'*`
-
-image::che-runtask.png[Che - RunTask, 600]
---
-
-CLI::
-+
---
-`*Execute the following commands in the terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-oc login $(oc whoami --show-server) --username=user{USER_ID} --password={OPENSHIFT_PASSWORD} --insecure-skip-tls-verify
-oc project my-project{USER_ID} 2> /dev/null
-----
-
-NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
-
---
-====
-
-The output should be as follows:
-
-[source,shell,subs="{markup-in-source}"]
-----
-Login successful.
-
-You have access to the following projects and can switch between them with 'oc project <projectname>':
-
-  * cn-project{USER_ID}
-    user{USER_ID} -devspaces
-
-Using project "user{USER_ID} -devspaces".
-----
-
-Then, create your **Development Environment**:
-
-[tabs, subs="attributes+,+macros"]
-====
-
-IDE Task::
-+
--- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: OpenShift - Create Development Project'*`
-
-image::che-runtask.png[Che - RunTask, 600]
---
-
-CLI::
-+
---
-`*Execute the following commands in the terminal window*`
-
-[source,shell,subs="{markup-in-source}",role=copypaste]
-----
-oc new-project my-project{USER_ID}
-----
-
-NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
---
-====
-
-The output should be as follows:
-
-[source,shell,subs="{markup-in-source}"]
-----
- Now using project "my-project{USER_ID}" on server "https://172.30.0.1:443".
-
-You can add applications to this project with the 'new-app' command. For example, try:
-
-    oc new-app rails-postgresql-example
-
-to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
-
-    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname
-----
-
-[#login_to_openshift]
-== Log in to the OpenShift Developer Console
-
-OpenShift ships with a web-based console that will allow users to
-perform various tasks via a browser.
-
-`*Click on the 'Developer Console' button below*`
-
-[link={OPENSHIFT_CONSOLE_URL}]
-[window=_blank, align="center"]
-[role='params-link']
-image::developer-console-button.png[Developer Workspace - Button, 300]
-
-`*Enter your username and password (user{USER_ID}/{OPENSHIFT_PASSWORD})*` and 
-then log in. After you have authenticated to the web console, you will be presented with a
-list of projects that your user has permission to work with. 
-
-`*Select the 'Developer View' then your 'my-project{USER_ID}'*` to be taken to the project overview page
-which will list all of the routes, services, deployments, and pods that you have
-running as part of your project. There's nothing there now, but that's about to
-change.
-
-image::openshift-empty-project.png[OpenShift - Empty Project, 700]
-
 Now you are ready to get started with the labs!
+
+[#trouble_shooting_tips]
+== Sandbox Workshop Trouble Shooting Tips
+
+We hope you have a good workshop, but here are a few tips and tricks that may make it run better.
+
+=== What browser should I be using for this workshop?
+
+The whole workshop runs in your browser environment which allows us to support a variety of developer platforms from Windows, Mac and Linux.
+We find the best browser for this workshop is Firefox, Chrome or Edge browser.
+
+=== Workshop stops or freezes
+
+Everything here is browser based so might have the odd glitch. The easiets resoltuion to a number of problems is just to refresh the browser, 
+or worse case restart the browser. All you work is stored centrally on our services so you should juts be able to re-attach 
+to your workspace and OpenShift project and continue.
+
+=== Having problems seeing OpenShift Dev Spaces
+
+Dev Spaces use secure web sockets for its UI. If you are having problems try this test web site https://websocketstest.com. 
+All results should be green to proceed. If this test fails please check that you a direct access to the internet, i.e disable any VPNs
+web proxies etc. If you are using a corporate device you may need to switch to a personal computer.
+
+=== I've been timed out or need to restart the workspace
+
+The workshop will take a few hours to complete all the way through, if you use the system continuosly throughout 
+that period you will not see this issue.
+
+*Timed-out and wont reconnect*
+Workspaces idel after about 10 minutes of non-use. Sometimes the workspace can be started with the in browser buttons, but if not
+close your Dev Spaces browser session and use the instruction on this page to *Get Your Developer Workspace*. Then *Open* your existing 
+workspace rather than Creating a new one.
+
+*Re-login to the Red Hat* Your authentication token will need to refresh for security so expect to have login again. 
+You will need you Sandbox credentials daily but they should be cached.
+
+*Re-login from Dev Spaces* Dev Spaces can perform local tasks like builds, but usually needs to connect to your OpenShift project
+to deploy. If your deployment tasks fail chance are you need to re-login to Dev Spaces. Shutdown your Dev Spaces browser session 
+and use the instruction on this page to *Get Your Developer Workspace*
+
+=== My OpenShift pods have all gone to idle
+
+If left for a long period (like overnight) your OpenShift project will idle down all its running pods. On the 
+Topology display they will show up with white rings. Normally these rings would be dark blue if the pod is active. You need to select each 
+*Deployment* or *DeploymentConfig* that you have created in turn by clicking on the circle, then on the pop-out select the blue (D) or (DC) text. 
+Then using the circle marked as *Scaled to 0* increase the Pod count up to 1. The ring should turn blue after about 30 seconds.
+
+=== How do I cleanup after running this workshop? ===
+
+There is a terminal task included in the workshop to delete all the elements of the Inner Loop workshop.
+
+`*Click on 'Terminal' -> 'Run Task...' ->  'OpenShift - Cleanup'*`

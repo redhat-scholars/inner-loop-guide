@@ -1,4 +1,4 @@
-= Welcome to Inner Loop Workshop
+= Welcome to Inner Loop Workshop for Developer Sandbox
 :page-layout: home
 :!sectids:
 

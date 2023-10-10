@@ -1,8 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:APPS_HOSTNAME_SUFFIX: %APPS_HOSTNAME_SUFFIX%
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 
 = Monitor Application Health
 :navtitle: Monitor Application Health
@@ -63,16 +60,16 @@ start listening until initialization is complete.
 By default Pods are designed to be resilient, if a pod dies it will get restarted. Let's see
 this happening.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the OpenShift Web Console, from the **Developer view**,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Resources' -> 'P inventory-coolstore-x-xxxxx'*`
 
 image::openshift-inventory-pod.png[OpenShift Inventory Pod, 700]
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on 'Actions' -> 'Delete Pod' -> 'Delete'*`
+In the OpenShift Web Console, `*click on 'Actions' -> 'Delete Pod' -> 'Delete'*`
 
 image::openshift-inventory-delete-pod.png[OpenShift Inventory Delete Pod, 700]
 
-A new instance (pod) will be redeployed very quickly. Once deleted `*try to access your http://inventory-coolstore-my-project{USER_ID}.{APPS_HOSTNAME_SUFFIX}[Inventory Service^, role='params-link']*`.
+A new instance (pod) will be redeployed very quickly. Once deleted `*try to access your Inventory application test page*`.
 
 However, imagine the _Inventory Service_ is stuck in a state (Stopped listening, Deadlock, etc)
 where it cannot perform as it should. In this case, the pod will not immeditaely die, it will be in a zombie state.
@@ -88,7 +85,7 @@ the container could automatically restart (based on its restart policy).
 
 Let's imagine you have traffic coming into the _Inventory Service_. We can do that with simple script.
 
-In your {CHE_URL}[Workspace^, role='params-link'],
+In your Workspace,
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -110,7 +107,7 @@ CLI::
 ----
 for i in {1..60}
 do 
-    if [ $(curl -s -w "%{http_code}" -o /dev/null http://inventory-coolstore.my-project{USER_ID}.svc:8080/api/inventory/329299) == "200" ]
+    if [ $(curl -s -w "%{http_code}" -o /dev/null http://inventory-coolstore.${DEVWORKSPACE_NAMESPACE}.svc:8080/api/inventory/329299) == "200" ]
     then 
         MSG="\033[0;32mThe request to Inventory Service has succeeded\033[0m"
     else 
@@ -132,14 +129,14 @@ image::che-inventory-traffic.png[Che - Catalog Traffic OK, 500]
 
 Now let's scale out your _Inventory Service_ to 2 instances. 
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the OpenShift Web Console, from the **Developer view**,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Details' then click once on the up arrows 
 on the right side of the pod blue circle*`.
 
 image::openshift-scale-out-inventory.png[OpenShift Scale Out Catalog, 700]
 
 You should see the 2 instances (pods) running. 
-Now, `*switch back to your {CHE_URL}[Workspace^, role='params-link'] and check the output of the 'Inventory Generate Traffic' task*`.
+Now, `*switch back to your Workspace and check the output of the 'Inventory Generate Traffic' task*`.
 
 image::che-inventory-traffic-ko.png[Che - Catalog Traffic KO, 500]
 
@@ -150,7 +147,7 @@ In order to prevent this behaviour, a **Readiness check** is needed. It determin
 If the readiness probe fails, the endpoints controller ensures the container has its IP address removed from the endpoints of all services. 
 A readiness probe can be used to signal to the endpoints controller that even though a container is running, it should not receive any traffic from a proxy.
 
-First, scale down your _Inventory Service_ to 1 instance. In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+First, scale down your _Inventory Service_ to 1 instance. In the OpenShift Web Console, from the **Developer view**,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Details' then click once on the down arrows 
 on the right side of the pod blue circle*`.
 
@@ -164,7 +161,7 @@ It allows applications to provide information about their state to external view
 in cloud environments where automated processes must be able to determine whether the application should be discarded or restarted.
 
 Let's add the needed dependencies to **/projects/workshop/labs/inventory-quarkus/pom.xml**. 
-In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file*`:
+In your Workspace, `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file*`:
 
 [source,xml,subs="{markup-in-source}",role=copypaste]
 ----
@@ -206,17 +203,17 @@ Wait till the build is complete then, `*Delete the Inventory Pod*` to make it st
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc delete pod -l component=inventory -n my-project{USER_ID}
+oc delete pod -l component=inventory
 ----
 
 It will take a few seconds to retstart, then verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
-In your {CHE_URL}[Workspace^, role='params-link'], 
+In your Workspace, 
 `*execute the following commands in the terminal window*` - it may take a few attempts while the pod restarts.
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-curl -w "\n" http://inventory-coolstore.my-project{USER_ID}.svc:8080/q/health
+curl -w "\n" http://inventory-coolstore.${DEVWORKSPACE_NAMESPACE}.svc:8080/q/health
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
@@ -236,7 +233,7 @@ You should have the following output:
 }
 ----
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the OpenShift Web Console, from the **Developer view**,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Add Health Checks'*`.
 
 image::openshift-inventory-add-health-check.png[Che - Inventory Add Health Check, 700]
@@ -340,10 +337,10 @@ Therefore, as soon as you define the probe, OpenShift automatically redeploys th
 == Testing Inventory Readiness Probes
 
 Now let's test it as you did previously.
-`*Generate traffic to Inventory Service*` and then, in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], 
+`*Generate traffic to Inventory Service*` and then, in the OpenShift Web Console, 
 `*scale out the Inventory Service to 2 instances (pods)*`
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*check the output of the 'Inventory Generate Traffic' task*`.
+In your Workspace, `*check the output of the 'Inventory Generate Traffic' task*`.
 
 You should not see any errors, this means that you can now **scale out your _Inventory Service_ with no downtime.**
 
@@ -360,12 +357,12 @@ dependencies which is already done for the **Catalog Service**.
 
 Verify that the health endpoint works for the **Catalog Service** using `*curl*`.
 
-In your {CHE_URL}[Workspace^, role='params-link'], in the *terminal* window, 
+In your Workspace, in the *terminal* window, 
 `*execute the following commands*`:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-curl -w "\n" http://catalog-coolstore.my-project{USER_ID}.svc:8080/actuator/health
+curl -w "\n" http://catalog-coolstore.${DEVWORKSPACE_NAMESPACE}.svc:8080/actuator/health
 ----
 
 You should have the following output:
@@ -378,7 +375,7 @@ You should have the following output:
 Liveness and Readiness health checks values have already been set for this service as part of the build and deploying 
 using Eclipse JKube in combination with the Spring Boot actuator. 
 
-You can check this in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+You can check this in the OpenShift Web Console, from the **Developer view**,
 `*click on 'Topology' -> '(D) catalog-coolstore' -> 'Actions' -> 'Edit Health Checks'*`.
 
 image::openshift-catalog-edit-health.png[Che - Catalog Add Health Check, 700]
@@ -478,7 +475,7 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 |===
 
 Finally, let's configure probes for Gateway and Web Service.
-In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Probes - Configure Gateway & Web'*`
+In your Workspace, `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Probes - Configure Gateway & Web'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 
@@ -491,8 +488,8 @@ gain visibility into how the application behaves and particularly in identifying
 OpenShift provides container metrics out-of-the-box and displays how much memory, cpu and network 
 each container has been consuming over time. 
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on 'Observe' then select your 'my-project{USER_ID}' project*`.
+In the OpenShift Web Console, from the **Developer view**,
+`*click on 'Observe' then select your project*`.
 
 In the project overview, you can see the different **Resource Usage** sections. 
 `*click on one graph to get more details*`.

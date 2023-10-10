@@ -2,7 +2,7 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: OpenShift Inner Loop Workshop
+  title: OpenShift Inner Loop Workshop for Developer Sandbox
   url: https://redhat-scholars.github.io/course-template
   start_page: inner-loop::index.adoc
 
@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/inner-loop-guide.git
       tags: []
-      branches: ["6.1", "6.2", "6.4", "6.5"]
+      branches: ["rhds"]
       start_path: documentation
 
 asciidoc:
