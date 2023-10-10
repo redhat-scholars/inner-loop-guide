@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create Inventory Service with Quarkus :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/inventory-quarkus.html">
+    <link rel="prev" href="developer-workspace.html">
+    <link rel="next" href="catalog-spring-boot.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="inner-loop" data-version="rhds">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Inner Loop Workshop for Developer Sandbox</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="developer-workspace.html">2. Get your Developer Sandbox and Workspace</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="catalog-spring-boot.html">4. Create Catalog Service with Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="gateway-dotnet.html">5. Create Gateway Service with .NET</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="webui-deployment.html">6. Deploy Web UI with with Node.js and AngularJS</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-health.html">7. Monitor Application Health</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="app-config.html">8. Externalize Application Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Inner Loop Workshop for Developer Sandbox</span>
+    <span class="version">rhds</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Inner Loop Workshop for Developer Sandbox</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">rhds</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Inner Loop Workshop for Developer Sandbox</a></li>
+    <li><a href="inventory-quarkus.html">3. Create Inventory Service with Quarkus</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/rhds/documentation/modules/ROOT/pages/inventory-quarkus.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Create Inventory Service with Quarkus</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>40 MINUTE EXERCISE</em></p>
+</div>
+<div class="paragraph">
+<p>In this lab you will learn about building microservices using Quarkus.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/coolstore-arch-inventory-quarkus.png" alt="CoolStore Architecture" width="400">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_is_quarkus"><a class="anchor" href="#what_is_quarkus"></a>What is Quarkus?</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/quarkus-logo.png" alt="Quarkus" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://quarkus.io/" target="_blank" rel="noopener">Quarkus</a> is a Kubernetes Native Java stack tailored for GraalVM &amp; OpenJDK HotSpot,
+crafted from the best of breed Java libraries and standards.</p>
+</div>
+<div class="paragraph">
+<p><strong>Container First</strong>: <a href="https://quarkus.io/" target="_blank" rel="noopener">Quarkus</a> tailors your application for GraalVM and HotSpot. Amazingly fast boot time, incredibly low RSS memory
+(not just heap size!) offering near instant scale up and high density memory utilization in container orchestration platforms
+like Kubernetes. We use a technique we call <a href="https://quarkus.io/vision/container-first" target="_blank" rel="noopener">compile time boot</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Unifies Imperative and Reactive</strong>: Combine both the familiar <a href="https://quarkus.io/vision/continuum" target="_blank" rel="noopener">imperative code and
+the non-blocking reactive style</a> when developing applications</p>
+</div>
+<div class="paragraph">
+<p><strong>Developer Joy</strong>: A cohesive platform for optimized developer joy:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unified configuration</p>
+</li>
+<li>
+<p>Zero config, live reload in the blink of an eye</p>
+</li>
+<li>
+<p>Streamlined code for the 80% common usages, flexible for the 20%</p>
+</li>
+<li>
+<p>No hassle native executable generation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Best of Breed Libraries and Standards</strong>: Quarkus brings a cohesive, fun to use full-stack framework by leveraging best of breed libraries you
+love and use wired on a <a href="https://quarkus.io/vision/standards" target="_blank" rel="noopener">standard backbone</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quarkus_maven_project"><a class="anchor" href="#quarkus_maven_project"></a>Quarkus Maven Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>inventory-quarkus</strong> project has the following structure which shows the components of
+the Quarkus project laid out in different subdirectories according to Maven best practices:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/inventory-quarkus-project.png" alt="Inventory Project" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>'/projects/workshop/labs/inventory-quarkus'</strong> folder contents:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the Maven structure</p>
+</li>
+<li>
+<p>a com.redhat.cloudnative.InventoryResource resource exposed on /hello</p>
+</li>
+<li>
+<p>an associated unit test</p>
+</li>
+<li>
+<p>a landing page that is accessible on <a href="http://localhost:8080" class="bare">http://localhost:8080</a> after starting the application</p>
+</li>
+<li>
+<p>example Dockerfile files for both native and jvm modes in src/main/docker</p>
+</li>
+<li>
+<p>the application configuration file</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code><strong>Look at the pom.xml</strong></code>. You will find the import of the Quarkus BOM, allowing you to omit the version
+on the different Quarkus dependencies. In addition, you can see the <strong>quarkus-maven-plugin</strong> responsible for the packaging
+of the application and also providing the <strong>development mode</strong> feature.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+            &lt;artifactId&gt;quarkus-bom&lt;/artifactId&gt;
+            &lt;version&gt;${quarkus.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+            &lt;artifactId&gt;quarkus-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;${quarkus.version}&lt;/version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;build&lt;/goal&gt;
+                    &lt;/goals&gt;
+                &lt;/execution&gt;
+            &lt;/executions&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we focus on the dependencies section, you can see the following extensions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-resteasy-jsonb&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-hibernate-orm&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-jdbc-h2&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.quarkus&lt;/groupId&gt;
+        &lt;artifactId&gt;quarkus-openshift&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Quarkus Extensions</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/rest-json-guide" target="_blank" rel="noopener">JSON REST Services</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It allows you to develop REST services to consume and produce JSON payloads</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/hibernate-orm-guide" target="_blank" rel="noopener">Hibernate ORM</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The de facto JPA implementation and offers you the full breath of an Object Relational Mapper.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/datasource-guide#h2" target="_blank" rel="noopener">Datasources (H2)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using datasources is the main way of obtaining connections to a database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://quarkus.io/guides/deploying-to-openshift" target="_blank" rel="noopener">OpenShift</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Understands how to deploy an application to OpenShift</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code><strong>Examine 'src/main/java/com/redhat/cloudnative/InventoryResource.java' file</strong></code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/hello")
+public class InventoryResource {
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "hello";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It’s a very simple REST endpoint, returning "hello" to requests on "/hello".</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>With Quarkus, there is no need to create an Application class. It’s supported, but not required. In addition,
+only one instance of the resource is created and not one per request. You can configure this using the different <strong>Scoped</strong> annotations
+(ApplicationScoped, RequestScoped, etc).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enable_development_mode"><a class="anchor" href="#enable_development_mode"></a>Enable the Development Mode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>quarkus:dev</strong> runs Quarkus in development mode. This enables hot deployment with background compilation,
+which means that when you modify your Java files and/or your resource files and refresh your browser, these changes will
+automatically take effect. This works too for resource files like the configuration property file. Refreshing the browser
+triggers a scan of the workspace, and if any changes are detected, the Java files are recompiled and the application is redeployed;
+your request is then serviced by the redeployed application. If there are any issues with compilation or deployment an error page
+will let you know.</p>
+</div>
+<div class="paragraph">
+<p>First, in your Workspace,</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset1_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'devfile: Inventory - Compile (Dev Mode)'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="600">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+mvn compile quarkus:dev -Ddebug=false</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Terminal'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>When pop-ups appear, <strong>confirm you want to expose the 8080 port</strong> by <code><strong>clicking on 'Open in New Tab'</strong></code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-open-8080-link.png" alt="Che - Open Link" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>You then have to confirm the access to external web sites:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-external-website.png" alt="Che - Open Link" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be directed to <strong>your Inventory Service running inside your Workspace</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-quarkus-preview.png" alt="Che - Quarkus Preview" width="500">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you see the following result in the browser window you may just be too early, please <code><strong>click on the browser Refresh icon</code></strong>,</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-preview-na.png" alt="Che - Preview Not Available" width="500">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Recently browsers such as <strong>Google Chrome</strong> have started converting all <strong>HTTP</strong> requests into <strong>HTTPS</strong> (secure) requests by
+default. This is a problem for this workshop since all application URLs are HTTP only and will result in a failure to display.
+Please check carefully in the URL bar for a padlock and edit the URL to remove any <strong>'s'</strong> to make the request HTTP (ie. Not Secure)
+and then retry. Its not the purpose of this simple workshop to demonstrate how OpenShift can leverage TLS security.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Please <strong>don&#8217;t close</strong> that Inventory output browser tab, you will need it for the next few steps of this lab.</p>
+</div>
+<div class="paragraph">
+<p>If by accident you close that browser tab then you should be able to reopen it from your browser history.
+It will likely be called <strong>Inventory Service</strong></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code><strong>Modify the 'src/main/resources/META-INF/resources/index.html' file</strong></code> as follows</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;Inventory Service&lt;/title&gt;
+        &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+            integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"&gt;
+        &lt;link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css"&gt;
+        &lt;link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="jumbotron"&gt;
+            &lt;div class="container"&gt;
+                &lt;h1 class="display-3"&gt;&lt;img src="https://camo.githubusercontent.com/be1e4ea465298c7e05b1378ff38d463cfef120a3/68747470733a2f2f64657369676e2e6a626f73732e6f72672f717561726b75732f6c6f676f2f66696e616c2f504e472f717561726b75735f6c6f676f5f686f72697a6f6e74616c5f7267625f3132383070785f64656661756c742e706e67" alt="Quarkus" width="400"&gt; Inventory Service&lt;/h1&gt;
+                &lt;p&gt;This is a Quarkus Microservice for the CoolStore Demo. (&lt;a href="/api/inventory/329299"&gt;Test it&lt;/a&gt;)
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="container"&gt;
+            &lt;footer&gt;
+                &lt;p&gt;&amp;copy; Red Hat 2020&lt;/p&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code><strong>Refresh your browser</strong></code> (for the <strong>Inventory Service</strong> tab just opened) and you should see the new HTML content <strong>without rebuilding your JAR file</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/inventory-quarkus.png" alt="Inventory Quarkus" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s write some code and create a domain model and a RESTful endpoint to create the Inventory service</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_domain_model"><a class="anchor" href="#create_domain_model"></a>Create a Domain Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code><strong>Create the 'src/main/java/com/redhat/cloudnative/Inventory.java' file</code></strong> as follows:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import java.io.Serializable;
+
+@Entity <i class="conum" data-value="1"></i><b>(1)</b>
+@Table(name = "INVENTORY") <i class="conum" data-value="2"></i><b>(2)</b>
+public class Inventory implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id <i class="conum" data-value="3"></i><b>(3)</b>
+    private String itemId;
+
+    @Column
+    private int quantity;
+
+    public Inventory() {
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory [itemId='" + itemId + '\'' + ", quantity=" + quantity + ']';
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>@Entity</strong> marks the class as a JPA entity</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>@Table</strong> customizes the table creation process by defining a table name and database constraint</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><strong>@Id</strong> marks the primary key for the table</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You don&#8217;t need to press a save button! VS Code automatically saves the changes made to the files.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code><strong>Update the 'src/main/resources/application.properties' file</strong></code> to match with the following content:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">quarkus.datasource.db-kind=h2
+quarkus.datasource.jdbc.url=jdbc:h2:mem:inventory;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+quarkus.datasource.username=sa
+quarkus.datasource.password=sa
+quarkus.hibernate-orm.database.generation=drop-and-create
+quarkus.hibernate-orm.log.sql=true
+quarkus.hibernate-orm.sql-load-script=import.sql
+quarkus.http.host=0.0.0.0
+
+%prod.quarkus.package.type=uber-jar<i class="conum" data-value="1"></i><b>(1)</b>
+
+# these value are required for a quarkus openshift plugin build<i class="conum" data-value="2"></i><b>(2)</b>
+%prod.quarkus.openshift.route.expose=true
+%prod.quarkus.openshift.deployment-kind=Deployment
+%prod.quarkus.openshift.labels.app=coolstore
+%prod.quarkus.openshift.labels.component=inventory
+%prod.quarkus.openshift.part-of=coolstore
+%prod.quarkus.container-image.name=inventory-coolstore
+%prod.quarkus.openshift.name=inventory-coolstore
+%prod.quarkus.openshift.ports."http".host-port=8080
+%prod.quarkus.openshift.add-version-to-label-selectors=false
+%prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>An <strong>uber-jar</strong> contains all the dependencies required packaged in the <strong>jar</strong> to enable running the
+application with <strong>java -jar</strong>. By default, in Quarkus, the generation of the uber-jar is disabled. With the
+<strong>%prod</strong> prefix, this option is only activated when building the jar intended for deployments.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>There is a lot of additional configuration here to allow the quarkus-maven-plugin to build
+and then deploy this application to OpenShift - but more of that later</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code><strong>Update the 'src/main/resources/import.sql' file</code></strong> as follows:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO INVENTORY(itemId, quantity) VALUES (100000, 0);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (329299, 35);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (329199, 12);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (165613, 45);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (165614, 87);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (165954, 43);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (444434, 32);
+INSERT INTO INVENTORY(itemId, quantity) VALUES (444435, 53);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_restful_service"><a class="anchor" href="#create_restful_service"></a>Create a RESTful Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Quarkus uses JAX-RS standard for building REST services.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Modify the 'src/main/java/com/redhat/cloudnative/InventoryResource.java' file</strong></code> to match with:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.redhat.cloudnative;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/api/inventory")
+@ApplicationScoped
+public class InventoryResource {
+
+    @Inject
+    EntityManager em;
+
+    @GET
+    @Path("/{itemId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Inventory getAvailability(@PathParam("itemId") String itemId) {
+        Inventory inventory = em.find(Inventory.class, itemId);
+        return inventory;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above REST service defines an endpoint that is accessible via <strong>HTTP GET</strong> at
+for example <strong>/api/inventory/329299</strong> with
+the last path param being the product id which we want to check its inventory status.</p>
+</div>
+<div class="paragraph">
+<p><code><strong>Refresh your Inventory output browser and click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"itemId":"329299","quantity":35}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The REST API returned a JSON object representing the inventory count for this product. Congratulations!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stop_development_mode"><a class="anchor" href="#stop_development_mode"></a>Stop the Development Mode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In your Workspace, stop the service as follows:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset2_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_ide-task">
+<div class="paragraph">
+<p><code><strong>Enter Ctrl+c in the existing '&gt;_ Inventory Compile (Dev Mode)' terminal window</strong></code></p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_cli">
+<div class="paragraph">
+<p><code><strong>Enter Ctrl+c in the existing terminal window</strong></code></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_on_openshift"><a class="anchor" href="#deploy_on_openshift"></a>Deploy on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using the Quarkus-maven-plugin, the Quarkus <a href="https://quarkus.io/guides/deploying-to-openshift">OpenShift Extension</a> and Source to Image (S2I)
+it’s time to deploy your service on OpenShift using all that information in the <strong>src/main/resources/application.properties</strong> file
+we saw earlier.</p>
+</div>
+<div class="paragraph">
+<p>In this section you will locally build a .jar file, then <strong>create</strong> the OpenShift build and deployment components
+and <strong>push</strong> the .jar it to OpenShift. The OpenShift <a href="https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a> builder
+will then package the .jar file into a container and run it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"># these value are required for a quarkus openshift plugin build
+%prod.quarkus.openshift.route.expose=true<i class="conum" data-value="3"></i><b>(3)</b>
+%prod.quarkus.openshift.deployment-kind=Deployment
+%prod.quarkus.openshift.labels.app=coolstore
+%prod.quarkus.openshift.labels.component=inventory<i class="conum" data-value="1"></i><b>(1)</b>
+%prod.quarkus.openshift.part-of=coolstore
+%prod.quarkus.container-image.name=inventory-coolstore
+%prod.quarkus.openshift.name=inventory-coolstore
+%prod.quarkus.openshift.ports."http".host-port=8080<i class="conum" data-value="2"></i><b>(2)</b>
+%prod.quarkus.openshift.add-version-to-label-selectors=false
+%prod.quarkus.openshift.labels."app.kubernetes.io/instance"=inventory<i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Its called <strong>inventory</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The service port 8080 will be used for HTTP</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The application has an external route for public access</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In your Workspace, <strong>build</strong> your jar file.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset3_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'devfile: Inventory - Build'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="600">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+mvn clean package -DskipTests</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Terminal'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once this completes, <strong>deploy</strong> your application code/binary for OpenShift. By watching the
+log output you should see this activity:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Push the jar file to OpenShift</p>
+</li>
+<li>
+<p>Create OpenShift deployment components</p>
+</li>
+<li>
+<p>Build a container using a Dockerfile/Containerfile</p>
+</li>
+<li>
+<p>Push this container image to the OpenShift registry</p>
+</li>
+<li>
+<p>Deploying the application to OpenShift</p>
+</li>
+</ul>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_ide-task"></a>IDE Task</p>
+</li>
+<li>
+<p><a id="tabset4_cli"></a>CLI</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_ide-task">
+<div class="paragraph">
+<p><code><strong>Click on 'Terminal' &#8594; 'Run Task&#8230;&#8203;' &#8594;  'devfile: Inventory - Deploy Component'</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/che-runtask.png" alt="Che - RunTask" width="600">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_cli">
+<div class="paragraph">
+<p><code><strong>Execute the following commands in the terminal window</strong></code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/inventory-quarkus
+mvn install -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q) -Dquarkus.kubernetes-client.trust-certs=true</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Terminal'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">[INFO] [io.quarkus...] STEP 3/9: ENV OPENSHIFT_BUILD_NAME="inventory-coolstore-1"     OPENSHIFT_BUILD_NAMESPACE="my-project2"
+[INFO] [io.quarkus....] STEP 4/9: USER root
+[INFO] [io.quarkus....] STEP 5/9: COPY upload/src /tmp/src
+[INFO] [io.quarkus....] STEP 6/9: RUN chown -R 185:0 /tmp/src
+[INFO] [io.quarkus....] STEP 7/9: USER 185
+[INFO] [io.quarkus....] STEP 8/9: RUN /usr/local/s2i/assemble
+[INFO] [io.quarkus....] INFO S2I source build with plain binaries detected
+[INFO] [io.quarkus....] INFO Copying binaries from /tmp/src to /deployments ...
+[INFO] [io.quarkus....] inventory-quarkus-1.0.0-SNAPSHOT-runner.jar
+[INFO] [io.quarkus....] INFO Cleaning up source directory (/tmp/src)
+[INFO] [io.quarkus....] STEP 9/9: CMD /usr/local/s2i/run
+[INFO] [io.quarkus....] COMMIT temp.builder.openshift.io/my-project2/inventory-coolstore-1:2c2db764
+[INFO] [io.quarkus....] Getting image source signatures
+[INFO] [io.quarkus....] Copying blob sha256:34e7a2afb94b75550a0e9b8685ba4edb5472647c08cbc61fa571a4f6d53dc107
+[INFO] [io.quarkus....] Copying blob sha256:7374092de81bae754b7b497cce97eac8bea3f66b6419a74c7e317c3ebb89fc6f
+[INFO] [io.quarkus....] Copying blob sha256:e8e3263c81c9ab945feeb803074259cac5da121ef39cfa0f7b56dd4e92573d25
+[INFO] [io.quarkus....] Copying config sha256:ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....] Writing manifest to image destination
+[INFO] [io.quarkus....] Storing signatures
+[INFO] [io.quarkus....] --&gt; ab940dedfdc
+[INFO] [io.quarkus....] Successfully tagged temp.builder.openshift.io/my-project2/inventory-coolstore-1:2c2db764
+[INFO] [io.quarkus....] ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....]
+[INFO] [io.quarkus....] Pushing image image-registry.openshift-image-registry.svc:5000/my-project2/inventory-coolstore:1.0.0-SNAPSHOT ...
+[INFO] [io.quarkus....] Getting image source signatures
+[INFO] [io.quarkus....] Copying blob sha256:e8e3263c81c9ab945feeb803074259cac5da121ef39cfa0f7b56dd4e92573d25
+[INFO] [io.quarkus....] Copying blob sha256:3840fdda5b0af7d845fe3540f5ca8b094b19617bcd7837701270a6cefc68811f
+[INFO] [io.quarkus....] Copying blob sha256:ced05cc33f5c3ba56c84452cadaa23602c29aa67649488da2bfc7664bb2f830e
+[INFO] [io.quarkus....] Copying config sha256:ab940dedfdce810409aec0c2cdd38d337d5e8d610ff5f64211cb3805b07674d4
+[INFO] [io.quarkus....] Writing manifest to image destination
+[INFO] [io.quarkus....] Storing signatures
+[INFO] [io.quarkus....] Successfully pushed image-registry.openshift-image-registry.svc:5000/my-project2/inventory-coolstore@sha256:be5b8ccdf161f4166ea0d040fcc78e1a09f8f20b16eb1b0d12ce288cd70c0643
+[INFO] [io.quarkus....] Push successful
+[INFO] [io.quarkus....] Deploying to openshift server: https://172.30.0.1:443/ in namespace: my-project2.
+[INFO] [io.quarkus....] Applied: ImageStream inventory-coolstore.
+[INFO] [io.quarkus....] Applied: Deployment inventory-coolstore.
+[INFO] [io.quarkus....] Applied: ImageStream openjdk-11-rhel7.
+[INFO] [io.quarkus....] Applied: Service inventory-coolstore.
+[INFO] [io.quarkus....] Applied: Route inventory-coolstore.
+[INFO] [io.quarkus....] Applied: BuildConfig inventory-coolstore.
+[INFO] [io.quarkus....] The deployed application can be accessed at: http://inventory-coolstore-my-project2.apps.cluster-qpgl9.qpgl9.sandbox2688.opentlc.com
+[INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 170564ms
+
+....
+
+[INFO] No primary artifact to install, installing attached artifacts instead.
+[INFO] Installing /projects/workshop/labs/inventory-quarkus/pom.xml to /home/developer/.m2/repository/com/redhat/cloudnative/inventory-quarkus/1.0.0-SNAPSHOT/inventory-quarkus-1.0.0-SNAPSHOT.pom
+[INFO] Installing /projects/workshop/labs/inventory-quarkus/target/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar to /home/developer/.m2/repository/com/redhat/cloudnative/inventory-quarkus/1.0.0-SNAPSHOT/inventory-quarkus-1.0.0-SNAPSHOT-runner.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:01 min
+[INFO] Finished at: 2023-05-11T15:19:06Z
+[INFO] ------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once this completes, your application should be up and running.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift runs the different components of the application
+in one or more pods. A pod is the unit of runtime deployment and consists of the running containers for the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<code><strong>click on the 'Open URL' icon of the Inventory Service</strong></code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-inventory-topology.png" alt="OpenShift - Inventory Topology" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your browser will be redirected to <strong>your Inventory Service running on OpenShift</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/inventory-quarkus.png" alt="Inventory Quarkus" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Then <code><strong>click on 'Test it'</strong></code>. You should have the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"itemId":"329299","quantity":35}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Well done! You are ready to move on to the next lab, but before you go, you probably should close those
+Inventory Service output browser tabs from the beginning of this chapter.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="developer-workspace.html" class="query-params-link">2. Get your Developer Sandbox and Workspace</a></span>
+  <span class="next"><a href="catalog-spring-boot.html" class="query-params-link">4. Create Catalog Service with Spring Boot</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
