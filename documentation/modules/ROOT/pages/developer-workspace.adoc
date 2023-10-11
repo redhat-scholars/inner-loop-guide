@@ -7,7 +7,7 @@
 
 _20 MINUTE EXERCISE_
 
-n this lab you will learn about getting your Red hat Developer Sandbox with a Kubernetes-native development platform 
+In this lab you will learn about getting your Red hat Developer Sandbox with a Kubernetes-native development platform 
 and getting familiar with the OpenShift CLI, OpenShift Web Console and Dev Spaces.
 
 
@@ -23,7 +23,7 @@ with our library of activities as well.
 image::sandbox-portal.png[Developer Sandbox, 600]
 
 The https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift^] is a Kubernetes-native environment for developing 
-software for OpenShift. You need to follow the *Get Started* process on this web site first, before attempting any of the workshop steps below.
+software for OpenShift. You need to follow the *Get Started* process on the Sandbox web site first, before attempting any of the workshop steps below.
 
 After verifying your email or mobile number you should you get access to your sandbox and be given a link to a login page to access the OpenShift Web Console, which looks like this:- 
 
@@ -115,10 +115,6 @@ https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-work
 [window=_blank, align="center"]
 image::enter-devfile.png[Launching the workspace , 500]
 
-Once completed, you will have a fully functional Browser-based IDE within the source code already imported and 
-the IDE configured for our workshop tasks.
-
-
 Now there are a couple of steps before we can get started. Firstly you need to `*Trust*` the Git source you need to import for this workshop
 
 image::vscode-trust.png[Che - Workspace, 500]
@@ -145,9 +141,9 @@ We find the best browser for this workshop is Firefox, Chrome or Edge browser.
 
 === Workshop stops or freezes
 
-Everything here is browser based so might have the odd glitch. The easiets resoltuion to a number of problems is just to refresh the browser, 
-or worse case restart the browser. All you work is stored centrally on our services so you should juts be able to re-attach 
-to your workspace and OpenShift project and continue.
+Everything here is browser based so might have the odd glitch. The easiest resoltuion to a number of problems is just to refresh the browser, 
+or worse case restart the browser. All you work is stored centrally on our servers so you should juts be able to re-attach 
+to your workspace and continue.
 
 === Having problems seeing OpenShift Dev Spaces
 
@@ -161,22 +157,22 @@ The workshop will take a few hours to complete all the way through, if you use t
 that period you will not see this issue.
 
 *Timed-out and wont reconnect*
-Workspaces idel after about 10 minutes of non-use. Sometimes the workspace can be started with the in browser buttons, but if not
+Workspaces idle after about 20 to minutes of non-use. Sometimes the workspace can be started with the in browser buttons, but if not
 close your Dev Spaces browser session and use the instruction on this page to *Get Your Developer Workspace*. Then *Open* your existing 
 workspace rather than Creating a new one.
 
-*Re-login to the Red Hat* Your authentication token will need to refresh for security so expect to have login again. 
+*Re-login to the Red Hat* Your authentication token will need to refresh for security so expect to have to login again. 
 You will need you Sandbox credentials daily but they should be cached.
 
 *Re-login from Dev Spaces* Dev Spaces can perform local tasks like builds, but usually needs to connect to your OpenShift project
-to deploy. If your deployment tasks fail chance are you need to re-login to Dev Spaces. Shutdown your Dev Spaces browser session 
+to deploy. If your deployment tasks fail chances are you need to re-login to Dev Spaces. Shutdown your Dev Spaces browser session 
 and use the instruction on this page to *Get Your Developer Workspace*
 
 === My OpenShift pods have all gone to idle
 
-If left for a long period (like overnight) your OpenShift project will idle down all its running pods. On the 
+If the Developer Sandbox is left for a long period (like overnight) your OpenShift project will idle down all its running pods. On the 
 Topology display they will show up with white rings. Normally these rings would be dark blue if the pod is active. You need to select each 
-*Deployment* or *DeploymentConfig* that you have created in turn by clicking on the circle, then on the pop-out select the blue (D) or (DC) text. 
+*Deployment* or *DeploymentConfig* that you have created in turn by clicking on the circle, then on the pop-out, select the blue (D) or (DC) text. 
 Then using the circle marked as *Scaled to 0* increase the Pod count up to 1. The ring should turn blue after about 30 seconds.
 
 === How do I cleanup after running this workshop? ===

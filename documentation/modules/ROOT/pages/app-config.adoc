@@ -146,7 +146,7 @@ Then, enter the following information:
 
 |===
 
-`*Click on 'Create' button*`, shortly a Postgresql dtabase pod should be created:-
+`*Click on 'Create' button*`, shortly a Postgresql database pod should be created:-
 
 image::openshift-catalog-postgresql-topology.png[OpenShift - Catalog PostgreSQL, 700]
 
