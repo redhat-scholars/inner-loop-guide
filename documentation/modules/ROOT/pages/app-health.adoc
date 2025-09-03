@@ -202,12 +202,15 @@ NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 --
 ====
 
-Wait till the build is complete then, `*Delete the Inventory Pod*` to make it start again with the new code.
+Wait till the build is complete then use the Dev Spaces terminal window to `*Delete the Inventory Pod*` and make it start again with the new code.
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 oc delete pod -l component=inventory -n my-project{USER_ID}
 ----
+NOTE: In Dev Spaces, to open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
+--
+
 
 It will take a few seconds to restart, then verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
