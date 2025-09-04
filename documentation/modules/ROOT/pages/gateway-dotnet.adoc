@@ -234,15 +234,24 @@ Look in the json to see how the *Gateway service* has combined the *product* inf
 
 [source,json]
 ----
-[ {
-  "itemId" : "329299",
-  "name" : "Red Fedora",
-  "desc" : "Official Red Hat Fedora",
-  "price" : 34.99,
-  "availability" : {
-    "quantity" : 35
-  }
-},
+[{
+    "itemId": "100000",
+    "name": "Red Fedora",
+    "description": "Official Red Hat Fedora",
+    "price": 34.99,
+    "availability": {
+      "quantity": 0
+    }
+  },
+  {
+    "itemId": "329299",
+    "name": "Quarkus T-shirt",
+    "description": "This updated unisex essential fits like a well-loved favorite, featuring a crew neck, short sleeves and designed with superior combed and ring- spun cotton.",
+    "price": 10,
+    "availability": {
+      "quantity": 35
+    }
+  },
 ...
 ]
 ----
