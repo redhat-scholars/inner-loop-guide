@@ -208,9 +208,8 @@ Wait till the build is complete then use the Dev Spaces terminal window to `*Del
 ----
 oc delete pod -l component=inventory -n my-project{USER_ID}
 ----
-NOTE: In Dev Spaces, to open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
---
 
+NOTE: In Dev Spaces, to open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
 
 It will take a few seconds to restart, then verify that the health endpoint works for the **Inventory Service** using `*curl*`
 
