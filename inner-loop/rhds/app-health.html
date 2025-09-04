@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Monitor Application Health :: OpenShift Inner Loop Workshop</title>
+    <title>Monitor Application Health :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/app-health.html">
     <link rel="prev" href="webui-deployment.html">
     <link rel="next" href="app-config.html">
@@ -18,7 +18,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -453,13 +453,27 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 </div>
 </div>
 <div class="paragraph">
-<p>Wait till the build is complete then, <code><strong>Delete the Inventory Pod</strong></code> to make it start again with the new code.</p>
+<p>Wait till the build is complete then use the Dev Spaces terminal window to <code><strong>Delete the Inventory Pod</strong></code> and make it start again with the new code.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l component=inventory</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In Dev Spaces, to open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Terminal'</strong></code>
+</td>
+</tr>
+</table>
+</div>
+<div class="openblock">
+<div class="content">
 <div class="paragraph">
 <p>It will take a few seconds to restart, then verify that the health endpoint works for the <strong>Inventory Service</strong> using <code><strong>curl</strong></code></p>
 </div>
@@ -578,11 +592,9 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 <div class="paragraph">
 <p>Finally <code><strong>click on the check icon</strong></code>. But don&#8217;t click <strong>Add</strong> yet, we have more probes to configure.</p>
 </div>
+<div id="configuring_readiness" class="paragraph">
+<p>==  Configuring Inventory Readiness Probes</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="configuring_readiness"><a class="anchor" href="#configuring_readiness"></a>Configuring Inventory Readiness Probes</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Now repeat the same task for the <strong>Inventory</strong> service, but this time set the <strong>Readiness</strong> probes:</p>
 </div>
@@ -647,11 +659,9 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 that react to changes to the container image or configuration.
 Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.</p>
 </div>
+<div id="testing_Readiness" class="paragraph">
+<p>== Testing Inventory Readiness Probes</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="testing_Readiness"><a class="anchor" href="#testing_Readiness"></a>Testing Inventory Readiness Probes</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Now let&#8217;s test it as you did previously.
 <code><strong>Generate traffic to Inventory Service</strong></code> and then, in the OpenShift Web Console,
@@ -671,11 +681,9 @@ Therefore, as soon as you define the probe, OpenShift automatically redeploys th
 <div class="paragraph">
 <p>Now scale down your <em>Inventory Service</em> back to 1 instance.</p>
 </div>
+<div class="paragraph">
+<p>== Catalog Services Probes</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_catalog_services_probes"><a class="anchor" href="#_catalog_services_probes"></a>Catalog Services Probes</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready" target="_blank" rel="noopener">Spring Boot Actuator</a> is a
 sub-project of Spring Boot which adds health and management HTTP endpoints to the application. Enabling Spring Boot
@@ -715,11 +723,9 @@ using Eclipse JKube in combination with the Spring Boot actuator.</p>
 <img src="_images/openshift-catalog-edit-health.png" alt="Che - Catalog Add Health Check" width="700">
 </div>
 </div>
+<div id="understanding_startup" class="paragraph">
+<p>==  Understanding Startup Probes</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="understanding_startup"><a class="anchor" href="#understanding_startup"></a>Understanding Startup Probes</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><strong>Startup probes</strong> are similar to liveness probes but only executed at startup.
 When a startup probe is configured, the other probes are disabled until it succeeds.</p>
@@ -732,11 +738,9 @@ the fast response to stuck states.</p>
 <div class="paragraph">
 <p><strong>Startup probes</strong> are useful to cover this worse case startup time.</p>
 </div>
+<div id="monitoring_all_applications" class="paragraph">
+<p>== Monitoring All Application Healths</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="monitoring_all_applications"><a class="anchor" href="#monitoring_all_applications"></a>Monitoring All Application Healths</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Now you understand and know how to configure Readiness, Liveness and Startup probes, let&#8217;s confirm your expertise!</p>
 </div>
@@ -861,11 +865,9 @@ In your Workspace, <code><strong>click on 'Terminal' &#8594; 'Run Task&#8230;&#8
 <img src="_images/che-runtask.png" alt="Che - RunTask" width="600">
 </div>
 </div>
+<div id="monitoring_application_metrics" class="paragraph">
+<p>== Monitoring Applications Metrics</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="monitoring_application_metrics"><a class="anchor" href="#monitoring_application_metrics"></a>Monitoring Applications Metrics</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Metrics are another important aspect of monitoring applications which is required in order to
 gain visibility into how the application behaves and particularly in identifying issues.</p>
@@ -901,6 +903,8 @@ The graphs can be found under the Metrics heading, or Details in earlier version
 </div>
 <div class="paragraph">
 <p>Well done! You are ready to move on to the next lab.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
