@@ -1,7 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 
 = Externalize Application Configuration
 :navtitle: Externalize Application Configuration
@@ -64,7 +62,7 @@ making it simple to re-create complex deployments by just deploying a single tem
 be parameterized to get input for fields like service names and generate values for fields like passwords.
 ====
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Home' menu, and choose 'Software Catalog'*` 
+In the OpenShift Web Console `*click on the 'Home' menu, and choose 'Software Catalog'*` 
 and then select `*Databases*` within the catalog.
 
 image::openshift-add-database.png[OpenShift - Add database, 800]
@@ -80,7 +78,7 @@ Then, enter the following information:
 |Value
 
 |Namespace*
-|my-project{USER_ID}
+|_user_-dev
 
 |Memory Limit*
 |512Mi
@@ -124,7 +122,7 @@ Then, enter the following information:
 |Value
 
 |Namespace*
-|my-project{USER_ID}
+|_user_-dev
 
 |Memory Limit*
 |512Mi
@@ -159,11 +157,11 @@ Now you can move on to configure the Inventory and Catalog service to use these 
 
 By default, due to security reasons, **containers are not allowed to snoop around OpenShift clusters and discover objects**. Security comes first and discovery is a privilege that needs to be granted to containers in each project. 
 
-Since you do want our applications to discover the config maps inside the **my-project{USER_ID}** project, you need `*to grant permission to the Service Account to access the OpenShift REST API*` and find the config maps. 
+Since you do want our applications to discover the config maps inside the your project, you need `*to grant permission to the Service Account to access the OpenShift REST API*` and find the config maps. 
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc policy add-role-to-user view -n my-project{USER_ID} -z default
+oc policy add-role-to-user view -z default
 ----
 
 [#externalize_quarkus_configuration]
@@ -178,7 +176,7 @@ In Quarkus, Driver is a build time property and cannot be overridden. So as you 
 technology, you need to change the 'quarkus.datasource.driver' parameter 
 in **/projects/workshop/labs/inventory-quarkus/src/main/resources/application.properties** and rebuild the application.
 
-In your {CHE_URL}[Workspace^, role='params-link'], `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
+In your Workspace, `*edit the '/projects/workshop/labs/inventory-quarkus/pom.xml' file and add the
 'JDBC Driver - MariaDB' dependency*`
 
 [source,xml,subs="{markup-in-source}",role=copypaste]
@@ -218,7 +216,7 @@ parameters unchanged. They will be overridden later.
 
 Now, let's create the Quarkus configuration content using the database credentials.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` menu
+In the OpenShift Web Console from the `*Workloads*` menu
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -231,13 +229,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: inventory
-  namespace: my-project{USER_ID}
   labels:
     app: coolstore
     app.kubernetes.io/instance: inventory
 data:
   application.properties: |-
-    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.my-project{USER_ID}.svc:3306/inventorydb
+    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.svc:3306/inventorydb
     quarkus.datasource.username=inventory
     quarkus.datasource.password=inventory
 ----
@@ -250,7 +247,7 @@ Wait till the build is complete then, `*Delete the Inventory Pod*` to make it st
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc delete pod -l component=inventory -n my-project{USER_ID}
+oc delete pod -l component=inventory
 ----
 
 Now **verify that the config map is in fact injected into the container by checking if the seed data is 
@@ -260,7 +257,7 @@ loaded into the database**.
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc rsh -n my-project{USER_ID} dc/inventory-mariadb
+oc rsh dc/inventory-mariadb
 ----
 
 Once connected to the MariaDB container, `*run the following*`:
@@ -321,7 +318,7 @@ configuration using an alternative **application.properties** backed by a config
 
 Let's create the Spring Boot configuration content using the database credentials and create the Config Map.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` menu,
+In the OpenShift Web Console, from the `*Workloads*` menu,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -334,13 +331,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: catalog
-  namespace: my-project{USER_ID}
   labels:
     app: coolstore
     app.kubernetes.io/instance: catalog
 data:
   application.properties: |-
-    spring.datasource.url=jdbc:postgresql://catalog-postgresql.my-project%USER_ID%.svc:5432/catalogdb
+    spring.datasource.url=jdbc:postgresql://catalog-postgresql:5432/catalogdb
     spring.datasource.username=catalog
     spring.datasource.password=catalog
     spring.datasource.driver-class-name=org.postgresql.Driver
@@ -358,7 +354,7 @@ if enabled, triggers hot reloading of beans or Spring context when changes are d
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc delete pod -l component=catalog -n my-project{USER_ID}
+oc delete pod -l component=catalog 
 ----
 
 When the Catalog container is *ready* (wait at least 30 seconds), verify that the PostgreSQL database is being 
@@ -366,7 +362,7 @@ used. Check the Catalog pod logs repeatedly:
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc logs deployment/catalog-coolstore -n my-project{USER_ID} | grep hibernate.dialect
+oc logs deployment/catalog-coolstore | grep hibernate.dialect
 ----
 
 You should have the following output:
@@ -380,7 +376,7 @@ You can also connect to the Catalog PostgreSQL database and verify that the seed
 
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
-oc rsh -n my-project{USER_ID} dc/catalog-postgresql
+oc rsh dc/catalog-postgresql
 ----
 
 Once connected to the PostgreSQL container, run the following:

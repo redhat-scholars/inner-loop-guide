@@ -1,8 +1,7 @@
 :markup-in-source: verbatim,attributes,quotes
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 :WORKSHOP_GIT_REPO: %WORKSHOP_GIT_REPO%
-:WORKSHOP_GIT_REF: %WORKSHOP_GIT_REF%
+:WORKSHOP_GIT_REF: rhds
 
 = Deploy Web UI with with Node.js and AngularJS
 :navtitle: Deploy Web UI with with Node.js and AngularJS
@@ -46,7 +45,8 @@ container image of it.
 
 For a change, rather than using the CLI option you will start this process from the web console.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '(+)' and select 'Import from Git'*`
+In the OpenShift Web Console,
+`*click on '(+)' and select 'Import from Git'*`
 
 image::openshift-add-from-git.png[OpenShift - Add from Git, 800]
 
@@ -59,7 +59,7 @@ Then, enter the following information:
 |Value
 
 |Git Repo URL
-|**{WORKSHOP_GIT_REPO}**
+|\https://github.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop.git
 
 |Git Reference (see *advanced Git options*)
 |**{WORKSHOP_GIT_REF}**
@@ -75,6 +75,9 @@ Then, enter the following information:
 
 |Name
 |**web-coolstore**
+
+|Deploy > Resource type
+|**Deployment**
 
 |Create a route to the application
 |**_Checked_**
@@ -97,7 +100,8 @@ the web application pod will not be ready until the blue ring goes dark blue.
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Open URL' icon of the Web Service*`
+In the OpenShift Web Console,
+`*click on the 'Open URL' icon of the Web Service*`
 
 image::openshift-web-topology.png[OpenShift - Web Topology, 700]
 

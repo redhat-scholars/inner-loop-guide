@@ -1,7 +1,5 @@
 :markup-in-source: verbatim,attributes,quotes
-:CHE_URL: http://devspaces.%APPS_HOSTNAME_SUFFIX%
-:USER_ID: %USER_ID%
-:OPENSHIFT_CONSOLE_URL: https://console-openshift-console.%APPS_HOSTNAME_SUFFIX%/topology/ns/my-project{USER_ID}
+:PROJECT: %PROJECT%
 
 = Create Inventory Service with Quarkus
 :navtitle: Create Inventory Service with Quarkus
@@ -177,7 +175,7 @@ triggers a scan of the workspace, and if any changes are detected, the Java file
 your request is then serviced by the redeployed application. If there are any issues with compilation or deployment an error page 
 will let you know.
 
-First, in your {CHE_URL}[Workspace^, role='params-link'],
+First, in your Workspace,
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -447,7 +445,7 @@ The REST API returned a JSON object representing the inventory count for this pr
 [#stop_development_mode]
 == Stop the Development Mode
 
-In your {CHE_URL}[Workspace^, role='params-link'], stop the service as follows:
+In your Workspace, stop the service as follows:
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -495,7 +493,7 @@ will then package the .jar file into a container and run it.
 <3> The application has an external route for public access
 
 
-In your {CHE_URL}[Workspace^, role='params-link'], **build** your jar file.
+In your Workspace, **build** your jar file.
 
 [tabs, subs="attributes+,+macros"]
 ====
@@ -627,7 +625,8 @@ in one or more pods. A pod is the unit of runtime deployment and consists of the
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role=params-link], `*click on the 'Open URL' icon of the Inventory Service*`
+In the OpenShift Web Console, 
+`*click on the 'Open URL' icon of the Inventory Service*`
 
 image::openshift-inventory-topology.png[OpenShift - Inventory Topology, 700]
 
