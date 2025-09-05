@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Monitor Application Health :: OpenShift Inner Loop Workshop</title>
+    <title>Monitor Application Health :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/app-health.html">
     <link rel="prev" href="webui-deployment.html">
     <link rel="next" href="app-config.html">
@@ -18,7 +18,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -113,9 +113,6 @@
           <a href="index.html">rhds</a>
         </li>
         <li class="version">
-          <a href="../6.8/index.html">6.8</a>
-        </li>
-        <li class="version">
           <a href="../6.7/index.html">6.7</a>
         </li>
         <li class="version">
@@ -142,7 +139,6 @@
   <button class="version-menu-toggle" title="Show other versions of page">rhds</button>
   <div class="version-menu">
     <a class="version is-current" href="app-health.html">rhds</a>
-    <a class="version" href="../6.8/app-health.html">6.8</a>
     <a class="version" href="../6.7/app-health.html">6.7</a>
     <a class="version" href="../6.5/app-health.html">6.5</a>
   </div>
@@ -181,7 +177,7 @@ In those scenarios, OpenShift would remove the faulty container from the built-i
 only to the healthy containers that remain.</p>
 </div>
 <div class="paragraph">
-<p>There are three types of health probes available in OpenShift: <a href="https://docs.openshift.com/container-platform/4.12/applications/application-health.html#application-health-about_application-health" target="_blank" rel="noopener">startup, readiness and liveness probes</a>.</p>
+<p>There are three types of health probes available in OpenShift: <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/building_applications/application-health" target="_blank" rel="noopener">startup, readiness and liveness probes</a>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -203,7 +199,7 @@ traffic from the old version of the container to the new version so that the use
 deployments.</p>
 </div>
 <div class="paragraph">
-<p>There are <a href="https://docs.openshift.com/container-platform/4.12/applications/application-health.html#application-health-about_types_application-health" target="_blank" rel="noopener">three ways to define a health probe</a> for a container:</p>
+<p>There are three ways to define a health probe for a container:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -238,7 +234,7 @@ start listening until initialization is complete.</p>
 this happening.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console under the Workloads menu
 <code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Resources' &#8594; 'P inventory-coolstore-x-xxxxx'</strong></code></p>
 </div>
 <div class="imageblock">
@@ -349,7 +345,7 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 <p>Now let&#8217;s scale out your <em>Inventory Service</em> to 2 instances.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console under the Workloads menu,
 <code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Details' then click once on the up arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
@@ -377,7 +373,7 @@ If the readiness probe fails, the endpoints controller ensures the container has
 A readiness probe can be used to signal to the endpoints controller that even though a container is running, it should not receive any traffic from a proxy.</p>
 </div>
 <div class="paragraph">
-<p>First, scale down your <em>Inventory Service</em> to 1 instance. In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>First, scale down your <em>Inventory Service</em> to 1 instance. In the OpenShift Web Console, under the Workloads menu,
 <code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Details' then click once on the down arrows
 on the right side of the pod blue circle</strong></code>.</p>
 </div>
@@ -517,7 +513,7 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 </div>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the In the OpenShift Web Console under the Workloads menu,
 <code><strong>click on 'Topology' &#8594; '(D) inventory-coolstore' &#8594; 'Add Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -658,8 +654,7 @@ To open a terminal window, <code><strong>click on 'Terminal' &#8594; 'New Termin
 </tbody>
 </table>
 <div class="paragraph">
-<p>Finally <code><strong>click on the check icon and the 'Add' button</strong></code>. OpenShift automates deployments using
-<a href="https://docs.openshift.com/container-platform/4.12/welcome/index.html" target="_blank" rel="noopener">deployment triggers</a>
+<p>Finally <code><strong>click on the check icon and the 'Add' button</strong></code>. OpenShift automates deployments using <strong>deployment triggers</strong>
 that react to changes to the container image or configuration.
 Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.</p>
 </div>
@@ -723,7 +718,7 @@ dependencies which is already done for the <strong>Catalog Service</strong>.</p>
 using Eclipse JKube in combination with the Spring Boot actuator.</p>
 </div>
 <div class="paragraph">
-<p>You can check this in the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>You can check this in the OpenShift Web Console, under the Workloads menu,
 <code><strong>click on 'Topology' &#8594; '(D) catalog-coolstore' &#8594; 'Actions' &#8594; 'Edit Health Checks'</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -888,27 +883,14 @@ gain visibility into how the application behaves and particularly in identifying
 </div>
 <div class="paragraph">
 <p>OpenShift provides container metrics out-of-the-box and displays how much memory, cpu and network
-each container has been consuming over time.</p>
+each container has been consuming over time.
+From the Workloads menu, <code><strong>click on 'Topology' &#8594; any Deployment (D) and click on the associated Pod (P)</strong></code></p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
-<code><strong>click on 'Observe' then select your project</strong></code>.</p>
+<p>In the pod <code><strong>Metrics</strong></code> tab, you can see a more detailed view of the pod consumption.</p>
 </div>
 <div class="paragraph">
-<p>In the project overview, you can see the different <strong>Resource Usage</strong> sections.
-<code><strong>click on one graph to get more details</strong></code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-monitoring.png" alt="OpenShift Monitoring" width="740">
-</div>
-</div>
-<div class="paragraph">
-<p>From the <strong>Developer view</strong>, <code><strong>click on 'Topology' &#8594; any Deployment (D) and click on the associated Pod (P)</strong></code></p>
-</div>
-<div class="paragraph">
-<p>In the pod overview, you can see a more detailed view of the pod consumption.
-The graphs can be found under the Metrics heading, or Details in earlier versions of the OpenShift console.</p>
+<p>The graphs can be found under the Metrics heading, or Details in earlier versions of the OpenShift console.</p>
 </div>
 <div class="imageblock">
 <div class="content">

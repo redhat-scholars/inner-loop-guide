@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Create Inventory Service with Quarkus :: OpenShift Inner Loop Workshop</title>
+    <title>Create Inventory Service with Quarkus :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/inventory-quarkus.html">
     <link rel="prev" href="developer-workspace.html">
     <link rel="next" href="catalog-spring-boot.html">
@@ -18,7 +18,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -113,9 +113,6 @@
           <a href="index.html">rhds</a>
         </li>
         <li class="version">
-          <a href="../6.8/index.html">6.8</a>
-        </li>
-        <li class="version">
           <a href="../6.7/index.html">6.7</a>
         </li>
         <li class="version">
@@ -142,7 +139,6 @@
   <button class="version-menu-toggle" title="Show other versions of page">rhds</button>
   <div class="version-menu">
     <a class="version is-current" href="inventory-quarkus.html">rhds</a>
-    <a class="version" href="../6.8/inventory-quarkus.html">6.8</a>
     <a class="version" href="../6.7/inventory-quarkus.html">6.7</a>
     <a class="version" href="../6.5/inventory-quarkus.html">6.5</a>
   </div>
@@ -824,7 +820,7 @@ we saw earlier.</p>
 </div>
 <div class="paragraph">
 <p>In this section you will locally build a .jar file, then <strong>create</strong> the OpenShift build and deployment components
-and <strong>push</strong> the .jar it to OpenShift. The OpenShift <a href="https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a> builder
+and <strong>push</strong> the .jar it to OpenShift. The OpenShift <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/builds_using_buildconfig/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a> builder
 will then package the .jar file into a container and run it.</p>
 </div>
 <div class="listingblock">
@@ -1052,7 +1048,7 @@ in one or more pods. A pod is the unit of runtime deployment and consists of the
 <h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console,
 <code><strong>click on the 'Open URL' icon of the Inventory Service</strong></code></p>
 </div>
 <div class="imageblock">

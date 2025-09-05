@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Deploy Web UI with with Node.js and AngularJS :: OpenShift Inner Loop Workshop</title>
+    <title>Deploy Web UI with with Node.js and AngularJS :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/webui-deployment.html">
     <link rel="prev" href="gateway-dotnet.html">
     <link rel="next" href="app-health.html">
@@ -18,7 +18,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -113,9 +113,6 @@
           <a href="index.html">rhds</a>
         </li>
         <li class="version">
-          <a href="../6.8/index.html">6.8</a>
-        </li>
-        <li class="version">
           <a href="../6.7/index.html">6.7</a>
         </li>
         <li class="version">
@@ -142,7 +139,6 @@
   <button class="version-menu-toggle" title="Show other versions of page">rhds</button>
   <div class="version-menu">
     <a class="version is-current" href="webui-deployment.html">rhds</a>
-    <a class="version" href="../6.8/webui-deployment.html">6.8</a>
     <a class="version" href="../6.7/webui-deployment.html">6.7</a>
     <a class="version" href="../6.5/webui-deployment.html">6.5</a>
   </div>
@@ -203,7 +199,7 @@ JavaScript. Let&#8217;s deploy it on OpenShift using the certified Node.js conta
 in OpenShift.</p>
 </div>
 <div class="paragraph">
-<p>In this lab, again you will use OpenShift <a href="https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a>.
+<p>In this lab, again you will use OpenShift <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/builds_using_buildconfig/understanding-image-builds.html" target="_blank" rel="noopener">Source-to-Image (S2I)</a>.
 OpenShift will obtain the application code directly from the source repository then build and deploy a
 container image of it.</p>
 </div>
@@ -211,12 +207,12 @@ container image of it.</p>
 <p>For a change, rather than using the CLI option you will start this process from the web console.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
-<code><strong>click on '+Add' and select 'Import from Git'</strong></code></p>
+<p>In the OpenShift Web Console,
+<code><strong>click on '(+)' and select 'Import from Git'</strong></code></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-add-from-git.png" alt="OpenShift - Add from Git" width="700">
+<img src="_images/openshift-add-from-git.png" alt="OpenShift - Add from Git" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -295,7 +291,7 @@ the web application pod will not be ready until the blue ring goes dark blue.</p
 <h2 id="test_your_service"><a class="anchor" href="#test_your_service"></a>Test your Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console,
 <code><strong>click on the 'Open URL' icon of the Web Service</strong></code></p>
 </div>
 <div class="imageblock">

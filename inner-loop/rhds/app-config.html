@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Externalize Application Configuration :: OpenShift Inner Loop Workshop</title>
+    <title>Externalize Application Configuration :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/app-config.html">
     <link rel="prev" href="app-health.html">
     <meta name="generator" content="Antora 3.0.0">
@@ -17,7 +17,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -112,9 +112,6 @@
           <a href="index.html">rhds</a>
         </li>
         <li class="version">
-          <a href="../6.8/index.html">6.8</a>
-        </li>
-        <li class="version">
           <a href="../6.7/index.html">6.7</a>
         </li>
         <li class="version">
@@ -141,7 +138,6 @@
   <button class="version-menu-toggle" title="Show other versions of page">rhds</button>
   <div class="version-menu">
     <a class="version is-current" href="app-config.html">rhds</a>
-    <a class="version" href="../6.8/app-config.html">6.8</a>
     <a class="version" href="../6.7/app-config.html">6.7</a>
     <a class="version" href="../6.5/app-config.html">6.5</a>
   </div>
@@ -179,7 +175,7 @@ should be externalized from the application and the container image content in
 order to keep the image portable across environments.</p>
 </div>
 <div class="paragraph">
-<p>OpenShift provides a mechanism called <a href="https://docs.openshift.com/container-platform/4.12/welcome/index.html" target="_blank" rel="noopener"><strong>ConfigMaps</strong></a>
+<p>OpenShift provides a mechanism called <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/nodes/working-with-pods#configmaps" target="_blank" rel="noopener"><strong>ConfigMaps</strong></a>
 in order to externalize configurations
 from the applications deployed within containers and provide them to the containers
 in a unified way as files and environment variables. OpenShift also offers a way to
@@ -212,7 +208,7 @@ regardless of what happens to the container itself, the data is safe and can be 
 database container.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s create a <a href="https://docs.openshift.com/container-platform/4.12/welcome/index.html" target="_blank" rel="noopener">MariaDB database</a>
+<p>Let&#8217;s create a <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/building_applications/creating-applications" target="_blank" rel="noopener">MariaDB database</a>
 for the <strong>Inventory Service</strong> using the MariaDB template that is provided out-of-the-box:</p>
 </div>
 <div class="admonitionblock tip">
@@ -223,7 +219,7 @@ for the <strong>Inventory Service</strong> using the MariaDB template that is pr
 </td>
 <td class="content">
 <div class="paragraph">
-<p><a href="https://docs.openshift.com/container-platform/4.12/openshift_images/using-templates.html" target="_blank" rel="noopener">OpenShift Templates</a> use YAML/JSON to compose
+<p><a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/building_applications/creating-applications" target="_blank" rel="noopener">OpenShift Templates</a> use YAML/JSON to compose
 multiple containers and their configurations as a list of objects to be created and deployed at once,
 making it simple to re-create complex deployments by just deploying a single template. Templates can
 be parameterized to get input for fields like service names and generate values for fields like passwords.</p>
@@ -233,11 +229,12 @@ be parameterized to get input for fields like service names and generate values 
 </table>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, <code><strong>click on '+Add' and select 'Database'</strong></code></p>
+<p>In the OpenShift Web Console <code><strong>click on the 'Home' menu, and choose 'Software Catalog'</strong></code>
+and then select <code><strong>Databases</strong></code> within the catalog.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/openshift-add-database.png" alt="OpenShift - Add database" width="700">
+<img src="_images/openshift-add-database.png" alt="OpenShift - Add database" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -247,7 +244,7 @@ be parameterized to get input for fields like service names and generate values 
 <p>Then, enter the following information:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Inventory Database</caption>
+<caption class="title">Table 1. Inventory Database - MariaDB (Ephemeral)</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -306,14 +303,14 @@ be parameterized to get input for fields like service names and generate values 
 </div>
 </div>
 <div class="paragraph">
-<p><code><strong>Now click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'</strong></code>
+<p>Now select again from the <code><strong>'Software Catalog'</strong></code>, this time choose <code><strong>'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'</strong></code>
 to create the Catalog Database as follows:</p>
 </div>
 <div class="paragraph">
 <p>Then, enter the following information:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Catalog Database</caption>
+<caption class="title">Table 2. Catalog Database - PostgreSQL (Ephemeral)</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -488,7 +485,7 @@ parameters unchanged. They will be overridden later.</p>
 <p>Now, let&#8217;s create the Quarkus configuration content using the database credentials.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console from the <code><strong>Workloads</strong></code> menu
 <code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -627,7 +624,7 @@ configuration using an alternative <strong>application.properties</strong> backe
 <p>Let&#8217;s create the Spring Boot configuration content using the database credentials and create the Config Map.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console, from the <code><strong>Workloads</strong></code> menu,
 <code><strong>click on 'Config Maps' then click on the 'Create Config Map' button</strong></code>.</p>
 </div>
 <div class="imageblock">
@@ -764,7 +761,7 @@ secure way to handle sensitive data.</p>
 </div>
 <div class="paragraph">
 <p>Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is
-called <a href="https://docs.openshift.com/container-platform/4.12/welcome/index.html" target="_blank" rel="noopener"><strong>Secrets</strong></a>. Secret objects act and are used
+called <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/nodes/working-with-pods#nodes-pods-secrets" target="_blank" rel="noopener"><strong>Secrets</strong></a>. Secret objects act and are used
 similarly to config maps however with the difference that they are encrypted as they travel over the wire
 and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into
 containers as environment variables or files on the filesystem using a temporary file-storage
@@ -811,9 +808,9 @@ the PostgreSQL database name, username and password values. These values are inj
 environment variables and used to initialize the database.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console, from the <code><strong>Workloads</strong></code> <code><strong>Topology</strong></code> menu,
 <code><strong>click on 'DC catalog-postgresql' &#8594; 'DC catalog-postgresql' &#8594; 'Environment'</strong></code>. Notice the values
-from the secret are defined as env vars on the deployment:</p>
+from the secret are defined as environment variables on the deployment:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -831,7 +828,7 @@ test that the Coolstore application still works. Just like you did a couple of c
 display in the web console.</p>
 </div>
 <div class="paragraph">
-<p>In the OpenShift Web Console, from the <strong>Developer view</strong>,
+<p>In the OpenShift Web Console, from the <code><strong>Workloads</strong></code> <code><strong>Topology</strong></code> menu,
 <code><strong>click on the 'Open URL' icon of the Web Service</strong></code></p>
 </div>
 <div class="imageblock">
