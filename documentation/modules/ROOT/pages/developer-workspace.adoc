@@ -153,7 +153,7 @@ web proxies etc. If you are using a corporate device you may need to switch to a
 
 === I've been timed out or need to restart the workspace
 
-The workshop will take a few hours to complete all the way through, if you use the system continuosly throughout 
+The workshop will take a few hours to complete all the way through, if you use the system continously throughout 
 that period you will not see this issue.
 
 *Timed-out and wont reconnect*

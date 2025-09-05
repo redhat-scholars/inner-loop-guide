@@ -6,6 +6,7 @@ on:
       - "rhds"
       - "6.5"
       - "6.7"
+      - "6.8"
 env:
   SITE_DIR: "gh-pages"
 jobs:

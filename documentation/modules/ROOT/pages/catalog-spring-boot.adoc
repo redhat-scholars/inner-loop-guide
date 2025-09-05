@@ -445,7 +445,7 @@ containers for the project.
 [#test_your_service]
 == Test your Service
 
-In the OpenShift Web Console, from the **Developer view**,
+In the OpenShift Web Console,
 `*click on the 'Open URL' icon of the Catalog Service*`
 
 image::openshift-catalog-topology.png[OpenShift - Catalog Topology, 700]
