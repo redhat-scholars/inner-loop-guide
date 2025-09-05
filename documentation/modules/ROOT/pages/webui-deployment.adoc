@@ -40,16 +40,15 @@ The Web UI is built using Node.js for server-side JavaScript and AngularJS for c
 JavaScript. Let's deploy it on OpenShift using the certified Node.js container image available 
 in OpenShift. 
 
-In this lab, again you will use OpenShift https://docs.openshift.com/container-platform/4.12/cicd/builds/understanding-image-builds.html[Source-to-Image (S2I)^].
+In this lab, again you will use OpenShift https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/builds_using_buildconfig/understanding-image-builds.html[Source-to-Image (S2I)^].
 OpenShift will obtain the application code directly from the source repository then build and deploy a 
 container image of it.
 
 For a change, rather than using the CLI option you will start this process from the web console.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on '+Add' and select 'Import from Git'*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '(+)' and select 'Import from Git'*`
 
-image::openshift-add-from-git.png[OpenShift - Add from Git, 700]
+image::openshift-add-from-git.png[OpenShift - Add from Git, 800]
 
 Then, enter the following information:
 
@@ -98,8 +97,7 @@ the web application pod will not be ready until the blue ring goes dark blue.
 [#test_your_service]
 == Test your Service
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
-`*click on the 'Open URL' icon of the Web Service*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Open URL' icon of the Web Service*`
 
 image::openshift-web-topology.png[OpenShift - Web Topology, 700]
 

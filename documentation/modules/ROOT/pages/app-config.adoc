@@ -27,7 +27,7 @@ configuration files and command line arguments. These configuration artifacts
 should be externalized from the application and the container image content in
 order to keep the image portable across environments.
 
-OpenShift provides a mechanism called https://docs.openshift.com/container-platform/4.12/welcome/index.html[**ConfigMaps**^] 
+OpenShift provides a mechanism called https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/nodes/working-with-pods#configmaps[**ConfigMaps**^] 
 in order to externalize configurations 
 from the applications deployed within containers and provide them to the containers 
 in a unified way as files and environment variables. OpenShift also offers a way to 
@@ -53,26 +53,27 @@ a persistent storage that survives the container itself. You can deploy database
 regardless of what happens to the container itself, the data is safe and can be used by the next 
 database container.
 
-Let's create a https://docs.openshift.com/container-platform/4.12/welcome/index.html[MariaDB database^] 
+Let's create a https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/building_applications/creating-applications[MariaDB database^] 
 for the **Inventory Service** using the MariaDB template that is provided out-of-the-box:
 
 [TIP]
 ====
-https://docs.openshift.com/container-platform/4.12/openshift_images/using-templates.html[OpenShift Templates^] use YAML/JSON to compose 
+https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/building_applications/creating-applications[OpenShift Templates^] use YAML/JSON to compose 
 multiple containers and their configurations as a list of objects to be created and deployed at once, 
 making it simple to re-create complex deployments by just deploying a single template. Templates can 
 be parameterized to get input for fields like service names and generate values for fields like passwords.
 ====
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on '+Add' and select 'Database'*`
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], `*click on the 'Home' menu, and choose 'Software Catalog'*` 
+and then select `*Databases*` within the catalog.
 
-image::openshift-add-database.png[OpenShift - Add database, 700]
+image::openshift-add-database.png[OpenShift - Add database, 800]
 
 `*Select 'MariaDB (Ephemeral)' and click on 'Instantiate Template'*`
 
 Then, enter the following information:
 
-.Inventory Database
+.Inventory Database - MariaDB (Ephemeral)
 [%header,cols=2*]
 |===
 |Parameter 
@@ -111,12 +112,12 @@ Then, enter the following information:
 
 image::openshift-inventory-mariadb-topology.png[OpenShift - Inventory MariaDB, 700]
 
-`*Now click again on '+Add' and select 'Database', select 'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
+Now select again from the `*'Software Catalog'*`, this time choose `*'PostgreSQL (Ephemeral)' and click on 'Instantiate Template'*` 
 to create the Catalog Database as follows:
 
 Then, enter the following information:
 
-.Catalog Database
+.Catalog Database - PostgreSQL (Ephemeral)
 [%header,cols=2*]
 |===
 |Parameter 
@@ -217,7 +218,7 @@ parameters unchanged. They will be overridden later.
 
 Now, let's create the Quarkus configuration content using the database credentials.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` menu
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -320,7 +321,7 @@ configuration using an alternative **application.properties** backed by a config
 
 Let's create the Spring Boot configuration content using the database credentials and create the Config Map.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` menu,
 `*click on 'Config Maps' then click on the 'Create Config Map' button*`.
 
 image::openshift-create-configmap.png[Che - OpenShift Create Config Map, 900]
@@ -433,7 +434,7 @@ credentials to simplify the steps; however, for production environments, you sho
 secure way to handle sensitive data.
 
 Fortunately, OpenShift already provides a secure mechanism for handling sensitive data which is 
-called https://docs.openshift.com/container-platform/4.12/welcome/index.html[**Secrets**^]. Secret objects act and are used 
+called https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/nodes/working-with-pods#nodes-pods-secrets[**Secrets**^]. Secret objects act and are used 
 similarly to config maps however with the difference that they are encrypted as they travel over the wire 
 and also at rest when kept on a persistent disk. Like config maps, secrets can be injected into 
 containers as environment variables or files on the filesystem using a temporary file-storage 
@@ -475,9 +476,9 @@ This secret has three encrypted properties defined as **database-name**, **datab
 the PostgreSQL database name, username and password values. These values are injected in the PostgreSQL container as 
 environment variables and used to initialize the database.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` `*Topology*` menu,
 `*click on 'DC catalog-postgresql' -> 'DC catalog-postgresql' -> 'Environment'*`. Notice the values 
-from the secret are defined as env vars on the deployment:
+from the secret are defined as environment variables on the deployment:
 
 image::config-psql-secret.png[Secrets as Env Vars,900]
 
@@ -488,7 +489,7 @@ Having made all those changes with adding databases and the application configur
 test that the Coolstore application still works. Just like you did a couple of chapters ago you need to use the topology 
 display in the web console.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the **Developer view**,
+In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'] from the `*Workloads*` `*Topology*` menu,
 `*click on the 'Open URL' icon of the Web Service*`
 
 image::openshift-web-topology.png[OpenShift - Web Topology, 700]
