@@ -219,7 +219,7 @@ containers for the project.
 
 == Test your Service
 
-In the OpenShift Web Console, from the **Developer view**,
+In the OpenShift Web Console,
 `*click on the 'Open URL' icon of the Gateway Service*`
 
 image::openshift-gateway-topology.png[OpenShift - Gateway Topology, 700]

@@ -472,7 +472,7 @@ This secret has three encrypted properties defined as **database-name**, **datab
 the PostgreSQL database name, username and password values. These values are injected in the PostgreSQL container as 
 environment variables and used to initialize the database.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], from the `*Workloads*` `*Topology*` menu,
+In the OpenShift Web Console, from the `*Workloads*` `*Topology*` menu,
 `*click on 'DC catalog-postgresql' -> 'DC catalog-postgresql' -> 'Environment'*`. Notice the values 
 from the secret are defined as environment variables on the deployment:
 
@@ -485,7 +485,7 @@ Having made all those changes with adding databases and the application configur
 test that the Coolstore application still works. Just like you did a couple of chapters ago you need to use the topology 
 display in the web console.
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'] from the `*Workloads*` `*Topology*` menu,
+In the OpenShift Web Console, from the `*Workloads*` `*Topology*` menu,
 `*click on the 'Open URL' icon of the Web Service*`
 
 image::openshift-web-topology.png[OpenShift - Web Topology, 700]

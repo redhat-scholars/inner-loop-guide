@@ -41,7 +41,7 @@ perform various tasks via a browser.
 After you have authenticated to the web console, you will be presented with a
 list of projects that your user has permission to work with. 
 
-`*Select the 'Developer View' then your "-dev" project*` to be taken to the project overview page
+`*Select your "-dev" project*` to be taken to the project overview page
 which will list all of the routes, services, deployments, and pods that you have
 running as part of your project. There's maybe nothing much there now, but that's about to
 change.
