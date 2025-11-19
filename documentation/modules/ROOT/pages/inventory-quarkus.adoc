@@ -97,7 +97,16 @@ If we focus on the dependencies section, you can see the following extensions:
 ----
     <dependency>
         <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-resteasy-jsonb</artifactId>
+        <artifactId>quarkus-rest</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-rest-jackson</artifactId>
     </dependency>
     <dependency>
         <groupId>io.quarkus</groupId>
@@ -140,10 +149,10 @@ If we focus on the dependencies section, you can see the following extensions:
 ----
 package com.redhat.cloudnative;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/hello")
 public class InventoryResource {
@@ -298,19 +307,19 @@ Now let's write some code and create a domain model and a RESTful endpoint to cr
 ----
 package com.redhat.cloudnative;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import java.io.Serializable;
 
-@Entity // <1> 
-@Table(name = "INVENTORY") // <2> 
+@Entity
+@Table(name = "INVENTORY")
 public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id // <3> 
+    @Id
     private String itemId;
 
     @Column
@@ -403,14 +412,14 @@ Quarkus uses JAX-RS standard for building REST services.
 ----
 package com.redhat.cloudnative;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/api/inventory")
 @ApplicationScoped
