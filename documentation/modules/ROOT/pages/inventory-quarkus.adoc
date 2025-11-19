@@ -313,13 +313,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "INVENTORY")
+@Entity // <1> 
+@Table(name = "INVENTORY") // <2> 
 public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @Id // <3> 
     private String itemId;
 
     @Column
