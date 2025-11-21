@@ -203,6 +203,7 @@ Then `*add the '%prod.quarkus.datasource.driver' parameter in
 %prod.quarkus.datasource.db-kind=mariadb#<1>
 %prod.quarkus.kubernetes-config.enabled=true#<2>
 %prod.quarkus.kubernetes-config.config-maps=inventory#<3>
+%prod.quarkus.datasource.db-version=10.3.39
 ----
 <1> The kind of database we will connect to
 <2> If set to true, the application will attempt to look up the configuration from the API server
