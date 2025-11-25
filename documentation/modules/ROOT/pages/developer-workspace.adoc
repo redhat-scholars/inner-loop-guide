@@ -58,10 +58,8 @@ to this file.
 ====
 
 `*Click on the 'Developer Workspace' button below*`
-// precreated workspace, we escape the - to get the URL userX-devspaces to work around an antora bug
-[link={CHE_URL}/dashboard/#/ide/user{USER_ID}%2Ddevspaces/wksp-end-to-end-dev]
-// Default IDE
-//[link={CHE_URL}/#https://raw.githubusercontent.com/RedHat-EMEA-SSA-Team/end-to-end-developer-workshop/{WORKSHOP_GIT_REF}/devfile.yaml]
+
+[link={CHE_URL}/dashboard/#/ide/user{USER_ID}devspaces/wksp-end-to-end-dev]
 [window=_blank, align="center"]
 [role='params-link']
 image::developer-workspace-button.png[Developer Workspace - Button, 300]
@@ -128,9 +126,9 @@ Login successful.
 You have access to the following projects and can switch between them with 'oc project <projectname>':
 
   * cn-project{USER_ID}
-    user{USER_ID} -devspaces
+    user{USER_ID}devspaces
 
-Using project "user{USER_ID} -devspaces".
+Using project "user{USER_ID}devspaces".
 ----
 
 Then, create your **Development Environment**:

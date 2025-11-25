@@ -182,7 +182,7 @@ Then, `*build and push the updated Inventory Service to the OpenShift cluster*`.
 IDE Task::
 +
 -- 
-`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Push Component'*`
+`*Click on 'Terminal' -> 'Run Task...' ->  'devfile: Inventory - Deploy Component'*`
 
 image::che-runtask.png[Che - RunTask, 600]
 --
@@ -195,7 +195,7 @@ CLI::
 [source,shell,subs="{markup-in-source}",role=copypaste]
 ----
 cd /projects/workshop/labs/inventory-quarkus
-mvn package -Dquarkus.container-image.build=true -DskipTests -Dquarkus.container-image.group=$(oc project -q) -Dquarkus.kubernetes-client.trust-certs=true
+mvn package -Dquarkus.kubernetes.deploy=true -DskipTests -Dquarkus.container-image.group=$(oc project -q) -Dquarkus.kubernetes-client.trust-certs=true
 ----
 
 NOTE: To open a terminal window, `*click on 'Terminal' -> 'New Terminal'*`
