@@ -423,7 +423,7 @@ There are 4 steps here to get the Gateway service running as you can see from th
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /projects/workshop/labs/gateway-dotnet
 
-oc new-build dotnet:6.0 --name gateway-coolstore  \
+oc new-build dotnet:9.0 --name gateway-coolstore  \
   --labels=component=gateway \
   --env DOTNET_STARTUP_PROJECT=app.csproj --binary=true
 oc start-build gateway-coolstore --from-dir=. -w
