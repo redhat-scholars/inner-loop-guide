@@ -200,7 +200,7 @@ CLI::
 ----
 cd /projects/workshop/labs/gateway-dotnet
 
-oc new-build dotnet:6.0 --name gateway-coolstore  \
+oc new-build dotnet:9.0 --name gateway-coolstore  \
   --labels=component=gateway \
   --env DOTNET_STARTUP_PROJECT=app.csproj --binary=true
 oc start-build gateway-coolstore --from-dir=. -w
