@@ -242,7 +242,7 @@ data:
 
 `*Click on the 'Create' button*`.
 
-Once the source code is updated and the ConfigMap is created, as before, build and `*Push the updated Inventory Service to the OpenShift cluster*`.
+Once the source code is updated and the ConfigMap is created, as before, `*Deploy the updated Inventory Service to the OpenShift cluster*`.
 
 Wait till the build is complete then, `*Delete the Inventory Pod*` to make it start again and look for the config maps:
 
