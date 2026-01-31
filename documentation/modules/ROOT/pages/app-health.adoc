@@ -143,8 +143,11 @@ Now, `*switch back to your {CHE_URL}[Workspace^, role='params-link'] and check t
 
 image::che-inventory-traffic-ko.png[Che - Catalog Traffic KO, 500]
 
-**Why do some requests failed? Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready.** 
+**Why do some requests fail?** 
+Because as soon as the container is created, the traffic is sent to this new instance even if the application is not ready. 
 (The _Inventory Service_ takes a few seconds to start up). 
+
+TIP: This is a race condition based on that startup speed, sometimes this script wont fail, if that is the case scale the pods back to 1 instance and try again.
 
 In order to prevent this behaviour, a **Readiness check** is needed. It determines if the container is ready to service requests. 
 If the readiness probe fails, the endpoints controller ensures the container has its IP address removed from the endpoints of all services. 
@@ -160,7 +163,7 @@ Now lets go fix some of these problems.
 == Configuring Liveness Probes
 
 https://quarkus.io/guides/health-guide[SmallRye Health^] is a Quarkus extension which utilizes the MicroProfile Health specification.
-It allows applications to provide information about their state to external viewers which is typically useful 
+It allows applications to provide information about their state to external viewers via an API call which is typically useful 
 in cloud environments where automated processes must be able to determine whether the application should be discarded or restarted.
 
 Let's add the needed dependencies to **/projects/workshop/labs/inventory-quarkus/pom.xml**. 
@@ -239,104 +242,19 @@ You should have the following output:
 }
 ----
 
-In the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], under the Workloads menu,
-`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Add Health Checks'*`.
+Liveness, Readiness and Startup health checks values have already been set for this service as part of the build and deploying 
+using the *quarkus-smallrye-health* plugin. 
 
-image::openshift-inventory-add-health-check.png[Che - Inventory Add Health Check, 700]
+You can check this in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], under the Workloads menu,
+`*click on 'Topology' -> '(D) inventory-coolstore' -> 'Actions' -> 'Edit Health Checks'*`.
 
-Then `*click on 'Add Liveness Probe'*`
+image::openshift-inventory-edit-health.png[Che - Inventory Add Health Check, 700]
 
-image::openshift-inventory-add-liveness-probe.png[Che - Inventory Add Liveness Probe, 500]
+You can now click *Edit Probe* for each probe type in turn to see the configuration, here for example are the liveness settings:
 
-`*Enter the following information:*`
+image::openshift-inventory-view-health.png[Che - Inventory View Health Check, 700]
 
-.Liveness Probe
-[%header,cols=2*]
-|===
-|Parameter 
-|Value
-
-|Type
-|HTTP GET
-
-|Use HTTPS
-|_Unchecked_
-
-|HTTP Headers
-|_Empty_
-
-|Path
-|/q/health/live
-
-|Port
-|8080
-
-|Failure Threshold
-|3
-
-|Success Threshold
-|1
-
-|Initial Delay
-|10
-
-|Period
-|10
-
-|Timeout
-|1
-
-|===
-
-Finally `*click on the check icon*`. But don't click *Add* yet, we have more probes to configure.
-
-[#configuring_readiness]
-==  Configuring Inventory Readiness Probes
-
-Now repeat the same task for the *Inventory* service, but this time set the *Readiness* probes:
-
-.Readiness Probe
-[%header,cols=2*]
-|===
-|Parameter
-|Value
-
-|Type
-|HTTP GET
-
-|Use HTTPS
-|_Unchecked_
-
-|HTTP Headers
-|_Empty_
-
-|Path
-|/q/health/ready
-
-|Port
-|8080
-
-|Failure Threshold
-|3
-
-|Success Threshold
-|1
-
-|Initial Delay
-|0
-
-|Period
-|5
-
-|Timeout
-|1
-
-|===
-
-Finally `*click on the check icon and the 'Add' button*`. OpenShift automates deployments using *deployment triggers* 
-that react to changes to the container image or configuration. 
-Therefore, as soon as you define the probe, OpenShift automatically redeploys the pod using the new configuration including the liveness probe.
-
+For each probe type the configuration and the API can be different since the delay, retry and responsiveness differs for each circumstance.
 
 [#testing_Readiness]
 == Testing Inventory Readiness Probes
@@ -402,45 +320,9 @@ the fast response to stuck states.
 
 Now you understand and know how to configure Readiness, Liveness and Startup probes, let's confirm your expertise! 
 
-`*Configure the remaining Probes for Inventory and Catalog*` using the following information:
+`*Configure the remaining Probes for Catalog*` using the following information:
 
 .Startup Probes
-[%header,cols=2*]
-|===
-|Inventory Service
-|Startup
-
-|Type
-|HTTP GET
-
-|Use HTTPS
-|_Unchecked_
-
-|HTTP Headers
-|_Empty_
-
-|Path
-|/q/health/live
-
-|Port
-|8080
-
-|Failure Threshold
-|3
-
-|Success Threshold
-|1
-
-|Initial Delay
-|0
-
-|Period
-|5
-
-|Timeout
-|1
-
-|===
 
 [%header,cols=2*]
 |===
@@ -479,7 +361,7 @@ Now you understand and know how to configure Readiness, Liveness and Startup pro
 
 |===
 
-Finally, let's configure probes for Gateway and Web Service.
+Finally, let's configure probes for Gateway and Web Service. For speed we will do this via script.
 In your {CHE_URL}[Workspace^, role='params-link'], `*click on 'Terminal' -> 'Run Task...' ->  'devfile: Probes - Configure Gateway & Web'*`
 
 image::che-runtask.png[Che - RunTask, 600]
