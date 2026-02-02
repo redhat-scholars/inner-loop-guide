@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Externalize Application Configuration :: OpenShift Inner Loop Workshop for Developer Sandbox</title>
+    <title>Externalize Application Configuration :: OpenShift Inner Loop Workshop</title>
     <link rel="canonical" href="https://redhat-scholars.github.io/course-template/inner-loop/rhds/app-config.html">
     <link rel="prev" href="app-health.html">
     <meta name="generator" content="Antora 3.0.0">
@@ -17,7 +17,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop for Developer Sandbox</a>
+      <a class="navbar-item" href="https://redhat-scholars.github.io/course-template">OpenShift Inner Loop Workshop</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -120,9 +120,6 @@
         <li class="version">
           <a href="../6.7/index.html">6.7</a>
         </li>
-        <li class="version">
-          <a href="../6.5/index.html">6.5</a>
-        </li>
       </ul>
     </li>
   </ul>
@@ -147,7 +144,6 @@
     <a class="version is-current" href="app-config.html">6.9</a>
     <a class="version" href="../6.8/app-config.html">6.8</a>
     <a class="version" href="../6.7/app-config.html">6.7</a>
-    <a class="version" href="../6.5/app-config.html">6.5</a>
   </div>
 </div>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/inner-loop-guide/edit/6.9/documentation/modules/ROOT/pages/app-config.adoc">Edit this Page</a></div>
@@ -537,6 +533,11 @@ data:
 <div class="paragraph">
 <p><code><strong>Click on the 'Create' button</strong></code>.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_re_build_inventory_component"><a class="anchor" href="#_re_build_inventory_component"></a>Re-build Inventory Component</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Once the source code is updated and the ConfigMap is created, as before <code><strong>Deploy the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
 </div>
@@ -548,6 +549,11 @@ data:
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l component=inventory -n my-project%USER_ID%</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_the_inventory_database_is_being_used"><a class="anchor" href="#_check_the_inventory_database_is_being_used"></a>Check the Inventory database is being used</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Now <strong>verify that the config map is in fact injected into the container by checking if the seed data is
 loaded into the database</strong>.</p>
