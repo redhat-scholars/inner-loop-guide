@@ -536,6 +536,11 @@ data:
 <div class="paragraph">
 <p><code><strong>Click on the 'Create' button</strong></code>.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_re_build_inventory_component"><a class="anchor" href="#_re_build_inventory_component"></a>Re-build Inventory Component</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Once the source code is updated and the ConfigMap is created, as before, <code><strong>Deploy the updated Inventory Service to the OpenShift cluster</strong></code>.</p>
 </div>
@@ -547,6 +552,11 @@ data:
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc delete pod -l component=inventory</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_the_inventory_database_is_being_used"><a class="anchor" href="#_check_the_inventory_database_is_being_used"></a>Check the Inventory database is being used</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Now <strong>verify that the config map is in fact injected into the container by checking if the seed data is
 loaded into the database</strong>.</p>
