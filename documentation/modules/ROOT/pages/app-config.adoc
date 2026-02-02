@@ -247,6 +247,8 @@ data:
 
 `*Click on the 'Create' button*`.
 
+== Re-build Inventory Component
+
 Once the source code is updated and the ConfigMap is created, as before `*Deploy the updated Inventory Service to the OpenShift cluster*`.
 
 Wait till the build is complete then, `*Delete the Inventory Pod*` to make it start again and look for the config maps:
@@ -255,6 +257,8 @@ Wait till the build is complete then, `*Delete the Inventory Pod*` to make it st
 ----
 oc delete pod -l component=inventory -n my-project{USER_ID}
 ----
+
+== Check the Inventory database is being used
 
 Now **verify that the config map is in fact injected into the container by checking if the seed data is 
 loaded into the database**.
