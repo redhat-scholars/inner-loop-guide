@@ -66,6 +66,7 @@ In the OpenShift Web Console `*click on the 'Home' menu, and choose 'Software Ca
 and then select `*Databases*` within the catalog. We will deploy 2 databases from this list.
 
 NOTE: Depending on how the web console is configured, the *Software Catalog* may instead be found as a sub-menu of the *Ecosystem* menu item
+
 image::openshift-add-database.png[OpenShift - Add database, 800]
 
 `*Select 'MariaDB (Ephemeral)' and click on 'Instantiate Template'*`

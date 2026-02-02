@@ -242,7 +242,7 @@ You should have the following output:
 Liveness, Readiness and Startup health checks values have already been set for this service as part of the build and deploying 
 using the *quarkus-smallrye-health* plugin. 
 
-You can check this in the {OPENSHIFT_CONSOLE_URL}[OpenShift Web Console^, role='params-link'], under the Workloads menu,
+You can check this in the OpenShift Web Console, under the Workloads menu,
 `*click on 'Topology' -> '(D) inventory-coolstore' -> 'Actions' -> 'Edit Health Checks'*`.
 
 image::openshift-inventory-edit-health.png[Che - Inventory Add Health Check, 700]
