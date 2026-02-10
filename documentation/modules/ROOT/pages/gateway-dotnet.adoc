@@ -263,7 +263,7 @@ You might be wondering how the Gateway service knows how to contact the *Catalog
 These values can be injected as environment variables at runtime for example if running the component locally in the IDE, 
 but by default we have hardcoded the name of the OpenShift *Services* and then use OpenShift local DNS to resolve these names as 
 the application starts. You can see the code that consumes those variables below. This is from *ProductsController.cs class* in the 
-**/projects/workshop/labs/gateway-dotnet/** directory.
+**/projects/workshop/labs/gateway-dotnet/Controllers** directory.
 
 [source,java]
 ----
