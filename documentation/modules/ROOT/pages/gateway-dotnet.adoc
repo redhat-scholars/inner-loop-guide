@@ -42,7 +42,7 @@ image::dotnet-gateway-project.png[Gateway Project,340]
 
 This is a minimal ASP .NET project with support for asynchronous REST services. 
 
-`*Examine 'Startup.cs' class*` in the **/projects/workshop/labs/gateway-dotnet/** directory.
+`*Examine 'Startup.cs' class*` in the **/projects/workshop/labs/gateway-dotnet/Controllers** directory.
 
 See how the basic web server is started with minimal services, health checks and a basic REST controller is deployed.
 
