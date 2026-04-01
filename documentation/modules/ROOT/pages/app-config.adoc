@@ -237,7 +237,7 @@ metadata:
     app.kubernetes.io/instance: inventory
 data:
   application.properties: |-
-    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb.svc:3306/inventorydb
+    quarkus.datasource.jdbc.url=jdbc:mariadb://inventory-mariadb:3306/inventorydb
     quarkus.datasource.username=inventory
     quarkus.datasource.password=inventory
 ----
